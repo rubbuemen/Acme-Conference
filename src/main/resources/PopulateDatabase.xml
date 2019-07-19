@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- * PopulateDatabase.xml * * Copyright (C) 2019 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
+	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+	<!-- User accounts -->
+
+	<bean id="userAccount1" class="security.UserAccount">
+		<property name="username" value="admin" />
+		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount2" class="security.UserAccount">
+		<property name="username" value="system" />
+		<property name="password" value="54b53072540eeeb8f8e9343e71f28176" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="ADMIN" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount3" class="security.UserAccount">
+		<property name="username" value="author1" />
+		<property name="password" value="b312ba4ffd5245fa2a1ab819ec0d0347" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUTHOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="author2" />
+		<property name="password" value="9bd97baef2b853ec00cc3cffd269f679" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUTHOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="author3" />
+		<property name="password" value="c59a474d5ade296a15ebc40d6c4e8e11" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUTHOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="author4" />
+		<property name="password" value="9c479f8cda01e6c46195dd03adc2b9a1" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUTHOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount7" class="security.UserAccount">
+		<property name="username" value="author5" />
+		<property name="password" value="7c5e66b6632c2dfac2d50ea62f0aa19f" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="AUTHOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="reviewer1" />
+		<property name="password" value="6ce19528a40dde9521d97cf7ba264eca" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="reviewer2" />
+		<property name="password" value="2693b57f0f59df94caacefb811e99851" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount10" class="security.UserAccount">
+		<property name="username" value="reviewer3" />
+		<property name="password" value="315d31e7c8f3a136610aafa220d689be" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount11" class="security.UserAccount">
+		<property name="username" value="reviewer4" />
+		<property name="password" value="5293e8663cbb7c157ff83eeae25177d3" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount12" class="security.UserAccount">
+		<property name="username" value="reviewer5" />
+		<property name="password" value="86045e9e3b2e615d8d2484dc64b3f408" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="REVIEWER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount13" class="security.UserAccount">
+		<property name="username" value="sponsor1" />
+		<property name="password" value="42c63ad66d4dc07ed17753772bef96d6" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount14" class="security.UserAccount">
+		<property name="username" value="sponsor2" />
+		<property name="password" value="3dc67f80a03324e01b1640f45d107485" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount15" class="security.UserAccount">
+		<property name="username" value="sponsor3" />
+		<property name="password" value="857a54956061fdc1b88d7722cafe6519" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount16" class="security.UserAccount">
+		<property name="username" value="sponsor4" />
+		<property name="password" value="a8be034fe44a453e912feadc414dc803" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<bean id="userAccount17" class="security.UserAccount">
+		<property name="username" value="sponsor5" />
+		<property name="password" value="d6d7f85c15bbb451ef50b704b3693033" />
+		<property name="statusAccount" value="true" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="SPONSOR" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Administrator -->
+	<bean id="administrator1" class="domain.Administrator">
+		<property name="name" value="Rubén" />
+		<property name="middleName" value="Razi" />
+		<property name="surname" value="Bueno Menéndez" />
+		<property name="photo" value="http://oi68.tinypic.com/oh4r9j.jpg" />
+		<property name="email" value="rubbuemen@aacmeconference.com" />
+		<property name="phoneNumber" value="662839501" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount1" />
+		<property name="messages">
+			<list>
+				<ref bean="message1" />
+				<ref bean="message2" />
+				<ref bean="message3" />
+				<ref bean="message4" />
+			</list>
+		</property>
+	</bean>
+	<bean id="administrator2" class="domain.Administrator">
+		<property name="name" value="System" />
+		<property name="surname" value="Administrator" />
+		<property name="email" value="&lt;noreply@acmeconference.com&gt;" />
+		<property name="userAccount" ref="userAccount2" />
+	</bean>
+	
+	<!-- Author -->
+	<bean id="author1" class="domain.Author">
+		<property name="name" value="Alberto" />
+		<property name="middleName" value="Albert" />
+		<property name="surname" value="Blanco Fuentes" />
+		<property name="email" value="albfue@acmeconference.com" />
+		<property name="phoneNumber" value="656269501" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount3" />
+		<property name="finder" ref="finder1" />
+	</bean>
+	<bean id="author2" class="domain.Author">
+		<property name="name" value="Santiago" />
+		<property name="middleName" value="Santi" />
+		<property name="surname" value="Castro Cortes" />
+		<property name="email" value="santcascor@acmeconference.com" />
+		<property name="phoneNumber" value="656269501" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount4" />
+		<property name="finder" ref="finder2" />
+	</bean>
+	<bean id="author3" class="domain.Author">
+		<property name="name" value="Jaime" />
+		<property name="middleName" value="Jam" />
+		<property name="surname" value="Hernandez Mendez" />
+		<property name="email" value="jaihermen@acmeconference.com" />
+		<property name="phoneNumber" value="656269501" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount5" />
+		<property name="finder" ref="finder3" />
+	</bean>
+	<bean id="author4" class="domain.Author">
+		<property name="name" value="Leo" />
+		<property name="surname" value="Perez Ferrer" />
+		<property name="email" value="leoperfer@acmeconference.com" />
+		<property name="phoneNumber" value="656269501" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount6" />
+		<property name="finder" ref="finder4" />
+	</bean>
+	<bean id="author5" class="domain.Author">
+		<property name="name" value="David" />
+		<property name="surname" value="Garrido Cabrera" />
+		<property name="email" value="davidgac@acmeconference.com" />
+		<property name="phoneNumber" value="652682037" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount7" />
+		<property name="finder" ref="finder5" />
+	</bean>
+
+	<!-- Reviewer -->
+	<bean id="reviewer1" class="domain.Reviewer">
+		<property name="name" value="Héctor" />
+		<property name="surname" value="Molina Jimenez" />
+		<property name="email" value="hectormol@acmeconference.com" />
+		<property name="phoneNumber" value="694039572" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="keywords">
+			<list>
+				<value>conference</value>
+				<value>biology</value>
+				<value>data</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount8" />
+	</bean>
+	<bean id="reviewer2" class="domain.Reviewer">
+		<property name="name" value="Santiago" />
+		<property name="surname" value="Martinez Montero" />
+		<property name="email" value="santmart@acmeconference.com" />
+		<property name="phoneNumber" value="698369572" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="keywords">
+			<list>
+				<value>conference</value>
+				<value>biology</value>
+				<value>data</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount9" />
+		<property name="messages">
+			<list>
+				<ref bean="message5" />
+				<ref bean="message6" />
+			</list>
+		</property>
+	</bean>
+	<bean id="reviewer3" class="domain.Reviewer">
+		<property name="name" value="Rayan" />
+		<property name="surname" value="Riera Marin" />
+		<property name="email" value="rayanrie@acmeconference.com" />
+		<property name="phoneNumber" value="696379442" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="keywords">
+			<list>
+				<value>biology</value>
+				<value>artificial</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount10" />
+	</bean>
+	<bean id="reviewer4" class="domain.Reviewer">
+		<property name="name" value="Alberto" />
+		<property name="surname" value="Rodriguez Calvo" />
+		<property name="email" value="alberrogriv@acmeconference.com" />
+		<property name="phoneNumber" value="653734711" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="keywords">
+			<list>
+				<value>data</value>
+				<value>tool</value>
+				<value>artificial</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount11" />
+	</bean>
+	<bean id="reviewer5" class="domain.Reviewer">
+		<property name="name" value="Antonio" />
+		<property name="surname" value="Garrido Gallardo" />
+		<property name="email" value="antonigarrig@acmeconference.com" />
+		<property name="phoneNumber" value="663094368" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="keywords">
+			<list>
+				<value>tool</value>
+				<value>animal</value>
+			</list>
+		</property>
+		<property name="userAccount" ref="userAccount12" />
+	</bean>
+
+	<!-- Sponsor -->
+	<bean id="sponsor1" class="domain.Sponsor">
+		<property name="name" value="Jordi" />
+		<property name="surname" value="Rovira Lorenzo" />
+		<property name="email" value="jordrivelo@acmeconference.com" />
+		<property name="phoneNumber" value="6748902435" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount13" />
+		<property name="sponsorships">
+			<list>
+				<ref bean="sponsorship1" />
+				<ref bean="sponsorship2" />
+			</list>
+		</property>
+	</bean>
+	<bean id="sponsor2" class="domain.Sponsor">
+		<property name="name" value="Omar" />
+		<property name="surname" value="Cabrera Moreno" />
+		<property name="email" value="omarcabrmo@acmeconference.com" />
+		<property name="phoneNumber" value="6748902435" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount14" />
+		<property name="sponsorships">
+			<list>
+				<ref bean="sponsorship3" />
+			</list>
+		</property>
+	</bean>
+	<bean id="sponsor3" class="domain.Sponsor">
+		<property name="name" value="Isaac" />
+		<property name="surname" value="Hidalgo Garrido" />
+		<property name="email" value="issahigarr@acmeconference.com" />
+		<property name="phoneNumber" value="6748902435" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="userAccount" ref="userAccount15" />
+		<property name="sponsorships">
+			<list>
+				<ref bean="sponsorship4" />
+				<ref bean="sponsorship5" />
+			</list>
+		</property>
+	</bean>
+	<bean id="sponsor4" class="domain.Sponsor">
+		<property name="name" value="Rayan" />
+		<property name="surname" value="Serrano Ramos" />
+		<property name="email" value="rayaserra@acmeconference.com" />
+		<property name="phoneNumber" value="6748902435" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="make" value="Absudscan SA" />
+		<property name="userAccount" ref="userAccount16" />
+	</bean>
+	<bean id="sponsor5" class="domain.Sponsor">
+		<property name="name" value="Iván" />
+		<property name="surname" value="Mas Castro" />
+		<property name="email" value="ivanmasca@acmeconference.com" />
+		<property name="phoneNumber" value="6748902435" />
+		<property name="address" value="41005 Sevilla" />
+		<property name="make" value="Entitas SA" />
+		<property name="userAccount" ref="userAccount17" />
+	</bean>
+
+	<!-- CreditCard -->
+	<bean id="creditCard1" class="domain.CreditCard">
+		<property name="holderName" value="Rubén Bueno Menéndez" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4539888159789783" />
+		<property name="expirationMonth" value="9" />
+		<property name="expirationYear" value="24" />
+		<property name="cvv" value="909" />
+	</bean>
+	<bean id="creditCard2" class="domain.CreditCard">
+		<property name="holderName" value="Mónica Amate Garrido" />
+		<property name="brandName" value="MASTER" />
+		<property name="number" value="4024007101185063" />
+		<property name="expirationMonth" value="2" />
+		<property name="expirationYear" value="21" />
+		<property name="cvv" value="482" />
+	</bean>
+	<bean id="creditCard3" class="domain.CreditCard">
+		<property name="holderName" value="José Fernandez Gamez" />
+		<property name="brandName" value="DINNERS" />
+		<property name="number" value="5237382715859548" />
+		<property name="expirationMonth" value="12" />
+		<property name="expirationYear" value="23" />
+		<property name="cvv" value="724" />
+	</bean>
+	<bean id="creditCard4" class="domain.CreditCard">
+		<property name="holderName" value="Antonio Gamez Pro" />
+		<property name="brandName" value="DINNERS" />
+		<property name="number" value="4485314248483647" />
+		<property name="expirationMonth" value="5" />
+		<property name="expirationYear" value="24" />
+		<property name="cvv" value="236" />
+	</bean>
+
+	<!-- Message -->
+	<bean id="message1" class="domain.Message">
+		<property name="moment" value="2019/01/10 11:43" />
+		<property name="subject" value="Hello beautiful life" />
+		<property name="body" value="How are you? You are amazing horrible" />
+		<property name="topic" ref="topic1" />
+		<property name="sender" ref="reviewer1" />
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1" />
+			</list>
+		</property>
+	</bean>
+	<bean id="message2" class="domain.Message">
+		<property name="moment" value="2019/01/24 23:30" />
+		<property name="subject" value="Problem beautiful" />
+		<property name="body"
+			value="I have a problem with the web. This is horrible, a disaster, horrible horrible horrible" />
+		<property name="topic" ref="topic2" />
+		<property name="sender" ref="reviewer1" />
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1" />
+			</list>
+		</property>
+	</bean>
+	<bean id="message3" class="domain.Message">
+		<property name="moment" value="2019/02/10 16:38" />
+		<property name="subject" value="Important average" />
+		<property name="body"
+			value="This is a important message sex. Good sex and fantastic satisfaction. Not bad" />
+		<property name="topic" ref="topic3" />
+		<property name="sender" ref="reviewer1" />
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1" />
+			</list>
+		</property>
+	</bean>
+	<bean id="message4" class="domain.Message">
+		<property name="moment" value="2019/01/22 14:25" />
+		<property name="subject" value="ITS SPAM TIME SEXO SEXO SEXO" />
+		<property name="body"
+			value="sex viagra palabra random sex viagra one million Nigeria. Horrible but fantastic and amazing disaster. Not Bad." />
+		<property name="topic" ref="topic2" />
+		<property name="sender" ref="reviewer2" />
+		<property name="recipients">
+			<list>
+				<ref bean="administrator1" />
+			</list>
+		</property>
+	</bean>
+	<bean id="message5" class="domain.Message">
+		<property name="moment" value="2019/01/22 14:25" />
+		<property name="subject" value="ITS SPAM TIME SEXO SEXO SEXO" />
+		<property name="body" value="Horrible but fantastic. Not Bad." />
+		<property name="topic" ref="topic4" />
+		<property name="sender" ref="reviewer1" />
+		<property name="recipients">
+			<list>
+				<ref bean="reviewer2" />
+			</list>
+		</property>
+	</bean>
+	<bean id="message6" class="domain.Message">
+		<property name="moment" value="2019/01/22 14:25" />
+		<property name="subject" value="ITS POSITIVE WORDS good good good" />
+		<property name="body"
+			value="good fantastic excellent great amazing terrific beautiful" />
+		<property name="topic" ref="topic4" />
+		<property name="sender" ref="administrator1" />
+		<property name="recipients">
+			<list>
+				<ref bean="reviewer2" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Finder -->
+	<bean id="finder1" class="domain.Finder">
+	</bean>
+	<bean id="finder2" class="domain.Finder">
+	</bean>
+	<bean id="finder3" class="domain.Finder">
+	</bean>
+	<bean id="finder4" class="domain.Finder">
+	</bean>
+	<bean id="finder5" class="domain.Finder">
+	</bean>
+
+	
+
+	<!-- Sponsorship -->
+	<bean id="sponsorship1" class="domain.Sponsorship">
+		<property name="banner" value="http://oi67.tinypic.com/n1dxqd.jpg" />
+		<property name="targetURL" value="https://www.nationalbreastcancer.org/" />
+		<property name="creditCard" ref="creditCard1" />
+		<property name="sponsor" ref="sponsor1" />
+		<property name="conference" ref="conference1" />
+
+	</bean>
+	<bean id="sponsorship2" class="domain.Sponsorship">
+		<property name="banner" value="http://oi65.tinypic.com/90by11.jpg" />
+		<property name="targetURL" value="https://www.petsupplies.com/" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="sponsor" ref="sponsor1" />
+		<property name="conference" ref="conference2" />
+
+	</bean>
+	<bean id="sponsorship3" class="domain.Sponsorship">
+		<property name="banner" value="http://oi66.tinypic.com/2s7vtyc.jpg" />
+		<property name="targetURL" value="https://sponsor.me/" />
+		<property name="creditCard" ref="creditCard3" />
+		<property name="sponsor" ref="sponsor2" />
+		<property name="conference" ref="conference2" />
+
+	</bean>
+	<bean id="sponsorship4" class="domain.Sponsorship">
+		<property name="banner" value="http://oi63.tinypic.com/33xkarl.jpg" />
+		<property name="targetURL"
+			value="https://www.firestonecompleteautocare.com/repair/brakes/service/" />
+		<property name="creditCard" ref="creditCard4" />
+		<property name="sponsor" ref="sponsor3" />
+		<property name="conference" ref="conference1" />
+	</bean>
+	<bean id="sponsorship5" class="domain.Sponsorship">
+		<property name="banner" value="http://oi68.tinypic.com/eze6o7.jpg" />
+		<property name="targetURL" value="https://www.joinusbeer.com" />
+		<property name="creditCard" ref="creditCard2" />
+		<property name="sponsor" ref="sponsor3" />
+		<property name="conference" ref="conference2" />
+	</bean>
+
+	<!-- Topic -->
+	<bean id="topic1" class="domain.Topic">
+		<property name="nameEnglish" value="INQUIRY" />
+		<property name="nameSpanish" value="CONSULTA" />
+	</bean>
+	<bean id="topic2" class="domain.Topic">
+		<property name="nameEnglish" value="REBUTTAL" />
+		<property name="nameSpanish" value="REFUTACIÓN" />
+	</bean>
+	<bean id="topic3" class="domain.Topic">
+		<property name="nameEnglish" value="REGISTRATION" />
+		<property name="nameSpanish" value="REGISTRO" />
+	</bean>
+	<bean id="topic4" class="domain.Topic">
+		<property name="nameEnglish" value="TOPICS" />
+		<property name="nameSpanish" value="TEMAS" />
+	</bean>
+	<bean id="topic5" class="domain.Topic">
+		<property name="nameEnglish" value="OTHER" />
+		<property name="nameSpanish" value="OTRO" />
+	</bean>
+
+	<!-- SystemConfiguration -->
+	<bean id="systemConfiguration1" class="domain.SystemConfiguration">
+		<property name="nameSystem" value="Acme Conference" />
+		<property name="bannerUrl" value="https://i.ibb.co/GVpZCtM/acme-conference.png" />
+		<property name="welcomeMessageEnglish"
+			value="Welcome to Acme Conference! Your scientific event manager" />
+		<property name="welcomeMessageSpanish"
+			value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos" />
+		<property name="phoneCountryCode" value="+34" />
+		<property name="creditCardBrands">
+			<list>
+				<value>VISA</value>
+				<value>MASTER</value>
+				<value>DINNERS</value>
+				<value>AMEX</value>
+			</list>
+		</property>
+		<property name="voidWords">
+			<list>
+				<value>a</value>
+				<value>able</value>
+				<value>about</value>
+				<value>across</value>
+				<value>after</value>
+				<value>all</value>
+				<value>almost</value>
+				<value>also</value>
+				<value>am</value>
+				<value>among</value>
+				<value>an</value>
+				<value>and</value>
+				<value>any</value>
+				<value>are</value>
+				<value>as</value>
+				<value>at</value>
+				<value>be</value>
+				<value>because</value>
+				<value>been</value>
+				<value>but</value>
+				<value>by</value>
+				<value>can</value>
+				<value>cannot</value>
+				<value>could</value>
+				<value>dear</value>
+				<value>did</value>
+				<value>do</value>
+				<value>does</value>
+				<value>either</value>
+				<value>else</value>
+				<value>ever</value>
+				<value>every</value>
+				<value>for</value>
+				<value>from</value>
+				<value>get</value>
+				<value>got</value>
+				<value>had</value>
+				<value>has</value>
+				<value>have</value>
+				<value>he</value>
+				<value>her</value>
+				<value>hers</value>
+				<value>him</value>
+				<value>his</value>
+				<value>how</value>
+				<value>however</value>
+				<value>i</value>
+				<value>if</value>
+				<value>in</value>
+				<value>into</value>
+				<value>is</value>
+				<value>it</value>
+				<value>its</value>
+				<value>just</value>
+				<value>least</value>
+				<value>let</value>
+				<value>like</value>
+				<value>likely</value>
+				<value>may</value>
+				<value>a</value>
+				<value>acá</value>
+				<value>ahí</value>
+				<value>ajena</value>
+				<value>ajeno</value>
+				<value>ajenas</value>
+				<value>ajenos</value>
+				<value>al</value>
+				<value>algo</value>
+				<value>algún</value>
+				<value>alguna</value>
+				<value>alguno</value>
+				<value>algunas</value>
+				<value>algunos</value>
+				<value>allá</value>
+				<value>allí</value>
+				<value>ambos</value>
+				<value>ante</value>
+				<value>antes</value>
+				<value>aquel</value>
+				<value>aquella</value>
+				<value>aquello</value>
+				<value>aquelas</value>
+				<value>aquellos</value>
+				<value>aquí</value>
+				<value>arriba</value>
+				<value>así</value>
+				<value>atrás</value>
+				<value>aun</value>
+				<value>aunque</value>
+				<value>bajo</value>
+				<value>bastante</value>
+				<value>bien</value>
+				<value>cabe</value>
+				<value>cada</value>
+				<value>casi</value>
+				<value>cierto</value>
+				<value>cierta</value>
+				<value>ciertos</value>
+				<value>ciertas</value>
+				<value>como</value>
+				<value>con</value>
+				<value>conmigo</value>
+				<value>conseguimos</value>
+				<value>conseguir</value>
+				<value>consigo</value>
+				<value>consigue</value>
+				<value>consiguen</value>
+				<value>consigues</value>
+				<value>contigo</value>
+				<value>contra</value>
+				<value>cual</value>
+				<value>cuales</value>
+				<value>cualquier</value>
+				<value>cualquiera</value>
+				<value>cualesquiera</value>
+				<value>cuan</value>
+				<value>cuando</value>
+				<value>cuanto</value>
+				<value>cuanta</value>
+				<value>cuantos</value>
+				<value>cuantas</value>
+				<value>de</value>
+			</list>
+		</property>
+	</bean>
+
+
+</beans>
