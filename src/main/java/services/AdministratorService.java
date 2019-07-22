@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ import security.Authority;
 import security.UserAccount;
 import domain.Actor;
 import domain.Administrator;
+import domain.Message;
 
 @Service
 @Transactional
@@ -39,11 +41,13 @@ public class AdministratorService {
 		this.actorService.checkUserLoginAdministrator(actorLogged);
 
 		result = new Administrator();
+		final Collection<Message> messages = new HashSet<>();
 		final UserAccount userAccount = this.userAccountService.create();
 		final Authority auth = new Authority();
 
 		auth.setAuthority(Authority.ADMIN);
 		userAccount.addAuthority(auth);
+		result.setMessages(messages);
 		result.setUserAccount(userAccount);
 
 		return result;

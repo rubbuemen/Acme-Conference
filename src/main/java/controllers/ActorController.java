@@ -62,6 +62,7 @@ public class ActorController extends AbstractController {
 
 		result = new ModelAndView("actor/register");
 
+		result.addObject("authority", Authority.AUTHOR);
 		result.addObject("actionURL", "actor/register-author.do");
 		result.addObject("actor", actor);
 
@@ -71,9 +72,9 @@ public class ActorController extends AbstractController {
 	@RequestMapping(value = "/register-reviewer", method = RequestMethod.GET)
 	public ModelAndView registerReviewer() {
 		ModelAndView result;
-		Author actor;
+		Reviewer actor;
 
-		actor = this.authorService.create();
+		actor = this.reviewerService.create();
 
 		result = new ModelAndView("actor/register");
 
@@ -93,6 +94,7 @@ public class ActorController extends AbstractController {
 
 		result = new ModelAndView("actor/register");
 
+		result.addObject("authority", Authority.SPONSOR);
 		result.addObject("actionURL", "actor/register-sponsor.do");
 		result.addObject("actor", actor);
 
@@ -121,7 +123,7 @@ public class ActorController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/register-reviewer", method = RequestMethod.POST, params = "save")
-	public ModelAndView registerAuthor(@ModelAttribute("actor") @Valid final Reviewer actor, final BindingResult binding) {
+	public ModelAndView registerReviewer(@ModelAttribute("actor") @Valid final Reviewer actor, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors())
@@ -177,8 +179,12 @@ public class ActorController extends AbstractController {
 		else
 			result = new ModelAndView("actor/register");
 
+		if (actor instanceof Author)
+			result.addObject("authority", Authority.AUTHOR);
 		if (actor instanceof Reviewer)
 			result.addObject("authority", Authority.REVIEWER);
+		if (actor instanceof Sponsor)
+			result.addObject("authority", Authority.SPONSOR);
 		result.addObject("actor", actor);
 		result.addObject("message", message);
 

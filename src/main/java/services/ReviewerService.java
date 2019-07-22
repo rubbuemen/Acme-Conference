@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ReviewerRepository;
-import domain.Actor;
+import security.Authority;
+import security.UserAccount;
+import domain.Message;
+import domain.Report;
 import domain.Reviewer;
 
 @Service
@@ -24,15 +28,26 @@ public class ReviewerService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private UserAccountService	userAccountService;
+
 
 	// Simple CRUD methods
+	//R11.6
 	public Reviewer create() {
 		Reviewer result;
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		result = new Reviewer();
+		final Collection<Message> messages = new HashSet<>();
+		final Collection<Report> reports = new HashSet<>();
+		final UserAccount userAccount = this.userAccountService.create();
+		final Authority auth = new Authority();
+
+		auth.setAuthority(Authority.REVIEWER);
+		userAccount.addAuthority(auth);
+		result.setMessages(messages);
+		result.setReports(reports);
+		result.setUserAccount(userAccount);
 
 		return result;
 	}
@@ -57,18 +72,14 @@ public class ReviewerService {
 		return result;
 	}
 
+	//R11.6
 	public Reviewer save(final Reviewer reviewer) {
 		Assert.notNull(reviewer);
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		Reviewer result;
 
-		if (reviewer.getId() == 0)
-			result = this.reviewerRepository.save(reviewer);
-		else
-			result = this.reviewerRepository.save(reviewer);
+		result = (Reviewer) this.actorService.save(reviewer);
+		result = this.reviewerRepository.save(result);
 
 		return result;
 	}

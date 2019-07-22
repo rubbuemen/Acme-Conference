@@ -20,16 +20,23 @@
 
 <spring:message code="actor.confirm.phone" var="confirmPhone" />
 <form:form id="form" action="${actionURL}" modelAttribute="actor" onsubmit="return checkPhone('${confirmPhone}');">
-
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="messages" />
-	<jstl:if test="${authority == 'ADMIN'}">
-		<form:hidden path="conferences" />
-	</jstl:if>
+	<form:hidden path="userAccount.authorities" value="${authority}" />
+	<form:hidden path="userAccount.statusAccount" />
 	<jstl:if test="${authority == 'AUTHOR'}">
-		<form:hidden path="finder" />
+		<jstl:choose>
+			<jstl:when test="${actor.id != 0}">
+				<form:hidden path="finder" />
+			</jstl:when>
+			<jstl:otherwise>
+				<form:hidden path="finder" value="0" />
+			</jstl:otherwise>
+		</jstl:choose>
+		<form:hidden path="registrations" />
 		<form:hidden path="submissions" />
+		<form:hidden path="score" />
 	</jstl:if>
 	<jstl:if test="${authority == 'REVIEWER'}">
 		<form:hidden path="reports" />
@@ -42,20 +49,18 @@
 		<legend><spring:message code="actor.userAccount"/></legend>
 		<jstl:choose>
 			<jstl:when test="${actor.id != 0}">
-				<acme:textbox path="actor.userAccount.username" code="actor.username" readonly="true" />
+				<acme:textbox code="actor.username" path="userAccount.username" readonly="true" />
+				<form:hidden path="userAccount" />
 			</jstl:when>
 			<jstl:otherwise>
-				<acme:textbox path="actor.userAccount.username" code="actor.username" placeholder="LoremIpsum" />
+				<acme:textbox code="actor.username" path="userAccount.username" placeholder="LoremIpsum" />
+				<br />
+				<acme:password code="actor.password" path="userAccount.password" placeholder="Lorem Ipsum" />
 			</jstl:otherwise>
 		</jstl:choose>
-		<br />
-	
-		<jstl:if test="${actor.id == 0}">
-			<acme:password code="actor.password" path="actor.userAccount.password" placeholder="Lorem Ipsum" />
-			<br />
-		</jstl:if>
 	</fieldset>
-
+	<br />
+	
 	<fieldset>
 		<legend><spring:message code="actor.personalData"/></legend>
 		<acme:textbox code="actor.name" path="name" placeholder="Lorem Ipsum"/>
@@ -89,6 +94,7 @@
 			<br />
 		</jstl:if>
 	</fieldset>
+	<br />
 
 	<jstl:choose>
 		<jstl:when test="${actor.id == 0}">

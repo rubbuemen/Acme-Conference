@@ -7,24 +7,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import repositories.FinderRepository;
-import services.FinderService;
-import domain.Finder;
+import security.UserAccount;
+import security.UserAccountRepository;
 
 @Component
 @Transactional
-public class StringToFinderConverter implements Converter<String, Finder> {
+public class StringToUserAccountConverter implements Converter<String, UserAccount> {
 
 	@Autowired
-	FinderRepository		finderRepository;
-
-	@Autowired
-	private FinderService	finderService;
+	UserAccountRepository	userAccountRepository;
 
 
 	@Override
-	public Finder convert(final String text) {
-		Finder result;
+	public UserAccount convert(final String text) {
+		UserAccount result;
 		int id;
 
 		try {
@@ -32,10 +28,7 @@ public class StringToFinderConverter implements Converter<String, Finder> {
 				result = null;
 			else {
 				id = Integer.valueOf(text);
-				if (id == 0)
-					result = this.finderService.create();
-				else
-					result = this.finderRepository.findOne(id);
+				result = this.userAccountRepository.findOne(id);
 			}
 		} catch (final Throwable oops) {
 			throw new IllegalArgumentException(oops);

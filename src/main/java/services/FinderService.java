@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
-import domain.Actor;
+import domain.Conference;
 import domain.Finder;
 
 @Service
@@ -20,19 +21,17 @@ public class FinderService {
 	@Autowired
 	private FinderRepository	finderRepository;
 
-	// Supporting services
-	@Autowired
-	private ActorService		actorService;
 
+	// Supporting services
 
 	// Simple CRUD methods
 	public Finder create() {
 		Finder result;
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		result = new Finder();
+		final Collection<Conference> conferences = new HashSet<>();
+
+		result.setConferences(conferences);
 
 		return result;
 	}
@@ -60,15 +59,9 @@ public class FinderService {
 	public Finder save(final Finder finder) {
 		Assert.notNull(finder);
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		Finder result;
 
-		if (finder.getId() == 0)
-			result = this.finderRepository.save(finder);
-		else
-			result = this.finderRepository.save(finder);
+		result = this.finderRepository.save(finder);
 
 		return result;
 	}

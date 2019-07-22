@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.AuthorRepository;
-import domain.Actor;
+import security.Authority;
+import security.UserAccount;
 import domain.Author;
+import domain.Finder;
+import domain.Message;
+import domain.Registration;
+import domain.Submission;
 
 @Service
 @Transactional
@@ -24,15 +30,33 @@ public class AuthorService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private UserAccountService	userAccountService;
+
+	@Autowired
+	private FinderService		finderService;
+
 
 	// Simple CRUD methods
+	//R11.5
 	public Author create() {
 		Author result;
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		result = new Author();
+		final Collection<Message> messages = new HashSet<>();
+		final Collection<Submission> submissions = new HashSet<>();
+		final Collection<Registration> registrations = new HashSet<>();
+		final Finder finder = this.finderService.create();
+		final UserAccount userAccount = this.userAccountService.create();
+		final Authority auth = new Authority();
+
+		auth.setAuthority(Authority.AUTHOR);
+		userAccount.addAuthority(auth);
+		result.setMessages(messages);
+		result.setSubmissions(submissions);
+		result.setRegistrations(registrations);
+		result.setFinder(finder);
+		result.setUserAccount(userAccount);
 
 		return result;
 	}
@@ -57,18 +81,19 @@ public class AuthorService {
 		return result;
 	}
 
+	//R11.5
 	public Author save(final Author author) {
 		Assert.notNull(author);
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		Author result;
 
-		if (author.getId() == 0)
-			result = this.authorRepository.save(author);
-		else
-			result = this.authorRepository.save(author);
+		if (author.getId() == 0) {
+			final Finder finder = this.finderService.save(author.getFinder());
+			author.setFinder(finder);
+		}
+
+		result = (Author) this.actorService.save(author);
+		result = this.authorRepository.save(result);
 
 		return result;
 	}
