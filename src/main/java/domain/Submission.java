@@ -31,6 +31,7 @@ public class Submission extends DomainEntity {
 	private String	ticker;
 	private Date	moment;
 	private String	status;
+	private Boolean	isAssigned;
 	private Boolean	isNotified;
 
 
@@ -66,6 +67,15 @@ public class Submission extends DomainEntity {
 
 	public void setStatus(final String status) {
 		this.status = status;
+	}
+
+	@NotNull
+	public Boolean getIsAssigned() {
+		return this.isAssigned;
+	}
+
+	public void setIsAssigned(final Boolean isAssigned) {
+		this.isAssigned = isAssigned;
 	}
 
 	@NotNull

@@ -26,7 +26,7 @@ import cz.jirutka.validator.collection.constraints.EachURL;
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Access(AccessType.PROPERTY)
-public abstract class Activity extends DomainEntity {
+public abstract class Activity extends Commentable {
 
 	// Attributes
 	private String				title;

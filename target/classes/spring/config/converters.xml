@@ -24,6 +24,7 @@
 		<bean class="converters.AuthorToStringConverter" />
 		<bean class="converters.CategoryToStringConverter" />
 		<bean class="converters.CommentToStringConverter" />
+		<bean class="converters.CommentableToStringConverter" />
 		<bean class="converters.ConferenceToStringConverter" />
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.FinderToStringConverter" />
@@ -47,6 +48,7 @@
 		<bean class="converters.StringToAuthorConverter" />
 		<bean class="converters.StringToCategoryConverter" />
 		<bean class="converters.StringToCommentConverter" />
+		<bean class="converters.StringToCommentableConverter" />
 		<bean class="converters.StringToConferenceConverter" />
 		<bean class="converters.StringToCreditCardConverter" />
 		<bean class="converters.StringToFinderConverter" />

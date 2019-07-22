@@ -24,7 +24,7 @@ import cz.jirutka.validator.collection.constraints.EachNotNull;
 
 @Entity
 @Access(AccessType.PROPERTY)
-public class Conference extends DomainEntity {
+public class Conference extends Commentable {
 
 	// Attributes
 	private String	title;
@@ -156,9 +156,7 @@ public class Conference extends DomainEntity {
 	// Relationships
 	private Collection<Activity>		activities;
 	private Category					category;
-	private Collection<Comment>			comments;
 	private Collection<Registration>	registrations;
-	private Collection<Sponsorship>		sponsorships;
 
 
 	@Valid
@@ -185,17 +183,6 @@ public class Conference extends DomainEntity {
 
 	@Valid
 	@EachNotNull
-	@OneToMany
-	public Collection<Comment> getComments() {
-		return this.comments;
-	}
-
-	public void setComments(final Collection<Comment> comments) {
-		this.comments = comments;
-	}
-
-	@Valid
-	@EachNotNull
 	@OneToMany(mappedBy = "conference")
 	public Collection<Registration> getRegistrations() {
 		return this.registrations;
@@ -203,17 +190,6 @@ public class Conference extends DomainEntity {
 
 	public void setRegistrations(final Collection<Registration> registrations) {
 		this.registrations = registrations;
-	}
-
-	@Valid
-	@EachNotNull
-	@OneToMany(mappedBy = "conference")
-	public Collection<Sponsorship> getSponsorships() {
-		return this.sponsorships;
-	}
-
-	public void setSponsorships(final Collection<Sponsorship> sponsorships) {
-		this.sponsorships = sponsorships;
 	}
 
 }
