@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,5 +83,16 @@ public class SponsorshipService {
 	}
 
 	// Other business methods
+	//R28
+	public Sponsorship findRandomSponsorship() {
+		Sponsorship result = null;
+		final Random r = new Random();
+		final Collection<Sponsorship> sponsorships = this.sponsorshipRepository.findAll();
+		if (!sponsorships.isEmpty()) {
+			final int i = r.nextInt(sponsorships.size());
+			result = (Sponsorship) sponsorships.toArray()[i];
+		}
+		return result;
+	}
 
 }

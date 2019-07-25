@@ -28,6 +28,7 @@ public class MessageService {
 
 
 	// Simple CRUD methods
+	//R12.3
 	public Message create() {
 		Message result;
 
@@ -77,7 +78,8 @@ public class MessageService {
 		return result;
 	}
 
-	public void save(final Message message, final boolean notification) {
+	//R12.3
+	public void save(final Message message) {
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() == 0); //Un mensaje no tiene sentido que se edite, por lo que sólo vendrá del create
 
@@ -91,6 +93,7 @@ public class MessageService {
 			copyMessage.setMoment(message.getMoment());
 			copyMessage.setBody(message.getBody());
 			copyMessage.setSubject(message.getSubject());
+			copyMessage.setTopic(message.getTopic());
 			copyMessage.setSender(message.getSender());
 			copyMessage.setRecipients(message.getRecipients());
 			result = this.messageRepository.save(copyMessage);
@@ -98,6 +101,7 @@ public class MessageService {
 		}
 	}
 
+	//R12.4
 	public void delete(final Message message) {
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
@@ -116,14 +120,14 @@ public class MessageService {
 	}
 
 	// Other business methods
-	public Collection<Message> findMessagesOrderByTagByActorLogged() {
+	//R12.4
+	public Collection<Message> findMessagesByActorLogged() {
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
 
 		Collection<Message> result;
 
-		//result = this.messageRepository.findMessagesOrderByTagByActorId(actorLogged.getId());
-		result = null;
+		result = this.messageRepository.findMessagesByActorId(actorLogged.getId());
 		return result;
 	}
 
@@ -141,15 +145,6 @@ public class MessageService {
 		result = this.messageRepository.findOne(messageId);
 		Assert.notNull(result);
 
-		return result;
-	}
-
-	public Collection<Message> findMessagesSentByActorId(final int actorId) {
-		Assert.isTrue(actorId != 0);
-
-		Collection<Message> result;
-
-		result = this.messageRepository.findMessagesSentByActorId(actorId);
 		return result;
 	}
 

@@ -18,22 +18,40 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${actionURL}" modelAttribute="entidad">
+<form:form action="${actionURL}" modelAttribute="registration">
+
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="author" />
 	
-	<acme:textbox code="entidad.atributo" path="atributo" placeholder="Lorem Ipsum"/>
-	<br />
+	<fieldset>
+		<legend>
+			<spring:message code="registration.creditCard" />
+		</legend>
+		<acme:textbox code="creditCard.holderName" path="creditCard.holderName" placeholder="Lorem Ipsum" />
+		<br />
 
-	<
-	<jstl:choose>
-		<jstl:when test="${entidad.id == 0}">
-			<acme:submit name="save" code="button.register" />
-		</jstl:when>
-		<jstl:otherwise>
-			<acme:submit name="save" code="button.save" />
-		</jstl:otherwise>
-	</jstl:choose>
+		<acme:selectString items="${creditCardBrands}" itemLabel="creditCard.brandName" code="creditCard.brandName" path="creditCard.brandName"/>
+		<br />
+		
+		<acme:textbox code="creditCard.number" path="creditCard.number"	placeholder="NNNNNNNNNNNNNNNN" />
+		<br />
+		
+		<acme:textbox code="creditCard.expirationMonth" path="creditCard.expirationMonth" placeholder="MM" type="number" min="1" max="12" />
+		<br />
+		
+		<acme:textbox code="creditCard.expirationYear" path="creditCard.expirationYear" placeholder="YY" type="number" min="0" max="99" />
+		<br />
+		
+		<acme:textbox code="creditCard.cvv" path="creditCard.cvv" placeholder="NNN" type="number" min="000" max="999" />
+		<br />
+	</fieldset>
+	<br />
+		
+	<acme:select items="${conferences}" itemLabel="title" code="registration.conference" path="conference"/>
+	<br />
 	
-	<acme:cancel url="entidad/actor/list.do" code="button.cancel" />
+	<acme:submit name="save" code="button.save" />
+	<acme:cancel url="registration/author/list.do" code="button.cancel" />
+
 </form:form>

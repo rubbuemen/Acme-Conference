@@ -18,22 +18,35 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${actionURL}" modelAttribute="entidad">
+<form:form action="${actionURL}" modelAttribute="submission">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="ticker" />
+	<form:hidden path="moment" />
+	<form:hidden path="status" />
+	<form:hidden path="isAssigned" />
+	<form:hidden path="isNotified" />
+	<form:hidden path="paper.isCameraReadyVersion" />
 	
-	<acme:textbox code="entidad.atributo" path="atributo" placeholder="Lorem Ipsum"/>
+	<fieldset>
+	    <legend><spring:message code="submission.paper"/></legend>
+	    <acme:textbox code="submission.paper.title" path="paper.title" placeholder="Lorem Ipsum"/>
+		<br />
+	
+		<acme:textbox code="submission.paper.aliasAuthors" path="paper.aliasAuthors" placeholder="Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum" />
+		<br />
+		
+		<acme:textbox code="submission.paper.summary" path="paper.summary" placeholder="Lorem Ipsum"/>
+		<br />
+		
+		<acme:textbox code="submission.paper.document" path="paper.document" placeholder="http://LoremIpsum.com" type="url" />
+		<br />
+	</fieldset>
+	<br />
+	
+	<acme:select items="${conferences}" itemLabel="title" code="submission.conference" path="conference" />
 	<br />
 
-	<
-	<jstl:choose>
-		<jstl:when test="${entidad.id == 0}">
-			<acme:submit name="save" code="button.register" />
-		</jstl:when>
-		<jstl:otherwise>
-			<acme:submit name="save" code="button.save" />
-		</jstl:otherwise>
-	</jstl:choose>
-	
-	<acme:cancel url="entidad/actor/list.do" code="button.cancel" />
+	<acme:submit name="save" code="button.register" />
+	<acme:cancel url="submission/author/list.do" code="button.cancel" />
 </form:form>

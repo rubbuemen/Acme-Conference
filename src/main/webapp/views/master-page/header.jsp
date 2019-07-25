@@ -22,7 +22,7 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->		
 		<security:authorize access="isAnonymous()">
-		<%-- <li><a class="fNiv" href="position/listGeneric.do"><spring:message code="master.page.positionsAvailables" /></a></li> --%>
+			<li><a class="fNiv" href="conference/listGeneric.do"><spring:message code="master.page.conferences" /></a></li>
 			<li><a class="fNiv"><spring:message code="master.page.register" /></a>
 				<ul>
 					<li class="arrow"></li>
@@ -39,7 +39,8 @@
 				<a class="fNiv"><spring:message code="master.page.author" /></a>
 				<ul>
 					<li class="arrow"></li>
-<%-- 					<li><a href="application/author/list.do"><spring:message code="master.page.applications" /></a></li> --%>
+					<li><a href="submission/author/list.do"><spring:message code="master.page.submissions" /></a></li>
+					<li><a href="registration/author/list.do"><spring:message code="master.page.registrations" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -78,6 +79,7 @@
 		</security:authorize>
 		
 		<security:authorize access="isAuthenticated()">
+		<li><a class="fNiv" href="conference/listGeneric.do"><spring:message code="master.page.conferences" /></a></li>
 		<li><a class="fNiv" href="message/list.do"><spring:message code="master.page.messages" /></a></li>
 			<li>
 				<a class="fNiv"> 

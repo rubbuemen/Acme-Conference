@@ -25,7 +25,6 @@
 		<value>/views/dashboard/tiles.xml</value>
 		<value>/views/finder/tiles.xml</value>
 		<value>/views/message/tiles.xml</value>
-		<value>/views/paper/tiles.xml</value>
 		<value>/views/registration/tiles.xml</value>
 		<value>/views/report/tiles.xml</value>
 		<value>/views/section/tiles.xml</value>

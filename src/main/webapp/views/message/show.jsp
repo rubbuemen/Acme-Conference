@@ -20,11 +20,6 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <ul style="list-style-type: disc">
-	<jstl:if test="${not empty messageEntity.tags}">
-		<spring:message code="message.tags" var="tags" />
-		<li><b>${tags}:</b> <jstl:out value="${messageEntity.tags}" /></li>
-	</jstl:if>
-	
 	<spring:message code="message.sender" var="sender" />
 	<li><b>${sender}:</b> <jstl:out value="${messageEntity.sender.userAccount.username}" /></li>
 	
@@ -36,6 +31,15 @@
 		<li><jstl:out value="${recipient.userAccount.username}" /></li>
     </jstl:forEach>
 	</ul>
+	
+	<spring:message code="message.topic" var="topic" />
+	<jstl:if test="${language eq 'en'}">
+		<jstl:set var="nameTopic" value="${messageEntity.topic.nameEnglish}" />
+	</jstl:if>
+	<jstl:if test="${language eq 'es'}">
+		<jstl:set var="nameTopic" value="${messageEntity.topic.nameSpanish}" />
+	</jstl:if>
+	<li><b>${topic}:</b> <jstl:out value="${nameTopic}" /></li>
 	
 	<spring:message code="message.subject" var="subject" />
 	<li><b>${subject}:</b> <jstl:out value="${messageEntity.subject}" /></li>

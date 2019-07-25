@@ -819,7 +819,7 @@
 	
 	<!-- Submission -->
 	<bean id="submission1" class="domain.Submission">
-		<property name="ticker" value="ALB-G5KD" />
+		<property name="ticker" value="AAB-G5KD" />
 		<property name="moment" value="2019/04/16 20:40" />
 		<property name="status" value="ACCEPTED" />
 		<property name="isAssigned" value="true" />
@@ -834,7 +834,7 @@
 		</property>
 	</bean>
 	<bean id="submission2" class="domain.Submission">
-		<property name="ticker" value="SAN-4H7A" />
+		<property name="ticker" value="SSC-4H7A" />
 		<property name="moment" value="2019/04/17 12:20" />
 		<property name="status" value="ACCEPTED" />
 		<property name="isAssigned" value="true" />
@@ -850,7 +850,7 @@
 		</property>
 	</bean>
 	<bean id="submission3" class="domain.Submission">
-		<property name="ticker" value="ALB-5B2J" />
+		<property name="ticker" value="AAB-5B2J" />
 		<property name="moment" value="2019/01/10 10:36" />
 		<property name="status" value="REJECTED" />
 		<property name="isAssigned" value="true" />
@@ -866,7 +866,7 @@
 		</property>
 	</bean>
 	<bean id="submission4" class="domain.Submission">
-		<property name="ticker" value="SAN-UKSB" />
+		<property name="ticker" value="SSC-UKSB" />
 		<property name="moment" value="2019/01/03 15:15" />
 		<property name="status" value="REJECTED" />
 		<property name="isAssigned" value="true" />
@@ -881,7 +881,7 @@
 		</property>
 	</bean>
 	<bean id="submission5" class="domain.Submission">
-		<property name="ticker" value="ALB-Y884" />
+		<property name="ticker" value="AAB-Y884" />
 		<property name="moment" value="2019/05/10 12:42" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="isAssigned" value="false" />
@@ -895,7 +895,7 @@
 		</property>
 	</bean>
 	<bean id="submission6" class="domain.Submission">
-		<property name="ticker" value="JAM-8GAK" />
+		<property name="ticker" value="JJM-8GAK" />
 		<property name="moment" value="2019/05/10 15:48" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="isAssigned" value="false" />
@@ -904,7 +904,7 @@
 		<property name="conference" ref="conference7" />
 	</bean>
 	<bean id="submission7" class="domain.Submission">
-		<property name="ticker" value="JAM-6437" />
+		<property name="ticker" value="JJM-6437" />
 		<property name="moment" value="2019/05/10 22:21" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="isAssigned" value="false" />
@@ -913,7 +913,7 @@
 		<property name="conference" ref="conference7" />
 	</bean>
 	<bean id="submission8" class="domain.Submission">
-		<property name="ticker" value="JAM-HGS3" />
+		<property name="ticker" value="JJM-HGS3" />
 		<property name="moment" value="2019/05/04 04:45" />
 		<property name="status" value="UNDER-REVIEW" />
 		<property name="isAssigned" value="false" />

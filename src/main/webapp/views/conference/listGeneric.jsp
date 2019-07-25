@@ -1,0 +1,266 @@
+<%--
+ * index.jsp
+ *
+ * Copyright (C) 2019 Universidad de Sevilla
+ * 
+ * The use of this project is hereby constrained to the conditions of the 
+ * TDG Licence, a copy of which you may download from 
+ * http://www.tdg-seville.info/License.html
+ --%>
+
+
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+
+<%@taglib prefix="jstl"	uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+
+<form name="singleKeyWord" id="singleKeyWord" action="conference/listGeneric.do" method="POST" >
+	<spring:message code="conference.searchBySingleKeyWord" />: 
+	<input type="text" name="singleKeyWord" required>
+		
+	<spring:message code="button.search" var="search" />
+	<input type="submit" name="search" value="${search}" />
+</form>
+<br />
+
+<display:table class="displaytag" name="conferences" id="row">
+	<spring:message code="conference.title" var="title" />
+	<display:column property="title" title="${title}" />
+	
+	<spring:message code="conference.acronym" var="acronym" />
+	<display:column property="acronym" title="${acronym}" />
+	
+	<spring:message code="conference.venue" var="venue" />
+	<display:column property="venue" title="${venue}" />
+	
+	<spring:message code="conference.submissionDeadline" var="submissionDeadline" />
+	<display:column title="${submissionDeadline}">
+		<fmt:formatDate var="format" value="${row.submissionDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.notificationDeadline" var="notificationDeadline" />
+	<display:column title="${notificationDeadline}">
+		<fmt:formatDate var="format" value="${row.notificationDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.cameraReadyDeadline" var="cameraReadyDeadline" />
+	<display:column title="${cameraReadyDeadline}">
+		<fmt:formatDate var="format" value="${row.cameraReadyDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.startDate" var="startDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="format" value="${row.startDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.endDate" var="endDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="endDate" value="${row.endDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.summary" var="summary" />
+	<display:column property="summary" title="${summary}" />
+	
+	<spring:message code="conference.fee" var="fee" />
+	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.sponsorship" var="sponsorship" />
+	<display:column title="${sponsorship}" >
+		<jstl:if test="${randomSponsorship.containsKey(row)}">
+			<jstl:set var="banner" value="${randomSponsorship.get(row).banner}"/>
+			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
+		</jstl:if>
+	</display:column>
+</display:table>
+<br/><br/>
+
+<details>
+<summary style="font-size: 26px; cursor:pointer;"><spring:message code="conference.forthcomingConferences"/></summary>
+
+<display:table class="displaytag" name="forthcomingConferences" id="row1">
+	<spring:message code="conference.title" var="title" />
+	<display:column property="title" title="${title}" />
+	
+	<spring:message code="conference.acronym" var="acronym" />
+	<display:column property="acronym" title="${acronym}" />
+	
+	<spring:message code="conference.venue" var="venue" />
+	<display:column property="venue" title="${venue}" />
+	
+	<spring:message code="conference.submissionDeadline" var="submissionDeadline" />
+	<display:column title="${submissionDeadline}">
+		<fmt:formatDate var="format" value="${row1.submissionDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.notificationDeadline" var="notificationDeadline" />
+	<display:column title="${notificationDeadline}">
+		<fmt:formatDate var="format" value="${row1.notificationDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.cameraReadyDeadline" var="cameraReadyDeadline" />
+	<display:column title="${cameraReadyDeadline}">
+		<fmt:formatDate var="format" value="${row1.cameraReadyDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.startDate" var="startDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="format" value="${row1.startDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.endDate" var="endDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="endDate" value="${row1.endDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.summary" var="summary" />
+	<display:column property="summary" title="${summary}" />
+	
+	<spring:message code="conference.fee" var="fee" />
+	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.sponsorship" var="sponsorship" />
+	<display:column title="${sponsorship}" >
+		<jstl:if test="${randomSponsorship1.containsKey(row1)}">
+			<jstl:set var="banner" value="${randomSponsorship1.get(row1).banner}"/>
+			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
+		</jstl:if>
+	</display:column>
+</display:table>
+
+</details><br/>
+
+<details>
+<summary style="font-size: 26px; cursor:pointer;"><spring:message code="conference.pastConferences"/></summary>
+
+<display:table class="displaytag" name="pastConferences" id="row2">
+	<spring:message code="conference.title" var="title" />
+	<display:column property="title" title="${title}" />
+	
+	<spring:message code="conference.acronym" var="acronym" />
+	<display:column property="acronym" title="${acronym}" />
+	
+	<spring:message code="conference.venue" var="venue" />
+	<display:column property="venue" title="${venue}" />
+	
+	<spring:message code="conference.submissionDeadline" var="submissionDeadline" />
+	<display:column title="${submissionDeadline}">
+		<fmt:formatDate var="format" value="${row2.submissionDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.notificationDeadline" var="notificationDeadline" />
+	<display:column title="${notificationDeadline}">
+		<fmt:formatDate var="format" value="${row2.notificationDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.cameraReadyDeadline" var="cameraReadyDeadline" />
+	<display:column title="${cameraReadyDeadline}">
+		<fmt:formatDate var="format" value="${row2.cameraReadyDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.startDate" var="startDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="format" value="${row2.startDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.endDate" var="endDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="endDate" value="${row2.endDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.summary" var="summary" />
+	<display:column property="summary" title="${summary}" />
+	
+	<spring:message code="conference.fee" var="fee" />
+	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.sponsorship" var="sponsorship" />
+	<display:column title="${sponsorship}" >
+		<jstl:if test="${randomSponsorship2.containsKey(row2)}">
+			<jstl:set var="banner" value="${randomSponsorship2.get(row2).banner}"/>
+			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
+		</jstl:if>
+	</display:column>
+</display:table>
+
+</details><br/>
+
+<details>
+<summary style="font-size: 26px; cursor:pointer;"><spring:message code="conference.runningConferences"/></summary>
+
+<display:table class="displaytag" name="runningConferences" id="row3">
+	<spring:message code="conference.title" var="title" />
+	<display:column property="title" title="${title}" />
+	
+	<spring:message code="conference.acronym" var="acronym" />
+	<display:column property="acronym" title="${acronym}" />
+	
+	<spring:message code="conference.venue" var="venue" />
+	<display:column property="venue" title="${venue}" />
+	
+	<spring:message code="conference.submissionDeadline" var="submissionDeadline" />
+	<display:column title="${submissionDeadline}">
+		<fmt:formatDate var="format" value="${row3.submissionDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.notificationDeadline" var="notificationDeadline" />
+	<display:column title="${notificationDeadline}">
+		<fmt:formatDate var="format" value="${row3.notificationDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.cameraReadyDeadline" var="cameraReadyDeadline" />
+	<display:column title="${cameraReadyDeadline}">
+		<fmt:formatDate var="format" value="${row3.cameraReadyDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.startDate" var="startDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="format" value="${row3.startDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.endDate" var="endDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="endDate" value="${row3.endDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.summary" var="summary" />
+	<display:column property="summary" title="${summary}" />
+	
+	<spring:message code="conference.fee" var="fee" />
+	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.sponsorship" var="sponsorship" />
+	<display:column title="${sponsorship}" >
+		<jstl:if test="${randomSponsorship3.containsKey(row3)}">
+			<jstl:set var="banner" value="${randomSponsorship3.get(row3).banner}"/>
+			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
+		</jstl:if>
+	</display:column>
+</display:table>
+
+</details><br/>

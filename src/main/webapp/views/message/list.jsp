@@ -23,13 +23,30 @@
 	<spring:message code="message.subject" var="subject" />
 	<display:column property="subject" title="${subject}" />
 	
-	<spring:message code="message.tags" var="tags" />
-	<display:column property="tags" title="${tags}" />
+	<spring:message code="message.topic" var="topic" />
+	<display:column title="${topic}" sortable="true">
+		<jstl:if test="${language eq 'en'}">
+			<jstl:out value="${row.topic.nameEnglish}" />
+		</jstl:if>
+		<jstl:if test="${language eq 'es'}">
+			<jstl:out value="${row.topic.nameSpanish}" />
+		</jstl:if>
+	</display:column>
 	
 	<spring:message code="message.moment" var="moment" />
 	<display:column title="${moment}">
 			<fmt:formatDate var="format" value="${row.moment}" pattern="dd/MM/YYYY HH:mm" />
 			<jstl:out value="${format}" />
+	</display:column>
+		
+	<spring:message code="message.sender" var="sender" />
+	<display:column property="sender.userAccount.username" title="${sender}" sortable="true" />
+	
+	<spring:message code="message.recipients" var="recipients" />
+	<display:column title="${recipients}" sortable="true" >
+		<jstl:forEach items="${row.recipients}" var="recipient" >
+			<jstl:out value="${recipient.userAccount.username}" />
+    	</jstl:forEach>
 	</display:column>
 	
 	<spring:message code="message.show" var="showH" />
@@ -45,5 +62,8 @@
 
 <acme:button url="message/create.do" code="button.sendMessage" />
 <security:authorize access="hasRole('ADMIN')">
-	<acme:button url="message/create.do?broadcast=true" code="button.sendBroadcast" />
+	<acme:button url="message/create.do?broadcast=authorsSubmissionsConference" code="button.sendBroadcast1" />
+	<acme:button url="message/create.do?broadcast=authorsRegistrationsConference" code="button.sendBroadcast2" />
+	<acme:button url="message/create.do?broadcast=authors" code="button.sendBroadcast3" />
+	<acme:button url="message/create.do?broadcast=actors" code="button.sendBroadcast4" />
 </security:authorize>

@@ -19,21 +19,41 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="displaytag" name="entidads" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="registrations" requestURI="${requestURI}" id="row">
 
-	<spring:message code="entidad.atributo" var="atributo" />
-	<display:column property="atributo" title="${atributo}" />
-	
-	<spring:message code="entidad.edit" var="editH" />
-	<display:column title="${editH}" >
-		<acme:button url="entidad/actor/edit.do?entidadId=${row.id}" code="button.edit" />
+	<spring:message code="registration.creditCard" var="creditCard" />
+	<display:column title="${creditCard}">
+			<spring:message code="creditCard.holderName" />: ${row.creditCard.holderName}<br />
+			<spring:message code="creditCard.brandName" />: ${row.creditCard.brandName}<br />
+			<spring:message code="creditCard.number" />: ${row.creditCard.number}<br />
+			<spring:message code="creditCard.expirationMonth" />: ${row.creditCard.expirationMonth}<br />
+			<spring:message code="creditCard.expirationYear" />: ${row.creditCard.expirationYear}<br />
+			<spring:message code="creditCard.cvv" />: ${row.creditCard.cvv}
 	</display:column>
 	
-	<spring:message code="entidad.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<acme:button url="entidad/actor/delete.do?entidadId=${row.id}" code="button.delete" />	
+	<spring:message code="registration.conference" var="conference" />
+	<display:column title="${conference}">
+			<spring:message code="conference.title" />: ${row.conference.title}<br />
+			<spring:message code="conference.acronym" />: ${row.conference.acronym}<br />
+			<spring:message code="conference.venue" />: ${row.conference.venue}<br />
+			<spring:message code="conference.submissionDeadline" />:
+			<fmt:formatDate var="format" value="${row.conference.submissionDeadline}" pattern="dd/MM/YYYY" />
+			<jstl:out value="${format}" /><br />
+			<spring:message code="conference.notificationDeadline" />:
+			<fmt:formatDate var="format" value="${row.conference.notificationDeadline}" pattern="dd/MM/YYYY" />
+			<jstl:out value="${format}" /><br />
+			<spring:message code="conference.cameraReadyDeadline" />:
+			<fmt:formatDate var="format" value="${row.conference.cameraReadyDeadline}" pattern="dd/MM/YYYY" />
+			<jstl:out value="${format}" /><br />
+			<spring:message code="conference.startDate" />:
+			<fmt:formatDate var="format" value="${row.conference.startDate}" pattern="dd/MM/YYYY" />
+			<jstl:out value="${format}" /><br />
+			<spring:message code="conference.endDate" />:
+			<fmt:formatDate var="format" value="${row.conference.endDate}" pattern="dd/MM/YYYY" />
+			<jstl:out value="${format}" /><br />
+			<spring:message code="conference.summary" />: ${row.conference.summary}<br />
+			<spring:message code="conference.fee" />: ${row.conference.fee}<br />
 	</display:column>
-			
 </display:table>
 
-<acme:button url="entidad/actor/create.do" code="button.create" />
+<acme:button url="registration/author/create.do" code="button.create" />

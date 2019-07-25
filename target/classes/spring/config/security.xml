@@ -36,13 +36,15 @@
 		<security:intercept-url pattern="/security/login.do" access="permitAll" />
 		<security:intercept-url pattern="/security/loginFailure.do"	access="permitAll" />
 		<security:intercept-url pattern="/welcome/index.do"	access="permitAll" />
-<!-- 		<security:intercept-url pattern="/audit/listGeneric.do" access="permitAll"/> -->
+		<security:intercept-url pattern="/conference/listGeneric.do" access="permitAll"/>
 		
 		<security:intercept-url pattern="/actor/register-author.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/actor/register-reviewer.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/actor/register-sponsor.do" access="isAnonymous()" />
 		
 		<security:intercept-url pattern="/actor/author/**" access="hasRole('AUTHOR')" />
+		<security:intercept-url pattern="/submission/author/**" access="hasRole('AUTHOR')" />
+		<security:intercept-url pattern="/registration/author/**" access="hasRole('AUTHOR')" />
 		
 		<security:intercept-url pattern="/actor/reviewer/**" access="hasRole('REVIEWER')" />
 		

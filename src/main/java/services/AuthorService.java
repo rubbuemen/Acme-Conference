@@ -107,5 +107,36 @@ public class AuthorService {
 	}
 
 	// Other business methods
+	public Collection<Author> findAuthorsWithSubmissionsConference() {
+		Collection<Author> result;
+
+		result = this.authorRepository.findAuthorsWithSubmissionsConference();
+
+		return result;
+	}
+
+	public Collection<Author> findAuthorsWithRegistrationsConference() {
+		Collection<Author> result;
+
+		result = this.authorRepository.findAuthorsWithRegistrationsConference();
+
+		return result;
+	}
+
+	public Author findAuthorBySubmissionId(final int submissionId) {
+		Author result;
+
+		result = this.authorRepository.findAuthorBySubmissionId(submissionId);
+
+		return result;
+	}
+
+	public Author findAuthorByRegistrationId(final int registrationId) {
+		Author result;
+
+		result = this.authorRepository.findAuthorByRegistrationId(registrationId);
+
+		return result;
+	}
 
 }

@@ -26,13 +26,16 @@ public class PaperService {
 
 
 	// Simple CRUD methods
+	//R11.5
 	public Paper create() {
 		Paper result;
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAuthor(actorLogged);
 
 		result = new Paper();
+		result.setIsCameraReadyVersion(false);
 
 		return result;
 	}
@@ -62,13 +65,11 @@ public class PaperService {
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAuthor(actorLogged);
 
 		Paper result;
 
-		if (paper.getId() == 0)
-			result = this.paperRepository.save(paper);
-		else
-			result = this.paperRepository.save(paper);
+		result = this.paperRepository.save(paper);
 
 		return result;
 	}

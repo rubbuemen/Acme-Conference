@@ -22,11 +22,18 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="moment" />
+	<form:hidden path="sender" />
 
-	<jstl:if test="${broadcast != true}">
-		<acme:select items="${recipients}" multiple="true" itemLabel="userAccount.username" code="message.recipients" path="recipients"/>
-		<br />
-	</jstl:if>
+	<jstl:choose>
+		<jstl:when test="${broadcast == null}">
+			<acme:select items="${recipients}" multiple="true" itemLabel="userAccount.username" code="message.recipients" path="recipients"/>
+			<br />
+		</jstl:when>
+		<jstl:otherwise>
+			<form:hidden path="recipients" />
+		</jstl:otherwise>
+	</jstl:choose>
 	
 	<acme:textbox code="message.subject" path="subject" placeholder="Lorem Ipsum"/>
 	<br />
@@ -34,7 +41,14 @@
 	<acme:textarea code="message.body" path="body" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at auctor massa" />
 	<br />
 	
-	<acme:textarea code="message.tags" path="tags" placeholder="Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum" />
+	<jstl:if test="${language eq 'en'}">
+		<jstl:set var="name" value="nameEnglish" />
+	</jstl:if>
+	<jstl:if test="${language eq 'es'}">
+		<jstl:set var="name" value="nameSpanish" />
+	</jstl:if>
+
+	<acme:select items="${topics}" itemLabel="${name}" code="message.topic" path="topic"/>
 	<br />
 
 	<acme:submit name="save" code="button.send" />

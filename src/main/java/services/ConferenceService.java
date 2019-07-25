@@ -73,6 +73,15 @@ public class ConferenceService {
 		return result;
 	}
 
+	public Conference saveAuxiliar(final Conference conference) {
+		Assert.notNull(conference);
+
+		Conference result;
+		result = this.conferenceRepository.save(conference);
+
+		return result;
+	}
+
 	public void delete(final Conference conference) {
 		Assert.notNull(conference);
 		Assert.isTrue(conference.getId() != 0);
@@ -82,5 +91,79 @@ public class ConferenceService {
 	}
 
 	// Other business methods
+	//R11.1
+	public Collection<Conference> findForthcomingConferencesFinalMode() {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findForthcomingConferencesFinalMode();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	//R11.2
+	public Collection<Conference> findPastConferencesFinalMode() {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findPastConferencesFinalMode();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	//R11.3
+	public Collection<Conference> findRunningConferencesFinalMode() {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findRunningConferencesFinalMode();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	//R11.4
+	public Collection<Conference> findConferencesFinalModeBySingleKeyWord(final String singleKeyWord) {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findConferencesFinalModeBySingleKeyWord(singleKeyWord);
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<Conference> findConferencesToSubmit() {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findConferencesToSubmit();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<Conference> findConferencesFinalModeNotStartDateDeadlineNotRegistrated() {
+		Collection<Conference> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAuthor(actorLogged);
+
+		result = this.conferenceRepository.findConferencesFinalModeNotStartDateDeadlineNotRegistrated();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<Conference> findConferencesRegistratedByAuthorId() {
+		Collection<Conference> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAuthor(actorLogged);
+
+		result = this.conferenceRepository.findConferencesRegistratedByAuthorId(actorLogged.getId());
+		Assert.notNull(result);
+
+		return result;
+	}
 
 }
