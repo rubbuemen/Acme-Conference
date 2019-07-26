@@ -8,6 +8,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -17,6 +18,8 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -161,7 +164,8 @@ public class Conference extends Commentable {
 
 	@Valid
 	@EachNotNull
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	public Collection<Activity> getActivities() {
 		return this.activities;
 	}
@@ -183,7 +187,8 @@ public class Conference extends Commentable {
 
 	@Valid
 	@EachNotNull
-	@OneToMany(mappedBy = "conference")
+	@OneToMany(mappedBy = "conference", fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	public Collection<Registration> getRegistrations() {
 		return this.registrations;
 	}

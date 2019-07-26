@@ -2,6 +2,8 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
+import domain.Activity;
 import domain.Actor;
+import domain.Comment;
 import domain.Conference;
+import domain.Registration;
 
 @Service
 @Transactional
@@ -26,17 +31,26 @@ public class ConferenceService {
 
 
 	// Simple CRUD methods
+	//R14.2
 	public Conference create() {
 		Conference result;
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		final Collection<Activity> activities = new HashSet<>();
+		final Collection<Registration> registrations = new HashSet<>();
+		final Collection<Comment> comments = new HashSet<>();
 
 		result = new Conference();
+		result.setIsFinalMode(false);
+		result.setActivities(activities);
+		result.setRegistrations(registrations);
+		result.setComments(comments);
 
 		return result;
 	}
-
 	public Collection<Conference> findAll() {
 		Collection<Conference> result;
 
@@ -57,18 +71,37 @@ public class ConferenceService {
 		return result;
 	}
 
+	//R14.2
 	public Conference save(final Conference conference) {
 		Assert.notNull(conference);
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		Conference result;
 
-		if (conference.getId() == 0)
-			result = this.conferenceRepository.save(conference);
-		else
-			result = this.conferenceRepository.save(conference);
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Assert.isTrue(!conference.getIsFinalMode(), "You can only save conferences that are not in final mode");
+
+		final Date currentMoment = new Date(System.currentTimeMillis());
+		final Date submissionDeadline = conference.getSubmissionDeadline();
+		final Date notificationDeadline = conference.getNotificationDeadline();
+		final Date cameraReadyDeadline = conference.getCameraReadyDeadline();
+		final Date startDate = conference.getStartDate();
+		final Date endDate = conference.getEndDate();
+
+		Assert.isTrue(submissionDeadline.compareTo(currentMoment) > 0, "The submission deadline must be future");
+		Assert.isTrue(notificationDeadline.compareTo(currentMoment) > 0, "The notification deadline must be future");
+		Assert.isTrue(cameraReadyDeadline.compareTo(currentMoment) > 0, "The camera-ready deadline must be future");
+		Assert.isTrue(startDate.compareTo(currentMoment) > 0, "The start date must be future");
+		Assert.isTrue(endDate.compareTo(currentMoment) > 0, "The end date must be future");
+
+		Assert.isTrue(submissionDeadline.compareTo(notificationDeadline) < 0, "The submission deadline must be before the notification deadline");
+		Assert.isTrue(notificationDeadline.compareTo(cameraReadyDeadline) < 0, "The notification deadline must be before the camera-ready deadline");
+		Assert.isTrue(cameraReadyDeadline.compareTo(startDate) < 0, "The camera-ready deadline must be before the start date");
+		Assert.isTrue(startDate.compareTo(endDate) < 0, "The start date must be before the end date");
+
+		result = this.conferenceRepository.save(conference);
 
 		return result;
 	}
@@ -82,12 +115,39 @@ public class ConferenceService {
 		return result;
 	}
 
+	//R14.2
 	public void delete(final Conference conference) {
 		Assert.notNull(conference);
 		Assert.isTrue(conference.getId() != 0);
 		Assert.isTrue(this.conferenceRepository.exists(conference.getId()));
 
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Assert.isTrue(!conference.getIsFinalMode(), "You can only delete conferences that are not in final mode");
+
 		this.conferenceRepository.delete(conference);
+	}
+
+	//R14.2
+	public Conference changeFinalMode(final Conference conference) {
+		Assert.notNull(conference);
+		Assert.isTrue(conference.getId() != 0);
+		Assert.isTrue(this.conferenceRepository.exists(conference.getId()));
+
+		Conference result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Assert.isTrue(!conference.getIsFinalMode(), "This conference is already in final mode");
+		conference.setIsFinalMode(true);
+
+		result = this.conferenceRepository.save(conference);
+
+		return result;
 	}
 
 	// Other business methods
@@ -161,6 +221,62 @@ public class ConferenceService {
 		this.actorService.checkUserLoginAuthor(actorLogged);
 
 		result = this.conferenceRepository.findConferencesRegistratedByAuthorId(actorLogged.getId());
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	//R14.1
+	public Collection<Conference> findConferencesSubmissionDeadlineLastFiveDays() {
+		Collection<Conference> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.conferenceRepository.findConferencesSubmissionDeadlineLastFiveDays();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	//R14.1
+	public Collection<Conference> findConferencesNotificationDeadlineInLessFiveDays() {
+		Collection<Conference> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.conferenceRepository.findConferencesNotificationDeadlineInLessFiveDays();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	//R14.1
+	public Collection<Conference> findConferencesCameraReadyDeadlineInLessFiveDays() {
+		Collection<Conference> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.conferenceRepository.findConferencesCameraReadyDeadlineInLessFiveDays();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	//R14.1
+	public Collection<Conference> findConferencesStartDateInLessFiveDays() {
+		Collection<Conference> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.conferenceRepository.findConferencesStartDateInLessFiveDays();
 		Assert.notNull(result);
 
 		return result;

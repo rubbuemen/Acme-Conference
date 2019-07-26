@@ -72,6 +72,7 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="actor/administrator/register-administrator.do"><spring:message code="master.page.register.admin" /></a></li>
+					<li><a href="conference/administrator/list.do"><spring:message code="master.page.conferences" /></a></li>
 					<li><a href="dashboard/administrator/show.do"><spring:message code="master.page.dashboard" /></a></li>	
 					<li><a href="systemConfiguration/administrator/show.do"><spring:message code="master.page.systemConfiguration" /></a></li>	
 				</ul>

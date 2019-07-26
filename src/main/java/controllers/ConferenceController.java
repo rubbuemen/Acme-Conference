@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -64,6 +65,8 @@ public class ConferenceController extends AbstractController {
 				randomSponsorship3.put(c, sponsorship);
 		}
 
+		final String language = LocaleContextHolder.getLocale().getLanguage();
+
 		result = new ModelAndView("conference/listGeneric");
 
 		result.addObject("forthcomingConferences", forthcomingConferences);
@@ -72,6 +75,7 @@ public class ConferenceController extends AbstractController {
 		result.addObject("randomSponsorship1", randomSponsorship1);
 		result.addObject("randomSponsorship2", randomSponsorship2);
 		result.addObject("randomSponsorship3", randomSponsorship3);
+		result.addObject("language", language);
 
 		return result;
 	}
@@ -113,6 +117,8 @@ public class ConferenceController extends AbstractController {
 				randomSponsorship3.put(c, sponsorship);
 		}
 
+		final String language = LocaleContextHolder.getLocale().getLanguage();
+
 		result = new ModelAndView("conference/listGeneric");
 
 		result.addObject("conferences", conferences);
@@ -123,6 +129,7 @@ public class ConferenceController extends AbstractController {
 		result.addObject("randomSponsorship1", randomSponsorship1);
 		result.addObject("randomSponsorship2", randomSponsorship2);
 		result.addObject("randomSponsorship3", randomSponsorship3);
+		result.addObject("language", language);
 
 		return result;
 	}

@@ -42,4 +42,16 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select distinct c from Conference c join c.registrations r join r.author a where a.id = ?1")
 	Collection<Conference> findConferencesRegistratedByAuthorId(int authorId);
 
+	@Query("select c from Conference c where datediff(c.submissionDeadline, CURRENT_DATE) between -5 and -1")
+	Collection<Conference> findConferencesSubmissionDeadlineLastFiveDays();
+
+	@Query("select c from Conference c where datediff(c.notificationDeadline, CURRENT_DATE) between 0 and 4")
+	Collection<Conference> findConferencesNotificationDeadlineInLessFiveDays();
+
+	@Query("select c from Conference c where datediff(c.cameraReadyDeadline, CURRENT_DATE) between 0 and 4")
+	Collection<Conference> findConferencesCameraReadyDeadlineInLessFiveDays();
+
+	@Query("select c from Conference c where datediff(c.startDate, CURRENT_DATE) between 0 and 4")
+	Collection<Conference> findConferencesStartDateInLessFiveDays();
+
 }

@@ -64,8 +64,8 @@
 	</display:column>
 	
 	<spring:message code="conference.endDate" var="endDate" />
-	<display:column title="${startDate}">
-		<fmt:formatDate var="endDate" value="${row.endDate}" pattern="dd/MM/YYYY" />
+	<display:column title="${endDate}">
+		<fmt:formatDate var="format" value="${row.endDate}" pattern="dd/MM/YYYY" />
 		<jstl:out value="${format}" />
 	</display:column>
 	
@@ -74,6 +74,16 @@
 	
 	<spring:message code="conference.fee" var="fee" />
 	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.category" var="category" />
+	<display:column title="${category}">
+		<jstl:if test="${language eq 'en'}">
+			<jstl:out value="${row.category.titleEnglish}" />
+		</jstl:if>
+		<jstl:if test="${language eq 'es'}">
+			<jstl:out value="${row.category.titleSpanish}" />
+		</jstl:if>
+	</display:column>
 	
 	<spring:message code="conference.sponsorship" var="sponsorship" />
 	<display:column title="${sponsorship}" >
@@ -123,8 +133,8 @@
 	</display:column>
 	
 	<spring:message code="conference.endDate" var="endDate" />
-	<display:column title="${startDate}">
-		<fmt:formatDate var="endDate" value="${row1.endDate}" pattern="dd/MM/YYYY" />
+	<display:column title="${endDate}">
+		<fmt:formatDate var="format" value="${row1.endDate}" pattern="dd/MM/YYYY" />
 		<jstl:out value="${format}" />
 	</display:column>
 	
@@ -133,6 +143,16 @@
 	
 	<spring:message code="conference.fee" var="fee" />
 	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.category" var="category" />
+	<display:column title="${category}">
+		<jstl:if test="${language eq 'en'}">
+			<jstl:out value="${row1.category.titleEnglish}" />
+		</jstl:if>
+		<jstl:if test="${language eq 'es'}">
+			<jstl:out value="${row1.category.titleSpanish}" />
+		</jstl:if>
+	</display:column>
 	
 	<spring:message code="conference.sponsorship" var="sponsorship" />
 	<display:column title="${sponsorship}" >
@@ -183,8 +203,8 @@
 	</display:column>
 	
 	<spring:message code="conference.endDate" var="endDate" />
-	<display:column title="${startDate}">
-		<fmt:formatDate var="endDate" value="${row2.endDate}" pattern="dd/MM/YYYY" />
+	<display:column title="${endDate}">
+		<fmt:formatDate var="format" value="${row2.endDate}" pattern="dd/MM/YYYY" />
 		<jstl:out value="${format}" />
 	</display:column>
 	
@@ -193,6 +213,16 @@
 	
 	<spring:message code="conference.fee" var="fee" />
 	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.category" var="category" />
+	<display:column title="${category}">
+		<jstl:if test="${language eq 'en'}">
+			<jstl:out value="${row2.category.titleEnglish}" />
+		</jstl:if>
+		<jstl:if test="${language eq 'es'}">
+			<jstl:out value="${row2.category.titleSpanish}" />
+		</jstl:if>
+	</display:column>
 	
 	<spring:message code="conference.sponsorship" var="sponsorship" />
 	<display:column title="${sponsorship}" >
@@ -243,8 +273,8 @@
 	</display:column>
 	
 	<spring:message code="conference.endDate" var="endDate" />
-	<display:column title="${startDate}">
-		<fmt:formatDate var="endDate" value="${row3.endDate}" pattern="dd/MM/YYYY" />
+	<display:column title="${endDate}">
+		<fmt:formatDate var="format" value="${row3.endDate}" pattern="dd/MM/YYYY" />
 		<jstl:out value="${format}" />
 	</display:column>
 	
@@ -253,6 +283,16 @@
 	
 	<spring:message code="conference.fee" var="fee" />
 	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.category" var="category" />
+	<display:column title="${category}">
+		<jstl:if test="${language eq 'en'}">
+			<jstl:out value="${row3.category.titleEnglish}" />
+		</jstl:if>
+		<jstl:if test="${language eq 'es'}">
+			<jstl:out value="${row3.category.titleSpanish}" />
+		</jstl:if>
+	</display:column>
 	
 	<spring:message code="conference.sponsorship" var="sponsorship" />
 	<display:column title="${sponsorship}" >
