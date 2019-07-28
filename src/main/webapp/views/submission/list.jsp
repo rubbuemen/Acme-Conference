@@ -19,6 +19,8 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <jsp:useBean id="date" class="java.util.Date" />
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <display:table pagesize="5" class="displaytag" name="submissions" requestURI="${requestURI}" id="row">
 
@@ -66,28 +68,72 @@
 			<spring:message code="submission.paper.document" />: ${row.paper.document}<br />
 	</display:column>
 	
-	<spring:message code="submission.upload" var="uploadCameraReadyVersion" />
-	<display:column title="${uploadCameraReadyVersion}" >
-		<jstl:choose>
-			<jstl:when test="${!row.paper.isCameraReadyVersion}">
-				<jstl:choose>
-					<jstl:when test="${row.status != 'ACCEPTED'}">
-						<spring:message code="submission.notAcceptedCameraReadyVersion" />
-					</jstl:when>
-					<jstl:when test="${row.conference.cameraReadyDeadline < date}">
-						<spring:message code="submission.deadlineElipsedCameraReadyVersion" />
-					</jstl:when>
-					<jstl:otherwise>
-						<acme:button url="submission/author/upload.do?submissionId=${row.id}" code="button.upload" />
-					</jstl:otherwise>
-				</jstl:choose>
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="submission.isCameraReadyVersion" />
-			</jstl:otherwise>
-		</jstl:choose>
-	</display:column>
+	<security:authorize access="hasRole('AUTHOR')">
+		<spring:message code="submission.upload" var="uploadCameraReadyVersion" />
+		<display:column title="${uploadCameraReadyVersion}" >
+			<jstl:choose>
+				<jstl:when test="${!row.paper.isCameraReadyVersion}">
+					<jstl:choose>
+						<jstl:when test="${row.status != 'ACCEPTED'}">
+							<spring:message code="submission.notAcceptedCameraReadyVersion" />
+						</jstl:when>
+						<jstl:when test="${row.conference.cameraReadyDeadline < date}">
+							<spring:message code="submission.deadlineElipsedCameraReadyVersion" />
+						</jstl:when>
+						<jstl:otherwise>
+							<acme:button url="submission/author/upload.do?submissionId=${row.id}" code="button.upload" />
+						</jstl:otherwise>
+					</jstl:choose>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="submission.isCameraReadyVersion" />
+				</jstl:otherwise>
+			</jstl:choose>
+		</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('ADMIN')">
+		<spring:message code="submission.author" var="author" />
+		<display:column title="${author}">
+			<acme:button url="author/show.do?authorId=${mapSubmissionAuthor.get(row).id}" code="button.more" />
+		</display:column>
+		
+		<spring:message code="submission.assign" var="assign" />
+		<display:column title="${assign}" >
+			<jstl:choose>
+				<jstl:when test="${!row.isAssigned}">
+					<jstl:choose>
+						<jstl:when test="${row.conference.startDate < date}">
+							<spring:message code="submission.startDatePassed" />
+						</jstl:when>
+						<jstl:otherwise>
+							<acme:button url="submission/administrator/assign.do?submissionId=${row.id}" code="button.assign" />
+						</jstl:otherwise>
+					</jstl:choose>
+				</jstl:when>
+				<jstl:otherwise>
+					<jstl:choose>
+						<jstl:when test="${fn:length(row.reviewers) > 0}">
+							<spring:message code="submission.isAssigned" />
+							<ul>
+								<jstl:forEach items="${row.reviewers}" var="reviewer" >
+									<li><jstl:out value="${reviewer.userAccount.username}" /></li>
+							  	</jstl:forEach>
+						  	</ul>
+						</jstl:when>
+						<jstl:otherwise>
+							<spring:message code="submission.isAssignedNone" />
+						</jstl:otherwise>
+					</jstl:choose>
+					
+				</jstl:otherwise>
+			</jstl:choose>
+		</display:column>
+		
+	</security:authorize>
 			
 </display:table>
 
-<acme:button url="submission/author/create.do" code="button.create" />
+<security:authorize access="hasRole('AUTHOR')">
+	<acme:button url="submission/author/create.do" code="button.create" />
+</security:authorize>

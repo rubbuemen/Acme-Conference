@@ -19,6 +19,7 @@
 
 		<value>/views/activity/messages</value>
 		<value>/views/actor/messages</value>
+		<value>/views/author/messages</value>
 		<value>/views/category/messages</value>
 		<value>/views/comment/messages</value>
 		<value>/views/conference/messages</value>

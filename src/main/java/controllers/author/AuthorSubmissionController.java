@@ -99,9 +99,10 @@ public class AuthorSubmissionController extends AbstractController {
 	public ModelAndView uploadCameraReadyVersion(@RequestParam final int submissionId) {
 		ModelAndView result;
 
-		final Submission submission = this.submissionService.findSubmissionAuthorLogged(submissionId);
+		Submission submission = null;
 
 		try {
+			submission = this.submissionService.findSubmissionAuthorLogged(submissionId);
 			this.submissionService.uploadCameraReadyVersion(submission);
 			result = new ModelAndView("redirect:/submission/author/list.do");
 

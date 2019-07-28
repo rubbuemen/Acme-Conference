@@ -47,13 +47,14 @@
 		<security:intercept-url pattern="/registration/author/**" access="hasRole('AUTHOR')" />
 		
 		<security:intercept-url pattern="/actor/reviewer/**" access="hasRole('REVIEWER')" />
-		
-		<security:intercept-url pattern="/actor/auditor/**" access="hasRole('AUDITOR')" />
+		<security:intercept-url pattern="/author/show.do" access="hasRole('REVIEWER')" />
 		
 		<security:intercept-url pattern="/actor/sponsor/**" access="hasRole('SPONSOR')" />
 		
 		<security:intercept-url pattern="/actor/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/conference/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/submission/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/author/show.do" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/dashboard/administrator/**" access="hasRole('ADMIN')" />
 		

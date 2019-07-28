@@ -322,7 +322,7 @@
 		<property name="keywords">
 			<list>
 				<value>conference</value>
-				<value>biology</value>
+				<value>science</value>
 				<value>data</value>
 			</list>
 		</property>
@@ -344,8 +344,9 @@
 		<property name="keywords">
 			<list>
 				<value>conference</value>
-				<value>biology</value>
-				<value>data</value>
+				<value>animals</value>
+				<value>science</value>
+				<value>latest</value>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount9" />
@@ -372,6 +373,8 @@
 		<property name="keywords">
 			<list>
 				<value>biology</value>
+				<value>explanation</value>
+				<value>plants</value>
 				<value>artificial</value>
 			</list>
 		</property>
@@ -394,6 +397,9 @@
 				<value>data</value>
 				<value>tool</value>
 				<value>artificial</value>
+				<value>intelligence</value>
+				<value>social</value>
+				<value>complexity</value>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount11" />
@@ -413,7 +419,8 @@
 		<property name="keywords">
 			<list>
 				<value>tool</value>
-				<value>animal</value>
+				<value>animals</value>
+				<value>future</value>
 			</list>
 		</property>
 		<property name="userAccount" ref="userAccount12" />
@@ -884,13 +891,14 @@
 		<property name="ticker" value="AAB-Y884" />
 		<property name="moment" value="2019/05/10 12:42" />
 		<property name="status" value="UNDER-REVIEW" />
-		<property name="isAssigned" value="false" />
+		<property name="isAssigned" value="true" />
 		<property name="isNotified" value="false" />
 		<property name="paper" ref="paper5" />
 		<property name="conference" ref="conference7" />
 		<property name="reviewers">
 			<list>
-				<ref bean="reviewer5" />
+				<ref bean="reviewer3" />
+				<ref bean="reviewer4" />
 			</list>
 		</property>
 	</bean>
@@ -898,10 +906,15 @@
 		<property name="ticker" value="JJM-8GAK" />
 		<property name="moment" value="2019/05/10 15:48" />
 		<property name="status" value="UNDER-REVIEW" />
-		<property name="isAssigned" value="false" />
+		<property name="isAssigned" value="true" />
 		<property name="isNotified" value="false" />
 		<property name="paper" ref="paper6" />
 		<property name="conference" ref="conference7" />
+		<property name="reviewers">
+			<list>
+				<ref bean="reviewer5" />
+			</list>
+		</property>
 	</bean>
 	<bean id="submission7" class="domain.Submission">
 		<property name="ticker" value="JJM-6437" />

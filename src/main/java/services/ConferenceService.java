@@ -131,12 +131,10 @@ public class ConferenceService {
 	}
 
 	//R14.2
-	public Conference changeFinalMode(final Conference conference) {
+	public void changeFinalMode(final Conference conference) {
 		Assert.notNull(conference);
 		Assert.isTrue(conference.getId() != 0);
 		Assert.isTrue(this.conferenceRepository.exists(conference.getId()));
-
-		Conference result;
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
@@ -145,9 +143,7 @@ public class ConferenceService {
 		Assert.isTrue(!conference.getIsFinalMode(), "This conference is already in final mode");
 		conference.setIsFinalMode(true);
 
-		result = this.conferenceRepository.save(conference);
-
-		return result;
+		this.conferenceRepository.save(conference);
 	}
 
 	// Other business methods

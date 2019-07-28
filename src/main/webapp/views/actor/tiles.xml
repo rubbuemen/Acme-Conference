@@ -19,12 +19,7 @@
 		<put-attribute name="title" value="Edit profile" />
 		<put-attribute name="body" value="/views/actor/edit.jsp" />
 	</definition>
-	
-	<definition name="actor/show" extends="master.page">
-		<put-attribute name="title" value="Show profile" />
-		<put-attribute name="body" value="/views/actor/show.jsp" />
-	</definition>
-	
+
 	<definition name="actor/list" extends="master.page">
 		<put-attribute name="title" value="Actors list" />
 		<put-attribute name="body" value="/views/actor/list.jsp" />
