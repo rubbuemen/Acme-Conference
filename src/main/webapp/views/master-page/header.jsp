@@ -50,7 +50,7 @@
 				<a class="fNiv"><spring:message code="master.page.reviewer" /></a>
 				<ul>
 					<li class="arrow"></li>
-<%-- 					<li><a href="position/reviewer/list.do"><spring:message code="master.page.positions" /></a></li> --%>
+					<li><a href="report/reviewer/list.do"><spring:message code="master.page.reports" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

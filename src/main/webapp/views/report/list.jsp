@@ -19,21 +19,47 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="displaytag" name="entidads" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="reports" requestURI="${requestURI}" id="row">
 
-	<spring:message code="entidad.atributo" var="atributo" />
-	<display:column property="atributo" title="${atributo}" />
+	<spring:message code="report.originalityScore" var="originalityScore" />
+	<display:column property="originalityScore" title="${originalityScore}" />
 	
-	<spring:message code="entidad.edit" var="editH" />
-	<display:column title="${editH}" >
-		<acme:button url="entidad/actor/edit.do?entidadId=${row.id}" code="button.edit" />
+	<spring:message code="report.qualityScore" var="qualityScore" />
+	<display:column property="qualityScore" title="${qualityScore}" />
+	
+	<spring:message code="report.readabilityScore" var="readabilityScore" />
+	<display:column property="readabilityScore" title="${readabilityScore}" />
+	
+	<spring:message code="report.status" var="status" />
+	<display:column property="status" title="${status}" />
+	
+	<spring:message code="report.comments" var="comments" />
+	<display:column property="comments" title="${comments}" />
+	
+	<spring:message code="report.submission" var="submission" />
+	<display:column title="${submission}">
+			<spring:message code="submission.ticker" />: ${row.submission.ticker}<br />
+			<spring:message code="submission.moment" />:
+			<fmt:formatDate var="format" value="${row.submission.moment}" pattern="dd/MM/YYYY HH:mm" />
+			<jstl:out value="${format}" /><br />
 	</display:column>
 	
-	<spring:message code="entidad.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<acme:button url="entidad/actor/delete.do?entidadId=${row.id}" code="button.delete" />	
-	</display:column>
+	<spring:message code="report.decideReport" var="decideReport" />
+		<display:column title="${decideReport}">
+			<jstl:choose>
+			<jstl:when test="${row.status eq 'BORDER-LINE'}">
+				<acme:button url="report/reviewer/accept.do?reportId=${row.id}" code="button.accept" />
+				<acme:button url="report/reviewer/reject.do?reportId=${row.id}" code="button.reject" />
+			</jstl:when>	
+			<jstl:otherwise>
+				<spring:message code="report.alreadyDecided" />
+			</jstl:otherwise>
 			
+			</jstl:choose>
+			
+		</display:column>
+	
+
 </display:table>
 
-<acme:button url="entidad/actor/create.do" code="button.create" />
+<acme:button url="report/reviewer/create.do" code="button.create" />

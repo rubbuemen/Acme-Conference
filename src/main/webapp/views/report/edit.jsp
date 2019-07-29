@@ -18,16 +18,28 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${actionURL}" modelAttribute="entidad">
+<form:form action="${actionURL}" modelAttribute="report">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="status" />
 	
-	<acme:textbox code="entidad.atributo" path="atributo" placeholder="Lorem Ipsum"/>
+	<acme:textbox code="report.originalityScore" path="originalityScore" placeholder="N" type="number" min="0" max="10" />
 	<br />
-
-	<
+	
+	<acme:textbox code="report.qualityScore" path="qualityScore" placeholder="N" type="number" min="0" max="10" />
+	<br />
+	
+	<acme:textbox code="report.readabilityScore" path="readabilityScore" placeholder="N" type="number" min="0" max="10" />
+	<br />
+	
+	<acme:textarea code="report.comments" path="comments" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at auctor massa" />
+	<br />
+	
+	<acme:select items="${submissions}" itemLabel="ticker" code="report.submission" path="submission"/>
+	<br />
+	
 	<jstl:choose>
-		<jstl:when test="${entidad.id == 0}">
+		<jstl:when test="${report.id == 0}">
 			<acme:submit name="save" code="button.register" />
 		</jstl:when>
 		<jstl:otherwise>
@@ -35,5 +47,5 @@
 		</jstl:otherwise>
 	</jstl:choose>
 	
-	<acme:cancel url="entidad/actor/list.do" code="button.cancel" />
+	<acme:cancel url="report/reviewer/list.do" code="button.cancel" />
 </form:form>

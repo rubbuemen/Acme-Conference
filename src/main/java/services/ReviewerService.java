@@ -93,5 +93,12 @@ public class ReviewerService {
 	}
 
 	// Other business methods
+	public Reviewer findReviewerByReportId(final int reportId) {
+		Reviewer result;
+
+		result = this.reviewerRepository.findReviewerByReportId(reportId);
+
+		return result;
+	}
 
 }

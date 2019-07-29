@@ -99,33 +99,40 @@ public class SubmissionService {
 	//R13.1
 	public Submission save(final Submission submission) {
 		Assert.notNull(submission);
+		Assert.isTrue(submission.getId() == 0); //Sólo se crearán submissions, no se editarán
 
 		Submission result;
 
-		if (submission.getId() == 0) {
-			final Actor actorLogged = this.actorService.findActorLogged();
-			Assert.notNull(actorLogged);
-			this.actorService.checkUserLoginAuthor(actorLogged);
-			final Author authorLogged = (Author) actorLogged;
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAuthor(actorLogged);
+		final Author authorLogged = (Author) actorLogged;
 
-			Assert.isTrue(!submission.getIsAssigned(), "When creating a submission, it has not yet been possible to make an assignment");
-			Assert.isTrue(!submission.getIsNotified(), "When creating a submission it has not yet been possible to notify");
-			Assert.isTrue(!submission.getPaper().getIsCameraReadyVersion(), "The submission must include a paper to review only, not a camera-ready version");
-			final Collection<Conference> findConferencesToSubmit = this.conferenceService.findConferencesToSubmit();
-			Assert.isTrue(findConferencesToSubmit.contains(submission.getConference()), "This conference is not available to submit");
+		Assert.isTrue(!submission.getIsAssigned(), "When creating a submission, it has not yet been possible to make an assignment");
+		Assert.isTrue(!submission.getIsNotified(), "When creating a submission it has not yet been possible to notify");
+		Assert.isTrue(!submission.getPaper().getIsCameraReadyVersion(), "The submission must include a paper to review only, not a camera-ready version");
+		final Collection<Conference> findConferencesToSubmit = this.conferenceService.findConferencesToSubmit();
+		Assert.isTrue(findConferencesToSubmit.contains(submission.getConference()), "This conference is not available to submit");
 
-			Paper paper = submission.getPaper();
-			paper = this.paperService.save(paper);
-			submission.setPaper(paper);
+		Paper paper = submission.getPaper();
+		paper = this.paperService.save(paper);
+		submission.setPaper(paper);
 
-			result = this.submissionRepository.save(submission);
-			final Collection<Submission> submissionsAuthorLogged = authorLogged.getSubmissions();
-			submissionsAuthorLogged.add(result);
-			authorLogged.setSubmissions(submissionsAuthorLogged);
-			this.authorService.save(authorLogged);
-		} else
-			//Se harán cosas como cambiar el isAssigned o el isNotified
-			result = this.submissionRepository.save(submission);
+		result = this.submissionRepository.save(submission);
+		final Collection<Submission> submissionsAuthorLogged = authorLogged.getSubmissions();
+		submissionsAuthorLogged.add(result);
+		authorLogged.setSubmissions(submissionsAuthorLogged);
+		this.authorService.save(authorLogged);
+
+		return result;
+	}
+
+	public Submission saveAuxiliar(final Submission submission) {
+		Assert.notNull(submission);
+
+		Submission result;
+
+		result = this.submissionRepository.save(submission);
 
 		return result;
 	}
@@ -285,6 +292,37 @@ public class SubmissionService {
 				final Author author = this.authorService.findAuthorBySubmissionId(s.getId());
 				result.put(s, author);
 			}
+		return result;
+	}
+
+	public Collection<Submission> findSubmissionsToReportReviewerLogged() {
+		Collection<Submission> result, submissionsAlreadyReported;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginReviewer(actorLogged);
+
+		final Reviewer reviewerLogged = (Reviewer) actorLogged;
+
+		result = this.submissionRepository.findSubmissionsToReportByReviewerId(reviewerLogged.getId());
+		submissionsAlreadyReported = this.submissionRepository.findSubmissionsAlreadyReportedByReviewerId(reviewerLogged.getId());
+		result.removeAll(submissionsAlreadyReported);
+
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<Submission> findSubmissionsUnderReviewByConferenceId(final int conferenceId) {
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Collection<Submission> result;
+
+		result = this.submissionRepository.findSubmissionsUnderReviewByConferenceId(conferenceId);
+		Assert.notNull(result);
+
 		return result;
 	}
 

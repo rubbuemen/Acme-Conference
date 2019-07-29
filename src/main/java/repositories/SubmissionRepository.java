@@ -27,4 +27,12 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 	@Query("select s from Submission s order by s.status")
 	Collection<Submission> findSubmissionsByStatus();
 
+	@Query("select s from Submission s join s.reviewers r where r.id = ?1")
+	Collection<Submission> findSubmissionsToReportByReviewerId(int reviewerId);
+
+	@Query("select s from Reviewer r join r.reports re join re.submission s where r.id = ?1")
+	Collection<Submission> findSubmissionsAlreadyReportedByReviewerId(int reviewerId);
+
+	@Query("select s from Submission s join s.conference c where s.status like 'UNDER-REVIEW' and c.id = ?1")
+	Collection<Submission> findSubmissionsUnderReviewByConferenceId(int conferenceId);
 }

@@ -16,6 +16,8 @@ import domain.Actor;
 import domain.Comment;
 import domain.Conference;
 import domain.Registration;
+import domain.Report;
+import domain.Submission;
 
 @Service
 @Transactional
@@ -28,6 +30,12 @@ public class ConferenceService {
 	// Supporting services
 	@Autowired
 	private ActorService			actorService;
+
+	@Autowired
+	private SubmissionService		submissionService;
+
+	@Autowired
+	private ReportService			reportService;
 
 
 	// Simple CRUD methods
@@ -276,6 +284,43 @@ public class ConferenceService {
 		Assert.notNull(result);
 
 		return result;
+	}
+
+	//R14.4
+	public void decisionMakingProcedure(final Conference conference) {
+		Assert.notNull(conference);
+		Assert.isTrue(conference.getId() != 0);
+		Assert.isTrue(this.conferenceRepository.exists(conference.getId()));
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Assert.isTrue(!conference.getIsDecisionProcedureDone(), "You cannot run a decision-make procedure because already is done");
+		Assert.isTrue(conference.getIsFinalMode(), "You cannot run a decision-make procedure because the conference is not in final mode");
+		Assert.isTrue(conference.getSubmissionDeadline().compareTo(new Date(System.currentTimeMillis())) < 0, "You cannot run a decision-make procedure on this conference until the submission deadline has elapsed");
+		Assert.isTrue(conference.getStartDate().compareTo(new Date(System.currentTimeMillis())) > 0, "You cannot run a decision-make procedure on this conference because the conference start date has passed");
+
+		final Collection<Submission> submissionsUnderReviewConference = this.submissionService.findSubmissionsUnderReviewByConferenceId(conference.getId());
+
+		for (final Submission s : submissionsUnderReviewConference) {
+			final Collection<Report> reportsSubmission = this.reportService.findReportsBySubmissionId(s.getId());
+			int countAccept = 0;
+			int countReject = 0;
+			for (final Report r : reportsSubmission)
+				if (r.getStatus().equals("ACCEPT"))
+					countAccept++;
+				else if (r.getStatus().equals("REJECT"))
+					countReject++;
+			if (countAccept >= countReject)
+				s.setStatus("ACCEPTED");
+			else
+				s.setStatus("REJECTED");
+			this.submissionService.saveAuxiliar(s);
+		}
+
+		conference.setIsDecisionProcedureDone(true);
+		this.conferenceRepository.save(conference);
 	}
 
 }

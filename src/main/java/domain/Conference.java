@@ -41,6 +41,7 @@ public class Conference extends Commentable {
 	private String	summary;
 	private Double	fee;
 	private Boolean	isFinalMode;
+	private Boolean	isDecisionProcedureDone;
 
 
 	// Getters and Setters
@@ -153,6 +154,15 @@ public class Conference extends Commentable {
 
 	public void setIsFinalMode(final Boolean isFinalMode) {
 		this.isFinalMode = isFinalMode;
+	}
+
+	@NotNull
+	public Boolean getIsDecisionProcedureDone() {
+		return this.isDecisionProcedureDone;
+	}
+
+	public void setIsDecisionProcedureDone(final Boolean isDecisionProcedureDone) {
+		this.isDecisionProcedureDone = isDecisionProcedureDone;
 	}
 
 

@@ -18,6 +18,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<jsp:useBean id="date" class="java.util.Date" />
 
 <display:table pagesize="5" class="displaytag" name="conferences" requestURI="${requestURI}" id="row">
 	<spring:message code="conference.title" var="title" />
@@ -107,6 +108,30 @@
 				<spring:message code="conference.isFinalMode" />
 			</jstl:when>
 		</jstl:choose>
+	</display:column>
+	
+	<spring:message code="conference.runDecisionMakingProcedure" var="runDecisionMakingProcedure" />
+	<display:column title="${runDecisionMakingProcedure}" >
+		<jstl:if test="${row.isFinalMode}">
+			<jstl:choose>
+				<jstl:when test="${!row.isDecisionProcedureDone}">
+					<jstl:choose>
+						<jstl:when test="${row.submissionDeadline >= date}">
+							<spring:message code="conference.decisionSubmissionDeadline" />
+						</jstl:when>
+						<jstl:when test="${row.startDate <= date}">
+							<spring:message code="conference.decisionStartDate" />
+						</jstl:when>
+						<jstl:otherwise>
+							<acme:button url="conference/administrator/decisionMakingProcedure.do?conferenceId=${row.id}" code="button.runDecisionMakingProcedure" />
+						</jstl:otherwise>
+					</jstl:choose>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="conference.isDecisionProcedureDone" />
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:if>
 	</display:column>
 </display:table>
 
@@ -205,6 +230,30 @@
 			</jstl:when>
 		</jstl:choose>
 	</display:column>
+	
+	<spring:message code="conference.runDecisionMakingProcedure" var="runDecisionMakingProcedure" />
+	<display:column title="${runDecisionMakingProcedure}" >
+		<jstl:if test="${row1.isFinalMode}">
+			<jstl:choose>
+				<jstl:when test="${!row1.isDecisionProcedureDone}">
+					<jstl:choose>
+						<jstl:when test="${row1.submissionDeadline >= date}">
+							<spring:message code="conference.decisionSubmissionDeadline" />
+						</jstl:when>
+						<jstl:when test="${row1.startDate <= date}">
+							<spring:message code="conference.decisionStartDate" />
+						</jstl:when>
+						<jstl:otherwise>
+							<acme:button url="conference/administrator/decisionMakingProcedure.do?conferenceId=${row1.id}" code="button.runDecisionMakingProcedure" />
+						</jstl:otherwise>
+					</jstl:choose>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="conference.isDecisionProcedureDone" />
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:if>
+	</display:column>
 </display:table>
 
 </details><br/>
@@ -300,6 +349,30 @@
 				<spring:message code="conference.isFinalMode" />
 			</jstl:when>
 		</jstl:choose>
+	</display:column>
+	
+	<spring:message code="conference.runDecisionMakingProcedure" var="runDecisionMakingProcedure" />
+	<display:column title="${runDecisionMakingProcedure}" >
+		<jstl:if test="${row2.isFinalMode}">
+			<jstl:choose>
+				<jstl:when test="${!row2.isDecisionProcedureDone}">
+					<jstl:choose>
+						<jstl:when test="${row2.submissionDeadline >= date}">
+							<spring:message code="conference.decisionSubmissionDeadline" />
+						</jstl:when>
+						<jstl:when test="${row2.startDate <= date}">
+							<spring:message code="conference.decisionStartDate" />
+						</jstl:when>
+						<jstl:otherwise>
+							<acme:button url="conference/administrator/decisionMakingProcedure.do?conferenceId=${row2.id}" code="button.runDecisionMakingProcedure" />
+						</jstl:otherwise>
+					</jstl:choose>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="conference.isDecisionProcedureDone" />
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:if>
 	</display:column>
 </display:table>
 
@@ -397,6 +470,30 @@
 			</jstl:when>
 		</jstl:choose>
 	</display:column>
+	
+	<spring:message code="conference.runDecisionMakingProcedure" var="runDecisionMakingProcedure" />
+	<display:column title="${runDecisionMakingProcedure}" >
+		<jstl:if test="${row3.isFinalMode}">
+			<jstl:choose>
+				<jstl:when test="${!row3.isDecisionProcedureDone}">
+					<jstl:choose>
+						<jstl:when test="${row3.submissionDeadline >= date}">
+							<spring:message code="conference.decisionSubmissionDeadline" />
+						</jstl:when>
+						<jstl:when test="${row3.startDate <= date}">
+							<spring:message code="conference.decisionStartDate" />
+						</jstl:when>
+						<jstl:otherwise>
+							<acme:button url="conference/administrator/decisionMakingProcedure.do?conferenceId=${row3.id}" code="button.runDecisionMakingProcedure" />
+						</jstl:otherwise>
+					</jstl:choose>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="conference.isDecisionProcedureDone" />
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:if>
+	</display:column>
 </display:table>
 
 </details><br/>
@@ -492,6 +589,30 @@
 				<spring:message code="conference.isFinalMode" />
 			</jstl:when>
 		</jstl:choose>
+	</display:column>
+	
+	<spring:message code="conference.runDecisionMakingProcedure" var="runDecisionMakingProcedure" />
+	<display:column title="${runDecisionMakingProcedure}" >
+		<jstl:if test="${row4.isFinalMode}">
+			<jstl:choose>
+				<jstl:when test="${!row4.isDecisionProcedureDone}">
+					<jstl:choose>
+						<jstl:when test="${row4.submissionDeadline >= date}">
+							<spring:message code="conference.decisionSubmissionDeadline" />
+						</jstl:when>
+						<jstl:when test="${row4.startDate <= date}">
+							<spring:message code="conference.decisionStartDate" />
+						</jstl:when>
+						<jstl:otherwise>
+							<acme:button url="conference/administrator/decisionMakingProcedure.do?conferenceId=${row4.id}" code="button.runDecisionMakingProcedure" />
+						</jstl:otherwise>
+					</jstl:choose>
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="conference.isDecisionProcedureDone" />
+				</jstl:otherwise>
+			</jstl:choose>
+		</jstl:if>
 	</display:column>
 </display:table>
 

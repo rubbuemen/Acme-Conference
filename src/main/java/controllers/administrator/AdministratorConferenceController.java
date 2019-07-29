@@ -222,6 +222,35 @@ public class AdministratorConferenceController extends AbstractController {
 		return result;
 	}
 
+	@RequestMapping(value = "/decisionMakingProcedure", method = RequestMethod.GET)
+	public ModelAndView decisionMakingProcedure(@RequestParam final int conferenceId) {
+		ModelAndView result;
+
+		final Conference conference = this.conferenceService.findOne(conferenceId);
+
+		try {
+			this.conferenceService.decisionMakingProcedure(conference);
+			result = new ModelAndView("redirect:/conference/administrator/list.do");
+		} catch (final Throwable oops) {
+			if (oops.getMessage().equals("You cannot run a decision-make procedure because already is done"))
+				result = this.createEditModelAndView(conference, "conference.error.decisionMakingProcedure.alreadyDone");
+			else if (oops.getMessage().equals("You cannot run a decision-make procedure because the conference is not in final mode"))
+				result = this.createEditModelAndView(conference, "conference.error.decisionMakingProcedure.notFinalMode");
+			else if (oops.getMessage().equals("You cannot run a decision-make procedure on this conference until the submission deadline has elapsed"))
+				result = this.createEditModelAndView(conference, "conference.error.decisionMakingProcedure.submissionDeadline");
+			else if (oops.getMessage().equals("You cannot run a decision-make procedure on this conference because the conference start date has passed"))
+				result = this.createEditModelAndView(conference, "conference.error.decisionMakingProcedure.startDate");
+			else if (oops.getMessage().equals("The logged actor is not the owner of this entity"))
+				result = this.createEditModelAndView(conference, "hacking.logged.error");
+			else if (oops.getMessage().equals("This entity does not exist"))
+				result = this.createEditModelAndView(null, "hacking.notExist.error");
+			else
+				result = this.createEditModelAndView(conference, "commit.error");
+		}
+
+		return result;
+	}
+
 	// Ancillary methods
 	protected ModelAndView createEditModelAndView(final Conference conference) {
 		ModelAndView result;

@@ -47,7 +47,7 @@
 		<security:intercept-url pattern="/registration/author/**" access="hasRole('AUTHOR')" />
 		
 		<security:intercept-url pattern="/actor/reviewer/**" access="hasRole('REVIEWER')" />
-		<security:intercept-url pattern="/author/show.do" access="hasRole('REVIEWER')" />
+		<security:intercept-url pattern="/report/reviewer/**" access="hasRole('REVIEWER')" />
 		
 		<security:intercept-url pattern="/actor/sponsor/**" access="hasRole('SPONSOR')" />
 		

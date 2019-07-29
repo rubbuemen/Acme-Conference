@@ -657,6 +657,7 @@
 		<property name="summary" value="This science conference focuses on technologies to deal with nowadays data" />
 		<property name="fee" value="20.5" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="true" />
 		<property name="category" ref="category8" />
 		<property name="activities">
 			<list>
@@ -693,6 +694,7 @@
 		<property name="summary" value="Data Science is a hot topic nowadays; find the latest research results in this conference" />
 		<property name="fee" value="1.5" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="true" />
 		<property name="category" ref="category9" />
 	</bean>
 	<bean id="conference3" class="domain.Conference">
@@ -707,6 +709,7 @@
 		<property name="summary" value="Nowhere have you found more papers on big data science" />
 		<property name="fee" value="13.2" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="true" />
 		<property name="category" ref="category7" />
 		<property name="activities">
 			<list>
@@ -732,6 +735,7 @@
 		<property name="summary" value="Explanation of the latest in social networks" />
 		<property name="fee" value="5.25" />
 		<property name="isFinalMode" value="false" />
+		<property name="isDecisionProcedureDone" value="false" />
 		<property name="category" ref="category1" />
 	</bean>
 	<bean id="conference5" class="domain.Conference">
@@ -746,6 +750,7 @@
 		<property name="summary" value="Animal experiments" />
 		<property name="fee" value="12.0" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="true" />
 		<property name="category" ref="category17" />
 	</bean>
 	<bean id="conference6" class="domain.Conference">
@@ -760,6 +765,7 @@
 		<property name="summary" value="Beautiful plants" />
 		<property name="fee" value="1.5" />
 		<property name="isFinalMode" value="false" />
+		<property name="isDecisionProcedureDone" value="false" />
 		<property name="category" ref="category18" />
 	</bean>
 	<bean id="conference7" class="domain.Conference">
@@ -774,6 +780,7 @@
 		<property name="summary" value="The latest in artificial intelligence" />
 		<property name="fee" value="15.75" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="false" />
 		<property name="category" ref="category3" />
 		<property name="registrations">
 			<list>
@@ -793,6 +800,7 @@
 		<property name="summary" value="Explanation of how complexity works" />
 		<property name="fee" value="11.99" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="false" />
 		<property name="category" ref="category10" />
 	</bean>
 	<bean id="conference9" class="domain.Conference">
@@ -807,6 +815,7 @@
 		<property name="summary" value="The secrets of quantum physics" />
 		<property name="fee" value="25.0" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="true" />
 		<property name="category" ref="category12" />
 	</bean>
 	<bean id="conference10" class="domain.Conference">
@@ -821,6 +830,7 @@
 		<property name="summary" value="How to save on electricity consumption" />
 		<property name="fee" value="12.0" />
 		<property name="isFinalMode" value="true" />
+		<property name="isDecisionProcedureDone" value="false" />
 		<property name="category" ref="category14" />
 	</bean>
 	
