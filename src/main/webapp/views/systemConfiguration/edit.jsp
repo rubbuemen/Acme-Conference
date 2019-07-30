@@ -44,19 +44,10 @@
 	<acme:textbox code="systemConfiguration.phoneCountryCode" path="phoneCountryCode" placeholder="+ddd" />
 	<br />
 	
-	<acme:textbox code="systemConfiguration.periodFinder" path="periodFinder" placeholder="N" type="number" min="1" max="24" />
+	<acme:textarea code="systemConfiguration.creditCardBrands" path="creditCardBrands" placeholder="Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum" />
 	<br />
 	
-	<acme:textbox code="systemConfiguration.maxResultsFinder" path="maxResultsFinder" placeholder="N" type="number" min="1" max="100" />
-	<br />
-
-	<acme:textarea code="systemConfiguration.spamWords" path="spamWords" placeholder="Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum" />
-	<br />
-	
-	<acme:textbox code="systemConfiguration.fare" path="fare" placeholder="N.NN" type="number" min="0" step="0.01" />
-	<br />
-	
-	<acme:textbox code="systemConfiguration.VATPercentage" path="VATPercentage" placeholder="N.NN" type="number" min="0" max="100" step="0.01" />
+	<acme:textarea code="systemConfiguration.voidWords" path="voidWords" placeholder="Lorem ipsum, Lorem ipsum, Lorem ipsum, Lorem ipsum" />
 	<br />
 
 	<acme:submit name="save" code="button.save" />

@@ -84,6 +84,18 @@
 		</jstl:if>
 	</display:column>
 	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<jstl:choose>
+			<jstl:when test="${row.isFinalMode}">
+				<acme:button url="activity/administrator/list.do?conferenceId=${row.id}" code="button.show" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="activity.error.conferenceNotFinalMode" />
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
+	
 	<spring:message code="conference.edit" var="editH" />
 	<display:column title="${editH}" >
 		<jstl:if test="${!row.isFinalMode}">
@@ -203,6 +215,18 @@
 			<jstl:set var="banner" value="${randomSponsorship1.get(row1).banner}"/>
 			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
 		</jstl:if>
+	</display:column>
+	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<jstl:choose>
+			<jstl:when test="${row1.isFinalMode}">
+				<acme:button url="activity/administrator/list.do?conferenceId=${row1.id}" code="button.show" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="activity.error.conferenceNotFinalMode" />
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 	
 	<spring:message code="conference.edit" var="editH" />
@@ -325,6 +349,18 @@
 		</jstl:if>
 	</display:column>
 	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<jstl:choose>
+			<jstl:when test="${row2.isFinalMode}">
+				<acme:button url="activity/administrator/list.do?conferenceId=${row2.id}" code="button.show" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="activity.error.conferenceNotFinalMode" />
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
+	
 	<spring:message code="conference.edit" var="editH" />
 	<display:column title="${editH}" >
 		<jstl:if test="${!row2.isFinalMode}">
@@ -445,6 +481,18 @@
 		</jstl:if>
 	</display:column>
 	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<jstl:choose>
+			<jstl:when test="${row3.isFinalMode}">
+				<acme:button url="activity/administrator/list.do?conferenceId=${row3.id}" code="button.show" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="activity.error.conferenceNotFinalMode" />
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
+	
 	<spring:message code="conference.edit" var="editH" />
 	<display:column title="${editH}" >
 		<jstl:if test="${!row3.isFinalMode}">
@@ -563,6 +611,18 @@
 			<jstl:set var="banner" value="${randomSponsorship4.get(row4).banner}"/>
 			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
 		</jstl:if>
+	</display:column>
+	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<jstl:choose>
+			<jstl:when test="${row4.isFinalMode}">
+				<acme:button url="activity/administrator/list.do?conferenceId=${row4.id}" code="button.show" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="activity.error.conferenceNotFinalMode" />
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 	
 	<spring:message code="conference.edit" var="editH" />

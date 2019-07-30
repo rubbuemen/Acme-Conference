@@ -81,6 +81,14 @@ public class TopicService {
 		this.topicRepository.delete(topic);
 	}
 
+	public Topic findTopicOther() {
+		Topic result;
+
+		result = this.topicRepository.findTopicOther();
+
+		return result;
+	}
+
 	// Other business methods
 
 }

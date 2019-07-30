@@ -187,4 +187,21 @@ public class ReportService {
 		return result;
 	}
 
+	//R14.5
+	public Collection<Report> findReportsBySubmissionIdAuthorLogged(final int submissionId) {
+		Collection<Report> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAuthor(actorLogged);
+
+		final Submission submission = this.submissionService.findSubmissionAuthorLogged(submissionId);
+		Assert.isTrue(submission.getIsNotified(), "You can't see the reports because you haven't been notified about this submission");
+
+		result = this.reportRepository.findReportsBySubmissionId(submissionId);
+		Assert.notNull(result);
+
+		return result;
+	}
+
 }

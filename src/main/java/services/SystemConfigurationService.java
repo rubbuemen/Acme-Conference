@@ -10,6 +10,9 @@ import org.springframework.util.Assert;
 
 import repositories.SystemConfigurationRepository;
 import domain.Actor;
+import domain.Author;
+import domain.Message;
+import domain.Submission;
 import domain.SystemConfiguration;
 
 @Service
@@ -23,6 +26,18 @@ public class SystemConfigurationService {
 	// Supporting services
 	@Autowired
 	private ActorService					actorService;
+
+	@Autowired
+	private SubmissionService				submissionService;
+
+	@Autowired
+	private MessageService					messageService;
+
+	@Autowired
+	private AuthorService					authorService;
+
+	@Autowired
+	private TopicService					topicService;
 
 
 	// Simple CRUD methods
@@ -62,13 +77,11 @@ public class SystemConfigurationService {
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
 
 		SystemConfiguration result;
 
-		if (systemConfiguration.getId() == 0)
-			result = this.systemConfigurationRepository.save(systemConfiguration);
-		else
-			result = this.systemConfigurationRepository.save(systemConfiguration);
+		result = this.systemConfigurationRepository.save(systemConfiguration);
 
 		return result;
 	}
@@ -89,6 +102,30 @@ public class SystemConfigurationService {
 		Assert.notNull(result);
 
 		return result;
+	}
+
+	//R14.5
+	public void notificationProcedure() {
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		final Collection<Submission> submissionsAcceptedOrRejectedNotNotifiedNoDeadline = this.submissionService.findSubmissionsAcceptedOrRejectedNotNotifiedNoDeadline();
+
+		for (final Submission s : submissionsAcceptedOrRejectedNotNotifiedNoDeadline) {
+			final Author author = this.authorService.findAuthorBySubmissionId(s.getId());
+			final Message result = this.messageService.create();
+			final Actor system = this.actorService.getSystemActor();
+			result.setSubject("Your submission has been reviewed");
+			result.setBody("We inform you that the submission with ticker " + s.getTicker() + " has been reviewed and its status has been '" + s.getStatus() + "'. You can see the reports in the corresponding section.");
+			result.setTopic(this.topicService.findTopicOther());
+			result.setSender(system);
+			result.getRecipients().add(author);
+			this.messageService.save(result);
+			s.setIsNotified(true);
+			this.submissionService.saveAuxiliar(s);
+		}
+
 	}
 
 }

@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.validation.Valid;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import cz.jirutka.validator.collection.constraints.EachNotNull;
 
 @Entity
@@ -21,7 +19,6 @@ public class Tutorial extends Activity {
 	private Collection<Section>	sections;
 
 
-	@NotEmpty
 	@Valid
 	@EachNotNull
 	@ManyToMany

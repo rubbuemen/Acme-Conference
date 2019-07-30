@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +11,8 @@ import org.springframework.util.Assert;
 
 import repositories.TutorialRepository;
 import domain.Actor;
+import domain.Conference;
+import domain.Section;
 import domain.Tutorial;
 
 @Service
@@ -24,15 +27,25 @@ public class TutorialService {
 	@Autowired
 	private ActorService		actorService;
 
+	@Autowired
+	private ActivityService		activityService;
+
+	@Autowired
+	private SectionService		sectionService;
+
 
 	// Simple CRUD methods
+	//R14.6
 	public Tutorial create() {
 		Tutorial result;
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
 
 		result = new Tutorial();
+		final Collection<Section> sections = new HashSet<>();
+		result.setSections(sections);
 
 		return result;
 	}
@@ -57,18 +70,28 @@ public class TutorialService {
 		return result;
 	}
 
-	public Tutorial save(final Tutorial tutorial) {
+	//R14.6
+	public Tutorial save(final Tutorial tutorial, final Conference conference, Section section) {
 		Assert.notNull(tutorial);
-
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
 
 		Tutorial result;
 
-		if (tutorial.getId() == 0)
-			result = this.tutorialRepository.save(tutorial);
-		else
-			result = this.tutorialRepository.save(tutorial);
+		if (tutorial.getId() == 0) {
+			section = this.sectionService.save(section, tutorial);
+			tutorial.getSections().add(section);
+		}
+		result = (Tutorial) this.activityService.save(tutorial, conference);
+		result = this.tutorialRepository.save(result);
+
+		return result;
+	}
+
+	public Tutorial saveAuxiliar(final Tutorial tutorial) {
+		Assert.notNull(tutorial);
+
+		Tutorial result;
+
+		result = this.tutorialRepository.save(tutorial);
 
 		return result;
 	}
@@ -82,5 +105,20 @@ public class TutorialService {
 	}
 
 	// Other business methods
+	//R14.6
+	public Collection<Tutorial> findTutorialsByConference(final Conference conference) {
+		Collection<Tutorial> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Assert.isTrue(conference.getIsFinalMode(), "Activities can only be managed if the conference is in final mode");
+
+		result = this.tutorialRepository.findTutorialsByConferenceId(conference.getId());
+
+		return result;
+
+	}
 
 }

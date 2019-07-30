@@ -57,6 +57,7 @@
 		<bean class="converters.StringToFinderConverter" />
 		<bean class="converters.StringToMessageConverter" />
 		<bean class="converters.StringToPanelConverter" />
+		<bean class="converters.StringToPaperConverter" />
 		<bean class="converters.StringToPresentationConverter" />
 		<bean class="converters.StringToRegistrationConverter" />
 		<bean class="converters.StringToReportConverter" />

@@ -83,5 +83,14 @@ public class PaperService {
 	}
 
 	// Other business methods
+	public Collection<Paper> findPapersCameraReadyByConferenceId(final int conferenceId) {
+		Collection<Paper> result, alreadyAssigned;
+
+		result = this.paperRepository.findPapersCameraReadyByConferenceId(conferenceId);
+		alreadyAssigned = this.paperRepository.findPapersCameraReadyAlreadyAssignedByConferenceId(conferenceId);
+		result.removeAll(alreadyAssigned);
+
+		return result;
+	}
 
 }

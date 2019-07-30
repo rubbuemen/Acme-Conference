@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.PanelRepository;
 import domain.Actor;
+import domain.Conference;
 import domain.Panel;
 
 @Service
@@ -24,13 +25,18 @@ public class PanelService {
 	@Autowired
 	private ActorService	actorService;
 
+	@Autowired
+	private ActivityService	activityService;
+
 
 	// Simple CRUD methods
+	//R14.6
 	public Panel create() {
 		Panel result;
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
 
 		result = new Panel();
 
@@ -57,18 +63,14 @@ public class PanelService {
 		return result;
 	}
 
-	public Panel save(final Panel panel) {
+	//R14.6
+	public Panel save(final Panel panel, final Conference conference) {
 		Assert.notNull(panel);
-
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
 
 		Panel result;
 
-		if (panel.getId() == 0)
-			result = this.panelRepository.save(panel);
-		else
-			result = this.panelRepository.save(panel);
+		result = (Panel) this.activityService.save(panel, conference);
+		result = this.panelRepository.save(result);
 
 		return result;
 	}
@@ -82,5 +84,20 @@ public class PanelService {
 	}
 
 	// Other business methods
+	//R14.6
+	public Collection<Panel> findPanelsByConference(final Conference conference) {
+		Collection<Panel> result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Assert.isTrue(conference.getIsFinalMode(), "Activities can only be managed if the conference is in final mode");
+
+		result = this.panelRepository.findPanelsByConferenceId(conference.getId());
+
+		return result;
+
+	}
 
 }

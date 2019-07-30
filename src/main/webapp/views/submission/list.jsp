@@ -90,6 +90,18 @@
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>
+		
+		<spring:message code="submission.reports" var="reports" />
+		<display:column title="${reports}" >
+			<jstl:choose>
+				<jstl:when test="${row.isNotified}">
+					<acme:button url="report/author/list.do?submissionId=${row.id}" code="button.show" />
+				</jstl:when>
+				<jstl:otherwise>
+					<spring:message code="submission.isNotNotified" />
+				</jstl:otherwise>
+			</jstl:choose>
+		</display:column>
 	</security:authorize>
 	
 	<security:authorize access="hasRole('ADMIN')">

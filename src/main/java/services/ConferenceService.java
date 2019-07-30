@@ -323,4 +323,12 @@ public class ConferenceService {
 		this.conferenceRepository.save(conference);
 	}
 
+	public Conference findConferenceByActivityId(final int activityId) {
+		Conference result;
+
+		result = this.conferenceRepository.findConferenceByActivityId(activityId);
+
+		return result;
+	}
+
 }

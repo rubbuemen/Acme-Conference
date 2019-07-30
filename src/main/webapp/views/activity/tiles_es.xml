@@ -10,13 +10,33 @@
 
 <tiles-definitions>
 
-	<definition name="activity/create" extends="master.page">
-		<put-attribute name="title" value="Crear actividad" />
+	<definition name="panel/create" extends="master.page">
+		<put-attribute name="title" value="Crear panel" />
 		<put-attribute name="body" value="/views/activity/edit.jsp" />
 	</definition>
 
-	<definition name="activity/edit" extends="master.page">
-		<put-attribute name="title" value="Editar actividad" />
+	<definition name="panel/edit" extends="master.page">
+		<put-attribute name="title" value="Editar panel" />
+		<put-attribute name="body" value="/views/activity/edit.jsp" />
+	</definition>
+	
+	<definition name="tutorial/create" extends="master.page">
+		<put-attribute name="title" value="Crear tutorial" />
+		<put-attribute name="body" value="/views/activity/createTutorial.jsp" />
+	</definition>
+
+	<definition name="tutorial/edit" extends="master.page">
+		<put-attribute name="title" value="Editar tutorial" />
+		<put-attribute name="body" value="/views/activity/edit.jsp" />
+	</definition>
+	
+	<definition name="presentation/create" extends="master.page">
+		<put-attribute name="title" value="Crear presentación" />
+		<put-attribute name="body" value="/views/activity/edit.jsp" />
+	</definition>
+
+	<definition name="presentation/edit" extends="master.page">
+		<put-attribute name="title" value="Editar presentación" />
 		<put-attribute name="body" value="/views/activity/edit.jsp" />
 	</definition>
 

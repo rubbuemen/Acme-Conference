@@ -326,4 +326,17 @@ public class SubmissionService {
 		return result;
 	}
 
+	public Collection<Submission> findSubmissionsAcceptedOrRejectedNotNotifiedNoDeadline() {
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Collection<Submission> result;
+
+		result = this.submissionRepository.findSubmissionsAcceptedOrRejectedNotNotifiedNoDeadline();
+		Assert.notNull(result);
+
+		return result;
+	}
+
 }

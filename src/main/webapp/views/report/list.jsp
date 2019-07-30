@@ -36,15 +36,16 @@
 	<spring:message code="report.comments" var="comments" />
 	<display:column property="comments" title="${comments}" />
 	
-	<spring:message code="report.submission" var="submission" />
-	<display:column title="${submission}">
-			<spring:message code="submission.ticker" />: ${row.submission.ticker}<br />
-			<spring:message code="submission.moment" />:
-			<fmt:formatDate var="format" value="${row.submission.moment}" pattern="dd/MM/YYYY HH:mm" />
-			<jstl:out value="${format}" /><br />
-	</display:column>
-	
-	<spring:message code="report.decideReport" var="decideReport" />
+	<security:authorize access="hasRole('REVIEWER')">
+		<spring:message code="report.submission" var="submission" />
+		<display:column title="${submission}">
+				<spring:message code="submission.ticker" />: ${row.submission.ticker}<br />
+				<spring:message code="submission.moment" />:
+				<fmt:formatDate var="format" value="${row.submission.moment}" pattern="dd/MM/YYYY HH:mm" />
+				<jstl:out value="${format}" /><br />
+		</display:column>
+		
+		<spring:message code="report.decideReport" var="decideReport" />
 		<display:column title="${decideReport}">
 			<jstl:choose>
 			<jstl:when test="${row.status eq 'BORDER-LINE'}">
@@ -58,8 +59,13 @@
 			</jstl:choose>
 			
 		</display:column>
-	
+	</security:authorize>
 
 </display:table>
 
-<acme:button url="report/reviewer/create.do" code="button.create" />
+<security:authorize access="hasRole('REVIEWER')">
+	<acme:button url="report/reviewer/create.do" code="button.create" />
+</security:authorize>
+<security:authorize access="hasRole('AUTHOR')">
+	<acme:button url="submission/author/list.do" code="button.back" />
+</security:authorize>

@@ -19,28 +19,32 @@ import cz.jirutka.validator.collection.constraints.EachURL;
 public class Section extends DomainEntity {
 
 	// Attributes
-	private String				title;
-	private String				summary;
+	private String				titleSec;
+	private String				summarySec;
 	private Collection<String>	pictures;
 
 
 	// Getters and Setters
 	@NotBlank
-	public String getTitle() {
-		return this.title;
+	public String getTitleSec() {
+		return this.titleSec;
 	}
 
-	public void setTitle(final String title) {
-		this.title = title;
+	public void setTitleSec(final String titleSec) {
+		this.titleSec = titleSec;
 	}
 
 	@NotBlank
-	public String getSummary() {
-		return this.summary;
+	public String getSummarySec() {
+		return this.summarySec;
 	}
 
-	public void setSummary(final String summary) {
-		this.summary = summary;
+	public void setSummarySec(final String summarySec) {
+		this.summarySec = summarySec;
+	}
+
+	public void setPictures(final Collection<String> pictures) {
+		this.pictures = pictures;
 	}
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -48,10 +52,6 @@ public class Section extends DomainEntity {
 	@EachURL
 	public Collection<String> getPictures() {
 		return this.pictures;
-	}
-
-	public void setPictures(final Collection<String> pictures) {
-		this.pictures = pictures;
 	}
 
 }

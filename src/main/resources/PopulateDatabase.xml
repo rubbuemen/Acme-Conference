@@ -1199,8 +1199,8 @@
 	
 	<!-- Section -->
 	<bean id="section1" class="domain.Section">
-		<property name="title" value="Section 1 Tutorial 1" />
-		<property name="summary" value="Summary Section 1 Tutorial 1" />
+		<property name="titleSec" value="Section 1 Tutorial 1" />
+		<property name="summarySec" value="Summary Section 1 Tutorial 1" />
 		<property name="pictures">
 			<list>
 				<value>http://www.picture1.com</value>
@@ -1209,16 +1209,16 @@
 		</property>
 	</bean>
 	<bean id="section2" class="domain.Section">
-		<property name="title" value="Section 2 Tutorial 1" />
-		<property name="summary" value="Summary Section 2 Tutorial 1" />
+		<property name="titleSec" value="Section 2 Tutorial 1" />
+		<property name="summarySec" value="Summary Section 2 Tutorial 1" />
 	</bean>
 	<bean id="section3" class="domain.Section">
-		<property name="title" value="Section 3 Tutorial 1" />
-		<property name="summary" value="Summary Section 3 Tutorial 1" />
+		<property name="titleSec" value="Section 3 Tutorial 1" />
+		<property name="summarySec" value="Summary Section 3 Tutorial 1" />
 	</bean>
 	<bean id="section4" class="domain.Section">
-		<property name="title" value="Section 1 Tutorial 2" />
-		<property name="summary" value="Summary Section 1 Tutorial 2" />
+		<property name="titleSec" value="Section 1 Tutorial 2" />
+		<property name="summarySec" value="Summary Section 1 Tutorial 2" />
 	</bean>
 	
 	<!-- Paper -->

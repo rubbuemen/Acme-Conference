@@ -10,6 +10,7 @@ import org.springframework.util.Assert;
 
 import repositories.PresentationRepository;
 import domain.Actor;
+import domain.Conference;
 import domain.Presentation;
 
 @Service
@@ -24,6 +25,9 @@ public class PresentationService {
 	@Autowired
 	private ActorService			actorService;
 
+	@Autowired
+	private ActivityService			activityService;
+
 
 	// Simple CRUD methods
 	public Presentation create() {
@@ -31,6 +35,7 @@ public class PresentationService {
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
 
 		result = new Presentation();
 
@@ -57,18 +62,14 @@ public class PresentationService {
 		return result;
 	}
 
-	public Presentation save(final Presentation presentation) {
+	//R14.6
+	public Presentation save(final Presentation presentation, final Conference conference) {
 		Assert.notNull(presentation);
-
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
 
 		Presentation result;
 
-		if (presentation.getId() == 0)
-			result = this.presentationRepository.save(presentation);
-		else
-			result = this.presentationRepository.save(presentation);
+		result = (Presentation) this.activityService.save(presentation, conference);
+		result = this.presentationRepository.save(result);
 
 		return result;
 	}
@@ -82,5 +83,19 @@ public class PresentationService {
 	}
 
 	// Other business methods
+	//R14.6
+	public Collection<Presentation> findPresentationsByConference(final Conference conference) {
+		Collection<Presentation> result;
 
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		Assert.isTrue(conference.getIsFinalMode(), "Activities can only be managed if the conference is in final mode");
+
+		result = this.presentationRepository.findPresentationsByConferenceId(conference.getId());
+
+		return result;
+
+	}
 }

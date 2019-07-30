@@ -21,6 +21,7 @@
 <form:form action="${actionURL}" modelAttribute="activity">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="sections" />
 	<input type="hidden" name="conferenceId" value="${conference.id}">
 	
 	<acme:textbox code="activity.title" path="title" placeholder="Lorem Ipsum"/>
@@ -43,40 +44,25 @@
 	
 	<acme:textarea code="activity.attachments" path="attachments" placeholder="http://LoremIpsum.com, http://LoremIpsum.com, http://LoremIpsum.com, ..."/>
 	<br />
-		
-	<jstl:if test="${type == 'presentation'}">
-		<jstl:choose>
-			<jstl:when test="${activity.id == 0}">
-				<acme:select items="${papers}" itemLabel="title" code="activity.paper" path="paper" />
-				<br />
-			</jstl:when>
-			<jstl:otherwise>
-				<form:hidden path="paper" />
-			</jstl:otherwise>
-		</jstl:choose>
-	</jstl:if>
 	
-	<jstl:choose>
-		<jstl:when test="${activity.id == 0}">
-			<jstl:if test="${type == 'panel'}">
-				<acme:submit name="savePanel" code="button.register" />
-			</jstl:if>
-			<jstl:if test="${type == 'presentation'}">
-				<acme:submit name="savePresentation" code="button.register" />
-			</jstl:if>
-		</jstl:when>
-		<jstl:otherwise>
-			<jstl:if test="${type == 'tutorial'}">
-				<acme:submit name="saveTutorial" code="button.save" />
-			</jstl:if>
-			<jstl:if test="${type == 'panel'}">
-				<acme:submit name="savePanel" code="button.save" />
-			</jstl:if>
-			<jstl:if test="${type == 'presentation'}">
-				<acme:submit name="savePresentation" code="button.save" />
-			</jstl:if>
-		</jstl:otherwise>
-	</jstl:choose>
+
+	<form:form modelAttribute='section'>
+	<fieldset>
+		<legend><spring:message code="activity.section"/></legend>
+		<acme:textbox code="activity.section.title" path="titleSec" placeholder="Lorem Ipsum"/>
+		<br />
+		
+		<acme:textbox code="activity.section.summary" path="summarySec" placeholder="Lorem Ipsum"/>
+		<br />
+		
+		<acme:textarea code="activity.section.pictures" path="pictures" placeholder="http://LoremIpsum.com, http://LoremIpsum.com, http://LoremIpsum.com, ..."/>
+		<br />
+		<spring:message code="activity.createMoreSections"/>.
+	</fieldset>
+	<br />
+	
+	<acme:submit name="saveTutorial" code="button.register" />
 	
 	<acme:cancel url="activity/administrator/list.do?conferenceId=${conference.id}" code="button.cancel" />
+	</form:form>
 </form:form>
