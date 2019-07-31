@@ -18,22 +18,35 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 
-<display:table pagesize="5" class="displaytag" name="entidads" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="topics" requestURI="${requestURI}" id="row">
 
-	<spring:message code="entidad.atributo" var="atributo" />
-	<display:column property="atributo" title="${atributo}" />
+	<spring:message code="topic.nameEnglish" var="nameEnglish" />
+	<display:column property="nameEnglish" title="${nameEnglish}" />
 	
-	<spring:message code="entidad.edit" var="editH" />
-	<display:column title="${editH}" >
-		<acme:button url="entidad/actor/edit.do?entidadId=${row.id}" code="button.edit" />
+	<spring:message code="topic.nameSpanish" var="nameSpanish" />
+	<display:column property="nameSpanish" title="${nameSpanish}" />
+	
+	<spring:message code="topic.edit" var="editH" />
+	<display:column title="${editH}">
+		<acme:button url="topic/administrator/edit.do?topicId=${row.id}" code="button.edit" />
 	</display:column>
 	
-	<spring:message code="entidad.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<acme:button url="entidad/actor/delete.do?entidadId=${row.id}" code="button.delete" />	
+	<spring:message code="topic.delete" var="deleteH" />
+	<jstl:set var = "positionsUsed" value = "${topicsUsed}"/>
+	<jstl:set var = "position" value = "${row}"/>
+	<display:column title="${deleteH}">
+		<jstl:choose>
+			<jstl:when test="${!fn:contains(positionsUsed, position)}">
+				<acme:button url="topic/administrator/delete.do?topicId=${row.id}" code="button.delete" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="topic.error.occupied" />
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 			
 </display:table>
 
-<acme:button url="entidad/actor/create.do" code="button.create" />
+<acme:button url="topic/administrator/create.do" code="button.create" />

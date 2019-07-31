@@ -80,7 +80,6 @@ public class AdministratorActivityController extends AbstractController {
 			result.addObject("panels", panels);
 			result.addObject("presentations", presentations);
 			result.addObject("tutorials", tutorials);
-			result.addObject("requestURI", "activity/administrator/list.do");
 			result.addObject("conference", conference);
 		} catch (final Throwable oops) {
 			if (oops.getMessage().equals("Activities can only be managed if the conference is in final mode"))

@@ -19,21 +19,24 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="displaytag" name="entidads" requestURI="${requestURI}" id="row">
+<display:table pagesize="5" class="displaytag" name="comments" requestURI="${requestURI}" id="row">
 
-	<spring:message code="entidad.atributo" var="atributo" />
-	<display:column property="atributo" title="${atributo}" />
+	<spring:message code="comment.title" var="title" />
+	<display:column property="title" title="${title}" />
 	
-	<spring:message code="entidad.edit" var="editH" />
-	<display:column title="${editH}" >
-		<acme:button url="entidad/actor/edit.do?entidadId=${row.id}" code="button.edit" />
+	<spring:message code="comment.moment" var="moment" />
+	<display:column title="${moment}">
+			<fmt:formatDate var="format" value="${row.moment}" pattern="dd/MM/YYYY HH:mm" />
+			<jstl:out value="${format}" />
 	</display:column>
 	
-	<spring:message code="entidad.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<acme:button url="entidad/actor/delete.do?entidadId=${row.id}" code="button.delete" />	
-	</display:column>
+	<spring:message code="comment.author" var="author" />
+	<display:column property="author" title="${author}" />
+	
+	<spring:message code="comment.text" var="text" />
+	<display:column property="text" title="${text}" />
 			
 </display:table>
 
-<acme:button url="entidad/actor/create.do" code="button.create" />
+<acme:button url="comment/create.do?commentableId=${commentable.id}" code="button.create" />
+<acme:button url="conference/listGeneric.do" code="button.backConferences" />

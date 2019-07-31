@@ -16,27 +16,30 @@ import domain.Topic;
 @Transactional
 public class TopicService {
 
-	// Managed repository
+	//Managed repository
 	@Autowired
 	private TopicRepository	topicRepository;
 
-	// Supporting services
+	//Supporting services
 	@Autowired
 	private ActorService	actorService;
 
 
-	// Simple CRUD methods
+	//Simple CRUD methods
+	//R17
 	public Topic create() {
 		Topic result;
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
 
 		result = new Topic();
 
 		return result;
 	}
 
+	//R17
 	public Collection<Topic> findAll() {
 		Collection<Topic> result;
 
@@ -57,28 +60,46 @@ public class TopicService {
 		return result;
 	}
 
+	//R17
 	public Topic save(final Topic topic) {
 		Assert.notNull(topic);
 
 		final Actor actorLogged = this.actorService.findActorLogged();
 		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
 
 		Topic result;
 
-		if (topic.getId() == 0)
-			result = this.topicRepository.save(topic);
-		else
-			result = this.topicRepository.save(topic);
+		result = this.topicRepository.save(topic);
 
 		return result;
 	}
 
+	//R17
 	public void delete(final Topic topic) {
 		Assert.notNull(topic);
 		Assert.isTrue(topic.getId() != 0);
 		Assert.isTrue(this.topicRepository.exists(topic.getId()));
 
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		final Collection<Topic> topicsUsed = this.topicRepository.findTopicsUsed();
+		Assert.isTrue(!topicsUsed.contains(topic), "This topic can not be deleted because it is in use");
+
 		this.topicRepository.delete(topic);
+	}
+
+	// Other business methods
+	public Collection<Topic> findTopicsUsed() {
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		final Collection<Topic> result = this.topicRepository.findTopicsUsed();
+
+		return result;
 	}
 
 	public Topic findTopicOther() {
@@ -88,7 +109,5 @@ public class TopicService {
 
 		return result;
 	}
-
-	// Other business methods
 
 }

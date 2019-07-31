@@ -2,6 +2,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CommentRepository;
-import domain.Actor;
 import domain.Comment;
+import domain.Commentable;
 
 @Service
 @Transactional
@@ -22,17 +23,17 @@ public class CommentService {
 
 	// Supporting services
 	@Autowired
-	private ActorService		actorService;
+	private CommentableService	commentableService;
 
 
 	// Simple CRUD methods
+	//R22.2
 	public Comment create() {
 		Comment result;
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-
 		result = new Comment();
+		final Date moment = new Date(System.currentTimeMillis() - 1);
+		result.setMoment(moment);
 
 		return result;
 	}
@@ -57,18 +58,16 @@ public class CommentService {
 		return result;
 	}
 
-	public Comment save(final Comment comment) {
+	//R22.2
+	public Comment save(final Comment comment, final Commentable commentable) {
 		Assert.notNull(comment);
-
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
+		Assert.isTrue(comment.getId() == 0); //Un comentario unicamente se creará, nunca se editará
 
 		Comment result;
 
-		if (comment.getId() == 0)
-			result = this.commentRepository.save(comment);
-		else
-			result = this.commentRepository.save(comment);
+		result = this.commentRepository.save(comment);
+		commentable.getComments().add(result);
+		this.commentableService.save(commentable);
 
 		return result;
 	}
@@ -82,5 +81,12 @@ public class CommentService {
 	}
 
 	// Other business methods
+	public Collection<Comment> findCommentsByCommentable(final Commentable commentable) {
+		Collection<Comment> result;
+
+		result = this.commentRepository.findCommentsByCommentableId(commentable.getId());
+
+		return result;
+	}
 
 }

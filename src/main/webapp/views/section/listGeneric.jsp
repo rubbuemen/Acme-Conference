@@ -15,27 +15,21 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${actionURL}" modelAttribute="topic">
-	<form:hidden path="id" />
-	<form:hidden path="version" />
+<display:table pagesize="5" class="displaytag" name="sections" requestURI="${requestURI}" id="row">
 
-	<acme:textbox code="topic.nameEnglish" path="nameEnglish" placeholder="Lorem Ipsum"/>
-	<br />
-
-	<acme:textbox code="topic.nameSpanish" path="nameSpanish" placeholder="Lorem Ipsum"/>
-	<br />
-
-	<jstl:choose>
-		<jstl:when test="${topic.id == 0}">
-			<acme:submit name="save" code="button.register" />
-		</jstl:when>
-		<jstl:otherwise>
-			<acme:submit name="save" code="button.save" />
-		</jstl:otherwise>
-	</jstl:choose>
+	<spring:message code="activity.section.title" var="titleSec" />
+	<display:column property="titleSec" title="${titleSec}" />
 	
-	<acme:cancel url="topic/administrator/list.do" code="button.cancel" />
-</form:form>
+	<spring:message code="activity.section.summary" var="summarySec" />
+	<display:column property="summarySec" title="${summarySec}" />
+	
+	<spring:message code="activity.section.pictures" var="pictures" />
+	<display:column property="pictures" title="${pictures}" />
+			
+</display:table>
+
+<acme:button url="activity/listGeneric.do?conferenceId=${conference.id}" code="button.back" />

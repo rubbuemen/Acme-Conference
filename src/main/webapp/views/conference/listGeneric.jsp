@@ -29,7 +29,10 @@
 </form>
 <br />
 
-<display:table class="displaytag" name="conferences" id="row">
+<security:authorize access="isAuthenticated()"><jstl:set var="sort" value="true" /></security:authorize>
+<security:authorize access="isAnonymous()"><jstl:set var="sort" value="false" /></security:authorize>
+
+<display:table class="displaytag" name="conferences" id="row" requestURI="conference/listGeneric.do">
 	<spring:message code="conference.title" var="title" />
 	<display:column property="title" title="${title}" />
 	
@@ -76,7 +79,7 @@
 	<display:column property="fee" title="${fee}" />
 	
 	<spring:message code="conference.category" var="category" />
-	<display:column title="${category}">
+	<display:column title="${category}" sortable="${sort}">
 		<jstl:if test="${language eq 'en'}">
 			<jstl:out value="${row.category.titleEnglish}" />
 		</jstl:if>
@@ -92,13 +95,23 @@
 			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
 		</jstl:if>
 	</display:column>
+	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<acme:button url="activity/listGeneric.do?conferenceId=${row.id}" code="button.show" />
+	</display:column>
+	
+	<spring:message code="conference.comments" var="comments" />
+	<display:column title="${comments}" >
+		<acme:button url="comment/list.do?commentableId=${row.id}" code="button.show" />
+	</display:column>
 </display:table>
 <br/><br/>
 
 <details>
 <summary style="font-size: 26px; cursor:pointer;"><spring:message code="conference.forthcomingConferences"/></summary>
 
-<display:table class="displaytag" name="forthcomingConferences" id="row1">
+<display:table class="displaytag" name="forthcomingConferences" id="row1" requestURI="conference/listGeneric.do">
 	<spring:message code="conference.title" var="title" />
 	<display:column property="title" title="${title}" />
 	
@@ -145,7 +158,7 @@
 	<display:column property="fee" title="${fee}" />
 	
 	<spring:message code="conference.category" var="category" />
-	<display:column title="${category}">
+	<display:column title="${category}" sortable="${sort}">
 		<jstl:if test="${language eq 'en'}">
 			<jstl:out value="${row1.category.titleEnglish}" />
 		</jstl:if>
@@ -161,6 +174,16 @@
 			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
 		</jstl:if>
 	</display:column>
+	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<acme:button url="activity/listGeneric.do?conferenceId=${row1.id}" code="button.show" />
+	</display:column>
+	
+	<spring:message code="conference.comments" var="comments" />
+	<display:column title="${comments}" >
+		<acme:button url="comment/list.do?commentableId=${row1.id}" code="button.show" />
+	</display:column>
 </display:table>
 
 </details><br/>
@@ -168,7 +191,7 @@
 <details>
 <summary style="font-size: 26px; cursor:pointer;"><spring:message code="conference.pastConferences"/></summary>
 
-<display:table class="displaytag" name="pastConferences" id="row2">
+<display:table class="displaytag" name="pastConferences" id="row2" requestURI="conference/listGeneric.do">
 	<spring:message code="conference.title" var="title" />
 	<display:column property="title" title="${title}" />
 	
@@ -215,7 +238,7 @@
 	<display:column property="fee" title="${fee}" />
 	
 	<spring:message code="conference.category" var="category" />
-	<display:column title="${category}">
+	<display:column title="${category}" sortable="${sort}">
 		<jstl:if test="${language eq 'en'}">
 			<jstl:out value="${row2.category.titleEnglish}" />
 		</jstl:if>
@@ -231,6 +254,16 @@
 			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
 		</jstl:if>
 	</display:column>
+	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<acme:button url="activity/listGeneric.do?conferenceId=${row2.id}" code="button.show" />
+	</display:column>
+	
+	<spring:message code="conference.comments" var="comments" />
+	<display:column title="${comments}" >
+		<acme:button url="comment/list.do?commentableId=${row2.id}" code="button.show" />
+	</display:column>
 </display:table>
 
 </details><br/>
@@ -238,7 +271,7 @@
 <details>
 <summary style="font-size: 26px; cursor:pointer;"><spring:message code="conference.runningConferences"/></summary>
 
-<display:table class="displaytag" name="runningConferences" id="row3">
+<display:table class="displaytag" name="runningConferences" id="row3" requestURI="conference/listGeneric.do">
 	<spring:message code="conference.title" var="title" />
 	<display:column property="title" title="${title}" />
 	
@@ -285,7 +318,7 @@
 	<display:column property="fee" title="${fee}" />
 	
 	<spring:message code="conference.category" var="category" />
-	<display:column title="${category}">
+	<display:column title="${category}" sortable="${sort}">
 		<jstl:if test="${language eq 'en'}">
 			<jstl:out value="${row3.category.titleEnglish}" />
 		</jstl:if>
@@ -300,6 +333,16 @@
 			<jstl:set var="banner" value="${randomSponsorship3.get(row3).banner}"/>
 			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
 		</jstl:if>
+	</display:column>
+	
+	<spring:message code="conference.activities" var="activities" />
+	<display:column title="${activities}" >
+		<acme:button url="activity/listGeneric.do?conferenceId=${row3.id}" code="button.show" />
+	</display:column>
+	
+	<spring:message code="conference.comments" var="comments" />
+	<display:column title="${comments}" >
+		<acme:button url="comment/list.do?commentableId=${row3.id}" code="button.show" />
 	</display:column>
 </display:table>
 

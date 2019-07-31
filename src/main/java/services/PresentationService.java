@@ -87,10 +87,6 @@ public class PresentationService {
 	public Collection<Presentation> findPresentationsByConference(final Conference conference) {
 		Collection<Presentation> result;
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-		this.actorService.checkUserLoginAdministrator(actorLogged);
-
 		Assert.isTrue(conference.getIsFinalMode(), "Activities can only be managed if the conference is in final mode");
 
 		result = this.presentationRepository.findPresentationsByConferenceId(conference.getId());

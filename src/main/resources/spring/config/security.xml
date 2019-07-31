@@ -37,6 +37,9 @@
 		<security:intercept-url pattern="/security/loginFailure.do"	access="permitAll" />
 		<security:intercept-url pattern="/welcome/index.do"	access="permitAll" />
 		<security:intercept-url pattern="/conference/listGeneric.do" access="permitAll"/>
+		<security:intercept-url pattern="/activity/listGeneric.do" access="permitAll"/>
+		<security:intercept-url pattern="/section/listGeneric.do" access="permitAll"/>
+		<security:intercept-url pattern="/comment/**" access="permitAll"/>
 		
 		<security:intercept-url pattern="/actor/register-author.do" access="isAnonymous()" />
 		<security:intercept-url pattern="/actor/register-reviewer.do" access="isAnonymous()" />
@@ -57,6 +60,7 @@
 		<security:intercept-url pattern="/submission/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/activity/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/section/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/topic/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/dashboard/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/author/show.do" access="hasRole('ADMIN')" />

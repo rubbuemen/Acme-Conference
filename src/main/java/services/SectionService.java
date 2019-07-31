@@ -107,10 +107,6 @@ public class SectionService {
 	public Collection<Section> findSectionsByTutorial(final int tutorialId) {
 		Collection<Section> result;
 
-		final Actor actorLogged = this.actorService.findActorLogged();
-		Assert.notNull(actorLogged);
-		this.actorService.checkUserLoginAdministrator(actorLogged);
-
 		result = this.sectionRepository.findSectionsByTutorialId(tutorialId);
 
 		return result;

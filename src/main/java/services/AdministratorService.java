@@ -96,5 +96,89 @@ public class AdministratorService {
 	}
 
 	// Other business methods
+	//Queries Dashboard
+	public String dashboardQueryC1() {
+		String result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.administratorRepository.dashboardQueryC1();
+
+		return result;
+	}
+
+	public String dashboardQueryC2() {
+		String result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.administratorRepository.dashboardQueryC2();
+
+		return result;
+	}
+
+	public String dashboardQueryC3() {
+		String result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.administratorRepository.dashboardQueryC3();
+
+		return result;
+	}
+
+	public String dashboardQueryC4() {
+		String result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.administratorRepository.dashboardQueryC4();
+
+		return result;
+	}
+
+	public String dashboardQueryB1() {
+		String result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.administratorRepository.dashboardQueryB1();
+
+		return result;
+	}
+
+	public String dashboardQueryB2() {
+		String result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.administratorRepository.dashboardQueryB2();
+
+		return result;
+	}
+
+	public String dashboardQueryB3() {
+		String result;
+
+		final Actor actorLogged = this.actorService.findActorLogged();
+		Assert.notNull(actorLogged);
+		this.actorService.checkUserLoginAdministrator(actorLogged);
+
+		result = this.administratorRepository.dashboardQueryB3();
+
+		return result;
+	}
 
 }

@@ -18,22 +18,22 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${actionURL}" modelAttribute="entidad">
+<form:form action="${actionURL}" modelAttribute="comment">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="moment" />
+	<input type="hidden" name="commentableId" value="${commentable.id}">
 	
-	<acme:textbox code="entidad.atributo" path="atributo" placeholder="Lorem Ipsum"/>
+	<acme:textbox code="comment.title" path="title" placeholder="Lorem Ipsum"/>
 	<br />
-
-	<
-	<jstl:choose>
-		<jstl:when test="${entidad.id == 0}">
-			<acme:submit name="save" code="button.register" />
-		</jstl:when>
-		<jstl:otherwise>
-			<acme:submit name="save" code="button.save" />
-		</jstl:otherwise>
-	</jstl:choose>
+			
+	<acme:textbox code="comment.author" path="author" placeholder="Lorem Ipsum"/>
+	<br />
 	
-	<acme:cancel url="entidad/actor/list.do" code="button.cancel" />
+	<acme:textarea code="comment.text" path="text" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at auctor massa"/>
+	<br />
+	
+	<acme:submit name="save" code="button.register" />
+	
+	<acme:cancel url="comment/list.do?commentableId=${commentable.id}" code="button.cancel" />
 </form:form>

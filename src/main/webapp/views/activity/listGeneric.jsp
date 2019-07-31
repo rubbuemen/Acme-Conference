@@ -50,35 +50,14 @@
 	
 	<spring:message code="activity.sections" var="sections" />
 		<display:column title="${sections}">
-			<acme:button url="section/administrator/list.do?tutorialId=${row1.id}" code="button.show" />
+			<acme:button url="section/listGeneric.do?tutorialId=${row1.id}" code="button.show" />
 		</display:column>
 	
-	<spring:message code="activity.edit" var="editH" />
-	<display:column title="${editH}" >
-		<jstl:choose>
-			<jstl:when test="${conference.startDate > date}">
-				<acme:button url="activity/administrator/edit.do?conferenceId=${conference.id}&activityId=${row1.id}" code="button.edit" />
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="activity.startDatePassed" />
-			</jstl:otherwise>
-		</jstl:choose>
-	</display:column>
-	
-	<spring:message code="activity.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<jstl:choose>
-			<jstl:when test="${conference.startDate > date}">
-				<acme:button url="activity/administrator/delete.do?conferenceId=${conference.id}&activityId=${row1.id}" code="button.delete" />
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="activity.startDatePassed" />
-			</jstl:otherwise>
-		</jstl:choose>
+	<spring:message code="activity.comments" var="comments" />
+	<display:column title="${comments}" >
+		<acme:button url="comment/list.do?commentableId=${row1.id}" code="button.show" />
 	</display:column>
 </display:table>
-
-<acme:button url="activity/administrator/create.do?conferenceId=${conference.id}&type=tutorial" code="button.create" />
 
 </details><br/>
 
@@ -109,33 +88,12 @@
 	
 	<spring:message code="activity.attachments" var="attachments" />
 	<display:column property="attachments" title="${attachments}" />
-	
-	<spring:message code="activity.edit" var="editH" />
-	<display:column title="${editH}" >
-		<jstl:choose>
-			<jstl:when test="${conference.startDate > date}">
-				<acme:button url="activity/administrator/edit.do?conferenceId=${conference.id}&activityId=${row2.id}" code="button.edit" />
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="activity.startDatePassed" />
-			</jstl:otherwise>
-		</jstl:choose>
-	</display:column>
-	
-	<spring:message code="activity.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<jstl:choose>
-			<jstl:when test="${conference.startDate > date}">
-				<acme:button url="activity/administrator/delete.do?conferenceId=${conference.id}&activityId=${row2.id}" code="button.delete" />
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="activity.startDatePassed" />
-			</jstl:otherwise>
-		</jstl:choose>
+		
+	<spring:message code="activity.comments" var="comments" />
+	<display:column title="${comments}" >
+		<acme:button url="comment/list.do?commentableId=${row2.id}" code="button.show" />
 	</display:column>
 </display:table>
-
-<acme:button url="activity/administrator/create.do?conferenceId=${conference.id}&type=panel" code="button.create" />
 
 </details><br/>
 
@@ -175,33 +133,11 @@
 			<spring:message code="activity.paper.document" />: ${row3.paper.document}<br />
 	</display:column>
 	
-	<spring:message code="activity.edit" var="editH" />
-	<display:column title="${editH}" >
-		<jstl:choose>
-			<jstl:when test="${conference.startDate > date}">
-				<acme:button url="activity/administrator/edit.do?conferenceId=${conference.id}&activityId=${row3.id}" code="button.edit" />
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="activity.startDatePassed" />
-			</jstl:otherwise>
-		</jstl:choose>
-	</display:column>
-	
-	<spring:message code="activity.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<jstl:choose>
-			<jstl:when test="${conference.startDate > date}">
-				<acme:button url="activity/administrator/delete.do?conferenceId=${conference.id}&activityId=${row3.id}" code="button.delete" />
-			</jstl:when>
-			<jstl:otherwise>
-				<spring:message code="activity.startDatePassed" />
-			</jstl:otherwise>
-		</jstl:choose>
+	<spring:message code="activity.comments" var="comments" />
+	<display:column title="${comments}" >
+		<acme:button url="comment/list.do?commentableId=${row3.id}" code="button.show" />
 	</display:column>
 </display:table>
-
-<acme:button url="activity/administrator/create.do?conferenceId=${conference.id}&type=presentation" code="button.create" />
-
 </details><br/>
 
-<acme:button url="conference/administrator/list.do" code="button.back" />
+<acme:button url="conference/listGeneric.do" code="button.back" />
