@@ -27,7 +27,7 @@ public class Finder extends DomainEntity {
 	private String	keyWord;
 	private Date	minDate;
 	private Date	maxDate;
-	private Double	minFee;
+	private Double	maxFee;
 
 
 	// Getters and Setters
@@ -61,12 +61,12 @@ public class Finder extends DomainEntity {
 
 	@Min(0)
 	@Digits(integer = 8, fraction = 2)
-	public Double getMinFee() {
-		return this.minFee;
+	public Double getMaxFee() {
+		return this.maxFee;
 	}
 
-	public void setMinFee(final Double minFee) {
-		this.minFee = minFee;
+	public void setMaxFee(final Double maxFee) {
+		this.maxFee = maxFee;
 	}
 
 

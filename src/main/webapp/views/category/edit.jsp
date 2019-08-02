@@ -18,22 +18,36 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${actionURL}" modelAttribute="entidad">
+<form:form action="${actionURL}" modelAttribute="category">
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	
-	<acme:textbox code="entidad.atributo" path="atributo" placeholder="Lorem Ipsum"/>
+	<form:hidden path="childCategories" />
+	<input type="hidden" name="categoryParentOld" value="${categoryParentOld}" />
+
+	<acme:textbox code="category.titleEnglish" path="titleEnglish" placeholder="Lorem Ipsum"/>
 	<br />
 
-	<
+	<acme:textbox code="category.titleSpanish" path="titleSpanish" placeholder="Lorem Ipsum"/>
+	<br />
+	
+	<jstl:if test="${language eq 'en'}">
+		<jstl:set var="titleCategory" value="titleEnglish" />
+	</jstl:if>
+	<jstl:if test="${language eq 'es'}">
+		<jstl:set var="titleCategory" value="titleSpanish" />
+	</jstl:if>
+	
+	<acme:select items="${categories}" itemLabel="${titleCategory}" code="category.parentCategory" path="parentCategory"/>
+	<br />
+
 	<jstl:choose>
-		<jstl:when test="${entidad.id == 0}">
-			<acme:submit name="save" code="button.register" />
+		<jstl:when test="${category.id == 0}">
+			<acme:submit name="save" code="button.create" />
 		</jstl:when>
 		<jstl:otherwise>
 			<acme:submit name="save" code="button.save" />
 		</jstl:otherwise>
 	</jstl:choose>
 	
-	<acme:cancel url="entidad/actor/list.do" code="button.cancel" />
+	<acme:cancel url="category/administrator/list.do" code="button.cancel" />
 </form:form>

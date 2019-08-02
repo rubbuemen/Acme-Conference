@@ -49,6 +49,7 @@
 		<security:intercept-url pattern="/submission/author/**" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/registration/author/**" access="hasRole('AUTHOR')" />
 		<security:intercept-url pattern="/report/author/**" access="hasRole('AUTHOR')" />
+		<security:intercept-url pattern="/finder/author/**" access="hasRole('AUTHOR')" />
 		
 		<security:intercept-url pattern="/actor/reviewer/**" access="hasRole('REVIEWER')" />
 		<security:intercept-url pattern="/report/reviewer/**" access="hasRole('REVIEWER')" />
@@ -61,6 +62,7 @@
 		<security:intercept-url pattern="/activity/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/section/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/topic/administrator/**" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/category/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/systemConfiguration/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/dashboard/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/author/show.do" access="hasRole('ADMIN')" />

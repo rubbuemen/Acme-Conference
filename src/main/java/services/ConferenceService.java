@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import org.springframework.util.Assert;
 import repositories.ConferenceRepository;
 import domain.Activity;
 import domain.Actor;
+import domain.Category;
 import domain.Comment;
 import domain.Conference;
 import domain.Registration;
@@ -327,6 +329,61 @@ public class ConferenceService {
 		Conference result;
 
 		result = this.conferenceRepository.findConferenceByActivityId(activityId);
+
+		return result;
+	}
+
+	public Collection<Conference> findConferencesFinalMode() {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findConferencesFinalMode();
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Collection<Conference> findConferencesFromFinder(final String keyWord, final Date minDate, final Date maxDate, final Double maxFee, final int categoryId) {
+		final Collection<Conference> result = new HashSet<>();
+		Collection<Conference> findConferencesFilterByKeyWord = new HashSet<>();
+		Collection<Conference> findConferencesFilterByDate = new HashSet<>();
+		Collection<Conference> findConferencesFilterByMaxFee = new HashSet<>();
+		Collection<Conference> findConferencesFilterByCategoryId = new HashSet<>();
+		final Calendar cal1 = Calendar.getInstance();
+		final Calendar cal2 = Calendar.getInstance();
+		cal1.setTime(minDate);
+		cal2.setTime(maxDate);
+
+		if (!keyWord.isEmpty())
+			findConferencesFilterByKeyWord = this.conferenceRepository.findConferencesFilterByKeyWord(keyWord);
+		if (cal1.get(Calendar.YEAR) != 1000 || cal2.get(Calendar.YEAR) != 3000)
+			findConferencesFilterByDate = this.conferenceRepository.findConferencesFilterByDate(minDate, maxDate);
+		if (maxFee != 0.0)
+			findConferencesFilterByMaxFee = this.conferenceRepository.findConferencesFilterByMaxFee(maxFee);
+		if (categoryId != 0)
+			findConferencesFilterByCategoryId = this.conferenceRepository.findConferencesFilterByCategoryId(categoryId);
+
+		result.addAll(findConferencesFilterByKeyWord);
+		result.addAll(findConferencesFilterByDate);
+		result.addAll(findConferencesFilterByMaxFee);
+		result.addAll(findConferencesFilterByCategoryId);
+
+		if (!keyWord.isEmpty())
+			result.retainAll(findConferencesFilterByKeyWord);
+		if (cal1.get(Calendar.YEAR) != 1000 || cal2.get(Calendar.YEAR) != 3000)
+			result.retainAll(findConferencesFilterByDate);
+		if (maxFee != 0.0)
+			result.retainAll(findConferencesFilterByMaxFee);
+		if (categoryId != 0)
+			result.retainAll(findConferencesFilterByCategoryId);
+
+		return result;
+	}
+
+	public Collection<Conference> findConferencesByCategory(final Category category) {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findConferencesByCategoryId(category.getId());
+		Assert.notNull(result);
 
 		return result;
 	}

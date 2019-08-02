@@ -20,75 +20,95 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="${actionURL}" modelAttribute="finder">
-
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="conferences" />
 
 	<acme:textbox code="finder.keyWord" path="keyWord" placeholder="Lorem Ipsum" />
 	<br />
-	
-	<acme:textbox code="finder.deadline" path="deadline" placeholder="dd/MM/yyyy" />
-	<br />
-	
-	<acme:textbox code="finder.minSalary" path="minSalary" placeholder="NNNNNN.NN" type="number" min="0" step="0.01" />
-	<br />
 
-	<acme:textbox code="finder.maxDeadline" path="maxDeadline" placeholder="dd/MM/yyyy" />
+	<acme:textbox code="finder.minDate" path="minDate" placeholder="dd/MM/yyyy" />
+	<br />
+	
+	<acme:textbox code="finder.maxDate" path="maxDate" placeholder="dd/MM/yyyy" />
+	<br />
+	
+	<acme:textbox code="finder.maxFee" path="maxFee" placeholder="NNN.NN" type="number" min="0" step="0.01" />
+	<br />
+	
+	<jstl:if test="${language eq 'en'}">
+		<jstl:set var="titleCategory" value="titleEnglish" />
+	</jstl:if>
+	<jstl:if test="${language eq 'es'}">
+		<jstl:set var="titleCategory" value="titleSpanish" />
+	</jstl:if>
+	
+	<acme:selectOptional items="${categories}" itemLabel="${titleCategory}" code="finder.category" path="category"/>
 	<br />
 	
 	<acme:submit name="save" code="button.search" />
-	<acme:button url="finder/author/clear.do" code="button.clear" />
 
 </form:form>
+<br />
 
+<display:table pagesize="5" class="displaytag" name="conferences" requestURI="${actionURL}" id="row">
 
-<display:table pagesize="5" class="displaytag" name="positions" requestURI="${requestURI}" id="row">
-
-	<spring:message code="position.ticker" var="ticker" />
-	<display:column property="ticker" title="${ticker}" />
-	
-	<spring:message code="position.title" var="title" />
+	<spring:message code="conference.title" var="title" />
 	<display:column property="title" title="${title}" />
 	
-	<spring:message code="position.description" var="description" />
-	<display:column property="description" title="${description}" />
+	<spring:message code="conference.acronym" var="acronym" />
+	<display:column property="acronym" title="${acronym}" />
 	
-	<spring:message code="position.deadline" var="deadline" />
-	<display:column title="${deadline}">
-			<fmt:formatDate var="format" value="${row.deadline}" pattern="dd/MM/YYYY" />
-			<jstl:out value="${format}" />
+	<spring:message code="conference.venue" var="venue" />
+	<display:column property="venue" title="${venue}" />
+	
+	<spring:message code="conference.submissionDeadline" var="submissionDeadline" />
+	<display:column title="${submissionDeadline}">
+		<fmt:formatDate var="format" value="${row.submissionDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
 	</display:column>
 	
-	<spring:message code="position.skills" var="skills" />
-	<display:column title="${skills}" >
-	<ul>
-	<jstl:forEach items="${row.skills}" var="skill">
-		<li><jstl:out value="${skill}"/></li>
-	</jstl:forEach>
-	</ul>
+	<spring:message code="conference.notificationDeadline" var="notificationDeadline" />
+	<display:column title="${notificationDeadline}">
+		<fmt:formatDate var="format" value="${row.notificationDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
 	</display:column>
 	
-	<spring:message code="position.technologies" var="technologies" />
-	<display:column title="${technologies}" >
-	<ul>
-	<jstl:forEach items="${row.technologies}" var="technology">
-		<li><jstl:out value="${technology}"/></li>
-	</jstl:forEach>
-	</ul>
+	<spring:message code="conference.cameraReadyDeadline" var="cameraReadyDeadline" />
+	<display:column title="${cameraReadyDeadline}">
+		<fmt:formatDate var="format" value="${row.cameraReadyDeadline}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
 	</display:column>
 	
-	<spring:message code="position.salary" var="salary" />
-	<display:column property="salary" title="${salary}" />
-	
-	<spring:message code="position.profile" var="profile" />
-	<display:column property="profile" title="${profile}" />
-	
-	<spring:message code="position.audits" var="audits" />
-	<display:column title="${audits}">
-		<acme:button url="audit/listGeneric.do?positionId=${row.id}" code="button.show" />
+	<spring:message code="conference.startDate" var="startDate" />
+	<display:column title="${startDate}">
+		<fmt:formatDate var="format" value="${row.startDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
 	</display:column>
 	
-	<spring:message code="position.sponsorship" var="sponsorship" />
+	<spring:message code="conference.endDate" var="endDate" />
+	<display:column title="${endDate}">
+		<fmt:formatDate var="format" value="${row.endDate}" pattern="dd/MM/YYYY" />
+		<jstl:out value="${format}" />
+	</display:column>
+	
+	<spring:message code="conference.summary" var="summary" />
+	<display:column property="summary" title="${summary}" />
+	
+	<spring:message code="conference.fee" var="fee" />
+	<display:column property="fee" title="${fee}" />
+	
+	<spring:message code="conference.category" var="category" />
+	<display:column title="${category}">
+		<jstl:if test="${language eq 'en'}">
+			<jstl:out value="${row.category.titleEnglish}" />
+		</jstl:if>
+		<jstl:if test="${language eq 'es'}">
+			<jstl:out value="${row.category.titleSpanish}" />
+		</jstl:if>
+	</display:column>
+	
+	<spring:message code="conference.sponsorship" var="sponsorship" />
 	<display:column title="${sponsorship}" >
 		<jstl:if test="${randomSponsorship.containsKey(row)}">
 			<jstl:set var="banner" value="${randomSponsorship.get(row).banner}"/>

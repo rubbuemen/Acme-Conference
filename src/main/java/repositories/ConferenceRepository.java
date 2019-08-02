@@ -11,6 +11,7 @@
 package repositories;
 
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -56,5 +57,23 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 
 	@Query("select c from Conference c join c.activities a where a.id = ?1")
 	Conference findConferenceByActivityId(int activityId);
+
+	@Query("select c from Conference c where c.isFinalMode = 1")
+	Collection<Conference> findConferencesFinalMode();
+
+	@Query("select c from Conference c where c.isFinalMode = 1 and (c.title like %?1% or c.acronym like %?1% or c.venue like %?1% or c.summary like %?1%)")
+	Collection<Conference> findConferencesFilterByKeyWord(String keyWord);
+
+	@Query("select c from Conference c where c.isFinalMode = 1 and c.startDate >= ?1 and c.endDate <= ?2")
+	Collection<Conference> findConferencesFilterByDate(Date minDate, Date maxDate);
+
+	@Query("select c from Conference c where c.isFinalMode = 1 and c.fee <= ?1")
+	Collection<Conference> findConferencesFilterByMaxFee(Double maxFee);
+
+	@Query("select distinct c from Conference c where c.isFinalMode = 1 and c.category.id = ?1")
+	Collection<Conference> findConferencesFilterByCategoryId(int categoryId);
+
+	@Query("select distinct c from Conference c where c.category.id = ?1")
+	Collection<Conference> findConferencesByCategoryId(int categoryId);
 
 }

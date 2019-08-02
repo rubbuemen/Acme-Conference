@@ -1405,7 +1405,7 @@
 	<bean id="category1" class="domain.Category">
 		<property name="titleEnglish" value="CONFERENCE" />
 		<property name="titleSpanish" value="CONFERENCIA" />
-		<property name="childsCategory">
+		<property name="childCategories">
 			<list>
 				<ref bean="category2" />
 			</list>
@@ -1415,7 +1415,7 @@
 		<property name="titleEnglish" value="Computer Science" />
 		<property name="titleSpanish" value="Ciencias de la Computación" />
 		<property name="parentCategory" ref="category1" />
-		<property name="childsCategory">
+		<property name="childCategories">
 			<list>
 				<ref bean="category3" />
 				<ref bean="category11" />
@@ -1427,7 +1427,7 @@
 		<property name="titleEnglish" value="Artificial Intelligence" />
 		<property name="titleSpanish" value="Inteligencia Artificial" />
 		<property name="parentCategory" ref="category2" />
-		<property name="childsCategory">
+		<property name="childCategories">
 			<list>
 				<ref bean="category4" />
 				<ref bean="category5" />
@@ -1454,7 +1454,7 @@
 		<property name="titleEnglish" value="Software Engineering" />
 		<property name="titleSpanish" value="Ingeniería del Software" />
 		<property name="parentCategory" ref="category2" />
-		<property name="childsCategory">
+		<property name="childCategories">
 			<list>
 				<ref bean="category8" />
 				<ref bean="category9" />
@@ -1487,7 +1487,7 @@
 		<property name="titleEnglish" value="Physics" />
 		<property name="titleSpanish" value="Física" />
 		<property name="parentCategory" ref="category2" />
-		<property name="childsCategory">
+		<property name="childCategories">
 			<list>
 				<ref bean="category13" />
 				<ref bean="category14" />
@@ -1514,7 +1514,7 @@
 		<property name="titleEnglish" value="Biology" />
 		<property name="titleSpanish" value="Biología" />
 		<property name="parentCategory" ref="category2" />
-		<property name="childsCategory">
+		<property name="childCategories">
 			<list>
 				<ref bean="category17" />
 				<ref bean="category18" />

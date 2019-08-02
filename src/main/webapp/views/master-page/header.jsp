@@ -41,6 +41,7 @@
 					<li class="arrow"></li>
 					<li><a href="submission/author/list.do"><spring:message code="master.page.submissions" /></a></li>
 					<li><a href="registration/author/list.do"><spring:message code="master.page.registrations" /></a></li>
+					<li><a href="finder/author/edit.do"><spring:message code="master.page.finder" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -75,6 +76,7 @@
 					<li><a href="conference/administrator/list.do"><spring:message code="master.page.conferences" /></a></li>
 					<li><a href="submission/administrator/list.do"><spring:message code="master.page.submissions" /></a></li>
 					<li><a href="topic/administrator/list.do"><spring:message code="master.page.topics" /></a></li>
+					<li><a href="category/administrator/list.do"><spring:message code="master.page.categories" /></a></li>	
 					<li><a href="dashboard/administrator/show.do"><spring:message code="master.page.dashboard" /></a></li>	
 					<li><a href="systemConfiguration/administrator/show.do"><spring:message code="master.page.systemConfiguration" /></a></li>	
 				</ul>

@@ -19,21 +19,68 @@
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table pagesize="5" class="displaytag" name="entidads" requestURI="${requestURI}" id="row">
+<jstl:if test="${language eq 'en'}">
+	<jstl:set var="titleCategory" value="${parentCategory.titleEnglish}" />
+</jstl:if>
+<jstl:if test="${language eq 'es'}">
+	<jstl:set var="titleCategory" value="${parentCategory.titleSpanish}" />
+</jstl:if>
+	
+<jstl:if test="${parentCategory != null}">
+	<h3><jstl:out value="${titleCategory}" /></h3>
+</jstl:if>
+	
 
-	<spring:message code="entidad.atributo" var="atributo" />
-	<display:column property="atributo" title="${atributo}" />
+<display:table class="displaytag" name="categories" requestURI="${requestURI}" id="row">
+
+	<spring:message code="category.titleEnglish" var="titleEnglish" />
+	<display:column property="titleEnglish" title="${titleEnglish}" />
 	
-	<spring:message code="entidad.edit" var="editH" />
+	<spring:message code="category.titleSpanish" var="titleSpanish" />
+	<display:column property="titleSpanish" title="${titleSpanish}" />
+	
+	<spring:message code="category.showCategories" var="showCategories" />
+	<display:column title="${showCategories}">
+	<jstl:if test="${not empty row.childCategories}">
+		<acme:button url="category/administrator/list.do?parentCategoryId=${row.id}" code="button.show" />
+	</jstl:if>	
+	</display:column>
+	
+	<spring:message code="category.edit" var="editH" />
 	<display:column title="${editH}" >
-		<acme:button url="entidad/actor/edit.do?entidadId=${row.id}" code="button.edit" />
+	<jstl:choose>
+		<jstl:when test="${row.parentCategory == null}">
+			<spring:message code="category.error.rootCategory" />
+		</jstl:when>
+		<jstl:otherwise>
+			<acme:button url="category/administrator/edit.do?categoryId=${row.id}" code="button.edit" />
+		</jstl:otherwise>
+	</jstl:choose>
 	</display:column>
 	
-	<spring:message code="entidad.delete" var="deleteH" />
-	<display:column title="${deleteH}" >
-		<acme:button url="entidad/actor/delete.do?entidadId=${row.id}" code="button.delete" />	
+	<spring:message code="category.delete" var="deleteH" />
+		<display:column title="${deleteH}" >
+	<jstl:choose>
+		<jstl:when test="${row.parentCategory == null}">
+			<spring:message code="category.error.rootCategory" />
+		</jstl:when>
+		<jstl:otherwise>
+			<acme:button url="category/administrator/delete.do?categoryId=${row.id}" code="button.delete" />	
+		</jstl:otherwise>
+	</jstl:choose>
 	</display:column>
-			
 </display:table>
 
-<acme:button url="entidad/actor/create.do" code="button.create" />
+<acme:button url="category/administrator/create.do" code="button.create" />
+<jstl:if test="${parentCategory != null}">
+	<jstl:choose>
+		<jstl:when test="${parentCategory.parentCategory == null}">
+			<acme:button url="category/administrator/list.do" code="button.back" />
+		</jstl:when>
+		<jstl:otherwise>
+			<acme:button url="category/administrator/list.do?parentCategoryId=${parentCategory.parentCategory.id}" code="button.back" />
+		</jstl:otherwise>
+	</jstl:choose>
+</jstl:if>
+	
+			
