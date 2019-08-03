@@ -37,6 +37,7 @@
 		<security:intercept-url pattern="/security/loginFailure.do"	access="permitAll" />
 		<security:intercept-url pattern="/welcome/index.do"	access="permitAll" />
 		<security:intercept-url pattern="/conference/listGeneric.do" access="permitAll"/>
+		<security:intercept-url pattern="/conference/download.do" access="permitAll"/>
 		<security:intercept-url pattern="/activity/listGeneric.do" access="permitAll"/>
 		<security:intercept-url pattern="/section/listGeneric.do" access="permitAll"/>
 		<security:intercept-url pattern="/comment/**" access="permitAll"/>

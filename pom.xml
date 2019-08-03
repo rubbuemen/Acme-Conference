@@ -321,6 +321,14 @@
 			<artifactId>validator-collection</artifactId>
 			<version>2.2.0</version>
 		</dependency>
+		
+		<!-- IText para descargar en PDF -->
+		<dependency>
+		    <groupId>com.itextpdf</groupId>
+		    <artifactId>itextpdf</artifactId>
+		    <version>5.5.13.1</version>
+		</dependency>
+		
 
 	</dependencies>
 

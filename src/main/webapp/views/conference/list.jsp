@@ -145,6 +145,18 @@
 			</jstl:choose>
 		</jstl:if>
 	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row.cameraReadyDeadline < date}">
+				<acme:button url="conference/administrator/download.do?conferenceId=${row.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 </display:table>
 
 <acme:button url="conference/administrator/create.do" code="button.create" />
@@ -278,6 +290,18 @@
 			</jstl:choose>
 		</jstl:if>
 	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row1.cameraReadyDeadline < date}">
+				<acme:button url="conference/administrator/download.do?conferenceId=${row1.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 </display:table>
 
 </details><br/>
@@ -409,6 +433,18 @@
 				</jstl:otherwise>
 			</jstl:choose>
 		</jstl:if>
+	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row2.cameraReadyDeadline < date}">
+				<acme:button url="conference/administrator/download.do?conferenceId=${row2.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 </display:table>
 
@@ -542,6 +578,18 @@
 			</jstl:choose>
 		</jstl:if>
 	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row3.cameraReadyDeadline < date}">
+				<acme:button url="conference/administrator/download.do?conferenceId=${row3.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 </display:table>
 
 </details><br/>
@@ -673,6 +721,18 @@
 				</jstl:otherwise>
 			</jstl:choose>
 		</jstl:if>
+	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row4.cameraReadyDeadline < date}">
+				<acme:button url="conference/administrator/download.do?conferenceId=${row4.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 </display:table>
 

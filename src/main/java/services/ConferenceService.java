@@ -1,6 +1,8 @@
 
 package services;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
@@ -12,6 +14,19 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.ConferenceRepository;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Font.FontFamily;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+
 import domain.Activity;
 import domain.Actor;
 import domain.Category;
@@ -395,6 +410,146 @@ public class ConferenceService {
 		Assert.notNull(result);
 
 		return result;
+	}
+
+	public void downloadPDF(final Document document, final Conference conference) throws DocumentException, IOException {
+		final Font normalFont = new Font(FontFamily.COURIER, 10, Font.NORMAL, BaseColor.BLACK);
+		final Font underlineFont = new Font(FontFamily.COURIER, 11, Font.UNDERLINE, BaseColor.BLACK);
+		final Font boldFont = new Font(FontFamily.COURIER, 11, Font.BOLD, BaseColor.BLACK);
+		final Font header1Font = new Font(FontFamily.COURIER, 18, Font.BOLD, BaseColor.BLACK);
+		final Font header2Font = new Font(FontFamily.COURIER, 16, Font.BOLD, BaseColor.BLACK);
+
+		document.open();
+		final Paragraph content = new Paragraph();
+		Chunk attribute, contentAttribute;
+
+		//Información de la conferencia
+		content.add(new Paragraph("Conference Information:", header1Font));
+		content.add(new Paragraph(" "));
+		final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		attribute = new Chunk("Title", underlineFont);
+		contentAttribute = new Chunk(": " + conference.getTitle(), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("Acronym", underlineFont);
+		contentAttribute = new Chunk(": " + conference.getAcronym(), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("Submission deadline", underlineFont);
+		contentAttribute = new Chunk(": " + format.format(conference.getSubmissionDeadline()), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("Notification deadline", underlineFont);
+		contentAttribute = new Chunk(": " + format.format(conference.getNotificationDeadline()), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("Camera-ready deadline", underlineFont);
+		contentAttribute = new Chunk(": " + format.format(conference.getCameraReadyDeadline()), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("Start date", underlineFont);
+		contentAttribute = new Chunk(": " + format.format(conference.getStartDate()), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("End date", underlineFont);
+		contentAttribute = new Chunk(": " + format.format(conference.getEndDate()), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("Summary", underlineFont);
+		contentAttribute = new Chunk(": " + conference.getSummary(), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+		attribute = new Chunk("Fee", underlineFont);
+		contentAttribute = new Chunk(": " + conference.getFee(), normalFont);
+		content.add(attribute);
+		content.add(contentAttribute);
+		content.add(new Paragraph(" "));
+
+		//Información de cada camera-ready version de submissions aceptadas
+		content.add(new Paragraph("Camera-ready version papers:", header2Font));
+		content.add(new Paragraph(" "));
+
+		final Collection<Submission> submissions = this.submissionService.findSubmissionsAcceptedByConferenceId(conference.getId());
+		final PdfPTable table = new PdfPTable(5);
+		table.setHorizontalAlignment(Element.ALIGN_LEFT);
+		table.setWidthPercentage(100);
+
+		final BaseColor colorTh = new BaseColor(143, 195, 255);
+		final BaseColor colorTd = new BaseColor(214, 233, 255);
+
+		final PdfPCell th1 = new PdfPCell(new Phrase("Submission ticker", boldFont));
+		final PdfPCell th2 = new PdfPCell(new Phrase("Title", boldFont));
+		final PdfPCell th3 = new PdfPCell(new Phrase("Alias of the authors", boldFont));
+		final PdfPCell th4 = new PdfPCell(new Phrase("Summary", boldFont));
+		final PdfPCell th5 = new PdfPCell(new Phrase("Document", boldFont));
+		th1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		th2.setHorizontalAlignment(Element.ALIGN_CENTER);
+		th3.setHorizontalAlignment(Element.ALIGN_CENTER);
+		th4.setHorizontalAlignment(Element.ALIGN_CENTER);
+		th5.setHorizontalAlignment(Element.ALIGN_CENTER);
+		th1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		th2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		th3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		th4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		th5.setVerticalAlignment(Element.ALIGN_MIDDLE);
+		th1.setBackgroundColor(colorTh);
+		th2.setBackgroundColor(colorTh);
+		th3.setBackgroundColor(colorTh);
+		th4.setBackgroundColor(colorTh);
+		th5.setBackgroundColor(colorTh);
+		table.addCell(th1);
+		table.addCell(th2);
+		table.addCell(th3);
+		table.addCell(th4);
+		table.addCell(th5);
+		table.setHeaderRows(1);
+
+		int cont = 0;
+		for (final Submission s : submissions)
+			if (s.getPaper().getIsCameraReadyVersion()) {
+				cont++;
+				final PdfPCell td1 = new PdfPCell(new Phrase(s.getTicker(), normalFont));
+				final PdfPCell td2 = new PdfPCell(new Phrase(s.getPaper().getTitle(), normalFont));
+				final PdfPCell td3 = new PdfPCell(new Phrase(s.getPaper().getAliasAuthors().toString(), normalFont));
+				final PdfPCell td4 = new PdfPCell(new Phrase(s.getPaper().getSummary(), normalFont));
+				final PdfPCell td5 = new PdfPCell(new Phrase(s.getPaper().getDocument(), normalFont));
+				td1.setHorizontalAlignment(Element.ALIGN_CENTER);
+				td2.setHorizontalAlignment(Element.ALIGN_CENTER);
+				td3.setHorizontalAlignment(Element.ALIGN_CENTER);
+				td4.setHorizontalAlignment(Element.ALIGN_CENTER);
+				td5.setHorizontalAlignment(Element.ALIGN_CENTER);
+				td1.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				td2.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				td3.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				td4.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				td5.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				td1.setBackgroundColor(colorTd);
+				td2.setBackgroundColor(colorTd);
+				td3.setBackgroundColor(colorTd);
+				td4.setBackgroundColor(colorTd);
+				td5.setBackgroundColor(colorTd);
+				table.addCell(td1);
+				table.addCell(td2);
+				table.addCell(td3);
+				table.addCell(td4);
+				table.addCell(td5);
+			}
+
+		if (cont == 0)
+			content.add(new Paragraph("There are no camera-ready versions uploaded in any of the accepted submissions from this conference.", normalFont));
+
+		content.add(table);
+
+		document.add(content);
+		document.close();
 	}
 
 }

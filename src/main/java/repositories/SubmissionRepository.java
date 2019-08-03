@@ -38,4 +38,7 @@ public interface SubmissionRepository extends JpaRepository<Submission, Integer>
 
 	@Query("select s from Submission s join s.conference c where (s.status like 'ACCEPTED' or s.status like 'REJECTED') and s.isNotified = 0 and c.notificationDeadline >= CURRENT_DATE")
 	Collection<Submission> findSubmissionsAcceptedOrRejectedNotNotifiedNoDeadline();
+
+	@Query("select s from Submission s join s.conference c where s.status like 'ACCEPTED' and c.id = ?1")
+	Collection<Submission> findSubmissionsAcceptedByConferenceId(int conferenceId);
 }

@@ -869,7 +869,7 @@
 	<bean id="submission3" class="domain.Submission">
 		<property name="ticker" value="AAB-5B2J" />
 		<property name="moment" value="2019/01/10 10:36" />
-		<property name="status" value="REJECTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="isAssigned" value="true" />
 		<property name="isNotified" value="true" />
 		<property name="paper" ref="paper3" />
@@ -885,7 +885,7 @@
 	<bean id="submission4" class="domain.Submission">
 		<property name="ticker" value="SSC-UKSB" />
 		<property name="moment" value="2019/01/03 15:15" />
-		<property name="status" value="REJECTED" />
+		<property name="status" value="ACCEPTED" />
 		<property name="isAssigned" value="true" />
 		<property name="isNotified" value="true" />
 		<property name="paper" ref="paper4" />
@@ -973,12 +973,12 @@
 	</bean>
 	<bean id="report3" class="domain.Report">
 		<property name="originalityScore" value="5" />
-		<property name="qualityScore" value="2" />
-		<property name="readabilityScore" value="1" />
-		<property name="status" value="REJECT" />
+		<property name="qualityScore" value="6" />
+		<property name="readabilityScore" value="8" />
+		<property name="status" value="ACCEPT" />
 		<property name="comments">
 			<list>
-				<value>Bad</value>
+				<value>Nice</value>
 			</list>
 		</property>
 		<property name="submission" ref="submission3" />
@@ -1008,13 +1008,13 @@
 		<property name="submission" ref="submission2" />
 	</bean>
 	<bean id="report6" class="domain.Report">
-		<property name="originalityScore" value="2" />
-		<property name="qualityScore" value="4" />
-		<property name="readabilityScore" value="3" />
-		<property name="status" value="REJECT" />
+		<property name="originalityScore" value="4" />
+		<property name="qualityScore" value="6" />
+		<property name="readabilityScore" value="5" />
+		<property name="status" value="BORDER-LINE" />
 		<property name="comments">
 			<list>
-				<value>Too bad</value>
+				<value>I'm not clear on my decision</value>
 			</list>
 		</property>
 		<property name="submission" ref="submission3" />
@@ -1032,10 +1032,10 @@
 		<property name="submission" ref="submission2" />
 	</bean>
 	<bean id="report8" class="domain.Report">
-		<property name="originalityScore" value="2" />
-		<property name="qualityScore" value="4" />
-		<property name="readabilityScore" value="4" />
-		<property name="status" value="REJECT" />
+		<property name="originalityScore" value="6" />
+		<property name="qualityScore" value="5" />
+		<property name="readabilityScore" value="5" />
+		<property name="status" value="ACCEPT" />
 		<property name="comments">
 			<list>
 				<value>Meh</value>
@@ -1254,7 +1254,7 @@
 		</property>
 		<property name="summary" value="Summary Paper 3" />
 		<property name="document" value="http://www.documentPaper3.com" />
-		<property name="isCameraReadyVersion" value="false" />
+		<property name="isCameraReadyVersion" value="true" />
 	</bean>
 	<bean id="paper4" class="domain.Paper">
 		<property name="title" value="Paper4" />
@@ -1265,7 +1265,7 @@
 		</property>
 		<property name="summary" value="Summary Paper 4" />
 		<property name="document" value="http://www.documentPaper4.com" />
-		<property name="isCameraReadyVersion" value="false" />
+		<property name="isCameraReadyVersion" value="true" />
 	</bean>
 	<bean id="paper5" class="domain.Paper">
 		<property name="title" value="Paper5" />

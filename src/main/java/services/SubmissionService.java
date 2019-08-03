@@ -339,4 +339,13 @@ public class SubmissionService {
 		return result;
 	}
 
+	public Collection<Submission> findSubmissionsAcceptedByConferenceId(final int conferenceId) {
+		Collection<Submission> result;
+
+		result = this.submissionRepository.findSubmissionsAcceptedByConferenceId(conferenceId);
+		Assert.notNull(result);
+
+		return result;
+	}
+
 }

@@ -19,6 +19,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<jsp:useBean id="date" class="java.util.Date" />
 
 <form name="singleKeyWord" id="singleKeyWord" action="conference/listGeneric.do" method="POST" >
 	<spring:message code="conference.searchBySingleKeyWord" />: 
@@ -105,6 +106,18 @@
 	<display:column title="${comments}" >
 		<acme:button url="comment/list.do?commentableId=${row.id}" code="button.show" />
 	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row.cameraReadyDeadline < date}">
+				<acme:button url="conference/download.do?conferenceId=${row.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 </display:table>
 <br/><br/>
 
@@ -183,6 +196,18 @@
 	<spring:message code="conference.comments" var="comments" />
 	<display:column title="${comments}" >
 		<acme:button url="comment/list.do?commentableId=${row1.id}" code="button.show" />
+	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row1.cameraReadyDeadline < date}">
+				<acme:button url="conference/download.do?conferenceId=${row1.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 </display:table>
 
@@ -264,6 +289,18 @@
 	<display:column title="${comments}" >
 		<acme:button url="comment/list.do?commentableId=${row2.id}" code="button.show" />
 	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row2.cameraReadyDeadline < date}">
+				<acme:button url="conference/download.do?conferenceId=${row2.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
+	</display:column>
 </display:table>
 
 </details><br/>
@@ -343,6 +380,18 @@
 	<spring:message code="conference.comments" var="comments" />
 	<display:column title="${comments}" >
 		<acme:button url="comment/list.do?commentableId=${row3.id}" code="button.show" />
+	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row3.cameraReadyDeadline < date}">
+				<acme:button url="conference/download.do?conferenceId=${row3.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 </display:table>
 
