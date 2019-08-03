@@ -21,4 +21,5 @@ public interface SystemConfigurationRepository extends JpaRepository<SystemConfi
 
 	@Query("select sc from SystemConfiguration sc")
 	SystemConfiguration getConfiguration();
+
 }

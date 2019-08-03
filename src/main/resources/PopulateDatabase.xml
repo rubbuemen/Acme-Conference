@@ -1223,14 +1223,14 @@
 	
 	<!-- Paper -->
 	<bean id="paper1" class="domain.Paper">
-		<property name="title" value="Paper1" />
+		<property name="title" value="Paper about the science and data" />
 		<property name="aliasAuthors">
 			<list>
 				<value>Antonio</value>
 				<value>Pepe</value>
 			</list>
 		</property>
-		<property name="summary" value="Summary Paper 1" />
+		<property name="summary" value="We'll talk about the advance in science." />
 		<property name="document" value="http://www.documentPaper1.com" />
 		<property name="isCameraReadyVersion" value="true" />
 	</bean>
@@ -1241,7 +1241,7 @@
 				<value>Victor</value>
 			</list>
 		</property>
-		<property name="summary" value="Summary Paper 2" />
+		<property name="summary" value="Data is important" />
 		<property name="document" value="http://www.documentPaper2.com" />
 		<property name="isCameraReadyVersion" value="true" />
 	</bean>
@@ -1617,6 +1617,66 @@
 				<value>like</value>
 				<value>likely</value>
 				<value>may</value>
+				<value>me</value>
+				<value>might</value>
+				<value>most</value>
+				<value>must</value>
+				<value>my</value>
+				<value>neither</value>
+				<value>no</value>
+				<value>nor</value>
+				<value>not</value>
+				<value>of</value>
+				<value>off</value>
+				<value>often</value>
+				<value>on</value>
+				<value>only</value>
+				<value>or</value>
+				<value>other</value>
+				<value>our</value>
+				<value>own</value>
+				<value>rather</value>
+				<value>said</value>
+				<value>say</value>
+				<value>says</value>
+				<value>she</value>
+				<value>should</value>
+				<value>since</value>
+				<value>so</value>
+				<value>some</value>
+				<value>than</value>
+				<value>that</value>
+				<value>the</value>
+				<value>their</value>
+				<value>them</value>
+				<value>then</value>
+				<value>there</value>
+				<value>these</value>
+				<value>they</value>
+				<value>this</value>
+				<value>tis</value>
+				<value>to</value>
+				<value>too</value>
+				<value>twas</value>
+				<value>us</value>
+				<value>wants</value>
+				<value>was</value>
+				<value>we</value>
+				<value>were</value>
+				<value>what</value>
+				<value>when</value>
+				<value>where</value>
+				<value>which</value>
+				<value>while</value>
+				<value>who</value>
+				<value>whom</value>
+				<value>why</value>
+				<value>will</value>
+				<value>with</value>
+				<value>would</value>
+				<value>yet</value>
+				<value>you</value>
+				<value>your</value>
 				<value>a</value>
 				<value>acá</value>
 				<value>ahí</value>
@@ -1680,6 +1740,272 @@
 				<value>cuantos</value>
 				<value>cuantas</value>
 				<value>de</value>
+				<value>dejar</value>
+				<value>del</value>
+				<value>demás</value>
+				<value>demasiada</value>
+				<value>demasiado</value>
+				<value>demasiadas</value>
+				<value>demasidos</value>
+				<value>dentro</value>
+				<value>desde</value>
+				<value>donde</value>
+				<value>dos</value>
+				<value>el</value>
+				<value>él</value>
+				<value>ella</value>
+				<value>ello</value>
+				<value>ellos</value>
+				<value>ellas</value>
+				<value>empleáis</value>
+				<value>emplean</value>
+				<value>emplear</value>
+				<value>empleas</value>
+				<value>empleo</value>
+				<value>en</value>
+				<value>encima</value>
+				<value>entonces</value>
+				<value>entre</value>
+				<value>era</value>
+				<value>eras</value>
+				<value>eramos</value>
+				<value>eran</value>
+				<value>eres</value>
+				<value>es</value>
+				<value>esa</value>
+				<value>ese</value>
+				<value>eso</value>
+				<value>esas</value>
+				<value>esos</value>
+				<value>esta</value>
+				<value>estas</value>
+				<value>estaba</value>
+				<value>estado</value>
+				<value>estáis</value>
+				<value>estamos</value>
+				<value>están</value>
+				<value>estar</value>
+				<value>este</value>
+				<value>esto</value>
+				<value>estos</value>
+				<value>estoy</value>
+				<value>etc</value>
+				<value>fin</value>
+				<value>fue</value>
+				<value>fueron</value>
+				<value>fui</value>
+				<value>fuimos</value>
+				<value>gueno</value>
+				<value>ha</value>
+				<value>hace</value>
+				<value>haces</value>
+				<value>hacéis</value>
+				<value>hacemos</value>
+				<value>hacen</value>
+				<value>hacer</value>
+				<value>hacia</value>
+				<value>hago</value>
+				<value>hasta</value>
+				<value>incluso</value>
+				<value>intenta</value>
+				<value>intentas</value>
+				<value>intentáis</value>
+				<value>intentamos</value>
+				<value>intentan</value>
+				<value>intentar</value>
+				<value>intento</value>
+				<value>ir</value>
+				<value>jamás</value>
+				<value>junto</value>
+				<value>juntos</value>
+				<value>la</value>
+				<value>lo</value>
+				<value>las</value>
+				<value>los</value>
+				<value>largo</value>
+				<value>más</value>
+				<value>me</value>
+				<value>menos</value>
+				<value>mi</value>
+				<value>mis</value>
+				<value>mía</value>
+				<value>mías</value>
+				<value>mientras</value>
+				<value>mío</value>
+				<value>míos</value>
+				<value>misma</value>
+				<value>mismo</value>
+				<value>mismas</value>
+				<value>mismos</value>
+				<value>modo</value>
+				<value>mucha</value>
+				<value>muchas</value>
+				<value>muchísima</value>
+				<value>muchísimo</value>
+				<value>muchísimas</value>
+				<value>muchísimos</value>
+				<value>mucho</value>
+				<value>muchos</value>
+				<value>muy</value>
+				<value>nada</value>
+				<value>ni</value>
+				<value>ningún</value>
+				<value>niguna</value>
+				<value>ninguno</value>
+				<value>ningunas</value>
+				<value>ningunos</value>
+				<value>no</value>
+				<value>nos</value>
+				<value>nosotras</value>
+				<value>nosotros</value>
+				<value>nuestra</value>
+				<value>nuestro</value>
+				<value>nuestras</value>
+				<value>nuestros</value>
+				<value>nunca</value>
+				<value>os</value>
+				<value>otra</value>
+				<value>otro</value>
+				<value>otras</value>
+				<value>otros</value>
+				<value>para</value>
+				<value>parecer</value>
+				<value>pero</value>
+				<value>poca</value>
+				<value>poco</value>
+				<value>pocas</value>
+				<value>pocos</value>
+				<value>podéis</value>
+				<value>podemos</value>
+				<value>poder</value>
+				<value>podría</value>
+				<value>podrías</value>
+				<value>podríais</value>
+				<value>podríamos</value>
+				<value>podrían</value>
+				<value>por</value>
+				<value>por qué</value>
+				<value>porque</value>
+				<value>primero</value>
+				<value>puede</value>
+				<value>pueden</value>
+				<value>puedo</value>
+				<value>pues</value>
+				<value>que</value>
+				<value>qué</value>
+				<value>querer</value>
+				<value>quién</value>
+				<value>quienes</value>
+				<value>quienesquiera</value>
+				<value>quienquiera</value>
+				<value>quizá</value>
+				<value>quizás</value>
+				<value>sabe</value>
+				<value>sabes</value>
+				<value>saben</value>
+				<value>sabéis</value>
+				<value>sabemos</value>
+				<value>saber</value>
+				<value>se</value>
+				<value>según</value>
+				<value>ser</value>
+				<value>si</value>
+				<value>sí</value>
+				<value>siempre</value>
+				<value>siendo</value>
+				<value>sin</value>
+				<value>sino</value>
+				<value>so</value>
+				<value>sobre</value>
+				<value>sois</value>
+				<value>solamente</value>
+				<value>solo</value>
+				<value>sólo</value>
+				<value>somos</value>
+				<value>soy</value>
+				<value>sr</value>
+				<value>sra</value>
+				<value>sres</value>
+				<value>sta</value>
+				<value>su</value>
+				<value>sus</value>
+				<value>suya</value>
+				<value>suyo</value>
+				<value>suyas</value>
+				<value>suyos</value>
+				<value>tal</value>
+				<value>tales</value>
+				<value>también</value>
+				<value>tampoco</value>
+				<value>tan</value>
+				<value>tanta</value>
+				<value>tanto</value>
+				<value>tantas</value>
+				<value>tantos</value>
+				<value>te</value>
+				<value>tenéis</value>
+				<value>tenemos</value>
+				<value>tener</value>
+				<value>tengo</value>
+				<value>ti</value>
+				<value>tiempo</value>
+				<value>tiene</value>
+				<value>tienen</value>
+				<value>toda</value>
+				<value>todo</value>
+				<value>todas</value>
+				<value>todos</value>
+				<value>tomar</value>
+				<value>trabaja</value>
+				<value>trabajo</value>
+				<value>trabajáis</value>
+				<value>trabajamos</value>
+				<value>trabajan</value>
+				<value>trabajar</value>
+				<value>trabajas</value>
+				<value>tras</value>
+				<value>tú</value>
+				<value>tu</value>
+				<value>tus</value>
+				<value>tuya</value>
+				<value>tuyo</value>
+				<value>tuyas</value>
+				<value>tuyos</value>
+				<value>último</value>
+				<value>ultimo</value>
+				<value>un</value>
+				<value>una</value>
+				<value>uno</value>
+				<value>unas</value>
+				<value>unos</value>
+				<value>usa</value>
+				<value>usas</value>
+				<value>usáis</value>
+				<value>usamos</value>
+				<value>usan</value>
+				<value>usar</value>
+				<value>uso</value>
+				<value>usted</value>
+				<value>ustedes</value>
+				<value>va</value>
+				<value>van</value>
+				<value>vais</value>
+				<value>valor</value>
+				<value>vamos</value>
+				<value>varias</value>
+				<value>varios</value>
+				<value>vaya</value>
+				<value>verdadera</value>
+				<value>vosotras</value>
+				<value>vosotros</value>
+				<value>voy</value>
+				<value>vuestra</value>
+				<value>vuestro</value>
+				<value>vuestras</value>
+				<value>vuestros</value>
+				<value>y</value>
+				<value>ya</value>
+				<value>yo</value>
 			</list>
 		</property>
 	</bean>

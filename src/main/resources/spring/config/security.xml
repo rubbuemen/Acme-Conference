@@ -55,6 +55,7 @@
 		<security:intercept-url pattern="/report/reviewer/**" access="hasRole('REVIEWER')" />
 		
 		<security:intercept-url pattern="/actor/sponsor/**" access="hasRole('SPONSOR')" />
+		<security:intercept-url pattern="/sponsorship/sponsor/**" access="hasRole('SPONSOR')" />
 		
 		<security:intercept-url pattern="/actor/administrator/**" access="hasRole('ADMIN')" />
 		<security:intercept-url pattern="/conference/administrator/**" access="hasRole('ADMIN')" />

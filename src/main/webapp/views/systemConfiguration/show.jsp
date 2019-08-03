@@ -50,3 +50,4 @@
 
 <acme:button url="systemConfiguration/administrator/edit.do" code="button.edit" /><br /><br />
 <acme:button url="systemConfiguration/administrator/notificationProcedure.do" code="button.notificationProcedure" />
+<acme:button url="systemConfiguration/administrator/computeScore.do" code="button.computeScore" />

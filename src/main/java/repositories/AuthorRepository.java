@@ -33,4 +33,7 @@ public interface AuthorRepository extends JpaRepository<Author, Integer> {
 	@Query("select a from Author a join a.registrations r where r.id = ?1")
 	Author findAuthorByRegistrationId(int registrationId);
 
+	@Query("select distinct a from Author a join a.submissions s join s.paper p where p.id = ?1")
+	Author findAuthorByPaperId(int paperId);
+
 }

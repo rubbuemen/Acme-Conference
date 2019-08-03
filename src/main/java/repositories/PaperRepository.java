@@ -27,4 +27,7 @@ public interface PaperRepository extends JpaRepository<Paper, Integer> {
 	@Query("select p from Conference c join c.activities pre join pre.paper p where c.id = ?1")
 	Collection<Paper> findPapersCameraReadyAlreadyAssignedByConferenceId(int conferenceId);
 
+	@Query("select p from Paper p where p.isCameraReadyVersion = 1")
+	Collection<Paper> findPapersCameraReady();
+
 }

@@ -19,18 +19,28 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <form:form action="${actionURL}" modelAttribute="sponsorship">
-
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	
+	<acme:textbox code="sponsorship.banner" path="banner" placeholder="http://LoremIpsum.com" type="url" />
+	<jstl:if test="${not empty sponsorship.banner}">
+		<br />
+		<img src="<jstl:out value='${sponsorship.banner}' />" />
+		<br />
+	</jstl:if>
+	<br />
+	
+	<acme:textbox code="sponsorship.targetURL" path="targetURL" placeholder="http://LoremIpsum.com" type="url" />
+	<br />
 	
 	<fieldset>
 		<legend>
 			<spring:message code="sponsorship.creditCard" />
 		</legend>
-		<acme:textbox code="creditCard.holder" path="creditCard.holder" placeholder="Lorem Ipsum" />
+		<acme:textbox code="creditCard.holderName" path="creditCard.holderName" placeholder="Lorem Ipsum" />
 		<br />
 
-		<acme:textbox code="creditCard.makeCreditCard" path="creditCard.makeCreditCard"	placeholder="Lorem Ipsum" />
+		<acme:selectString items="${creditCardBrands}" itemLabel="creditCard.brandName" code="creditCard.brandName" path="creditCard.brandName"/>
 		<br />
 		
 		<acme:textbox code="creditCard.number" path="creditCard.number"	placeholder="NNNNNNNNNNNNNNNN" />
@@ -42,26 +52,10 @@
 		<acme:textbox code="creditCard.expirationYear" path="creditCard.expirationYear" placeholder="YY" type="number" min="0" max="99" />
 		<br />
 		
-		<acme:textbox code="creditCard.cvv" path="creditCard.cvv" placeholder="NNN" type="number" min="100" max="999" />
+		<acme:textbox code="creditCard.cvv" path="creditCard.cvv" placeholder="NNN" type="number" min="000" max="999" />
 		<br />
 	</fieldset>
 	<br />
-
-	<acme:textbox code="sponsorship.banner" path="banner" placeholder="http://LoremIpsum.com" type="url" />
-	<jstl:if test="${not empty sponsorship.banner}">
-		<br />
-		<img src="<jstl:out value='${sponsorship.banner}' />" />
-		<br />
-	</jstl:if>
-	<br />
-	
-	<acme:textbox code="sponsorship.targetPage" path="targetPage" placeholder="http://LoremIpsum.com" type="url" />
-	<br />
-	
-	<jstl:if test="${sponsorship.id == 0}">
-		<acme:select items="${positions}" itemLabel="ticker" code="sponsorship.position" path="position"/>
-		<br />
-	</jstl:if>
 
 	<jstl:choose>
 		<jstl:when test="${sponsorship.id == 0}">

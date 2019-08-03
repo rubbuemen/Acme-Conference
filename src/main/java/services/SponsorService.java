@@ -93,5 +93,13 @@ public class SponsorService {
 	}
 
 	// Other business methods
+	public Sponsor findSponsorBySponsorshipId(final int sponsorshipId) {
+		Assert.isTrue(sponsorshipId != 0);
+
+		Sponsor result;
+
+		result = this.sponsorRepository.findSponsorBySponsorshipId(sponsorshipId);
+		return result;
+	}
 
 }

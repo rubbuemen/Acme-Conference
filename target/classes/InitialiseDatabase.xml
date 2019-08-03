@@ -42,85 +42,653 @@
 			</list>
 		</property>
 	</bean>
-	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="deletedUser" />
-		<property name="password" value="54b53072540eeeb8f8e9343e71f28176" />
-		<property name="statusAccount" value="true" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
 	
 	<!-- Administrator -->
 	<bean id="administrator1" class="domain.Administrator">
 		<property name="name" value="Rubén" />
-		<property name="surnames" value="Bueno Menéndez" />
-		<property name="VATNumber" value="TU463" />
-		<property name="creditCard" ref="creditCard1" />
+		<property name="middleName" value="Razi" />
+		<property name="surname" value="Bueno Menéndez" />
 		<property name="photo" value="http://oi68.tinypic.com/oh4r9j.jpg" />
-		<property name="email" value="rubbuemen@acmeauthorrank.com" />
+		<property name="email" value="rubbuemen@aacmeconference.com" />
 		<property name="phoneNumber" value="662839501" />
 		<property name="address" value="41005 Sevilla" />
 		<property name="userAccount" ref="userAccount1" />
 	</bean>
 	<bean id="administrator2" class="domain.Administrator">
 		<property name="name" value="System" />
-		<property name="surnames" value="Administrator" />
-		<property name="VATNumber" value="TU463" />
-		<property name="creditCard" ref="creditCard1" />
-		<property name="email" value="&lt;noreply@acmeauthorrank.com&gt;" />
+		<property name="surname" value="Administrator" />
+		<property name="email" value="&lt;noreply@acmeconference.com&gt;" />
 		<property name="userAccount" ref="userAccount2" />
 	</bean>
-	<bean id="administrator3" class="domain.Administrator">
-		<property name="name" value="User deleted" />
-		<property name="surnames" value="---" />
-		<property name="VATNumber" value="TU463" />
-		<property name="creditCard" ref="creditCard1" />
-		<property name="email" value="&lt;noreply@acmeauthorrank.com&gt;" />
-		<property name="userAccount" ref="userAccount3" />
-	</bean>
 	
-	<!-- CreditCard -->
-	<bean id="creditCard1" class="domain.CreditCard">
-		<property name="holder" value="Rubén Bueno Menéndez" />
-		<property name="makeCreditCard" value="VISA" />
-		<property name="number" value="4539888159789783" />
-		<property name="expirationMonth" value="9" />
-		<property name="expirationYear" value="24" />
-		<property name="cvv" value="909" />
-	</bean>
-	
-		<!-- SystemConfiguration -->
-	<bean id="systemConfiguration1" class="domain.SystemConfiguration">
-		<property name="nameSystem" value="Acme Conference" />
-		<property name="bannerUrl" value="https://i.imgur.com/6kbPiIn.jpg" />
-		<property name="welcomeMessageEnglish"
-			value="Welcome to Acme Conference! We're IT author's favourite job marketplace!" />
-		<property name="welcomeMessageSpanish"
-			value="¡Bienvenidos a Acme Conference! ¡Somos el mercado de trabajo favorito de los profesionales de las TICs!" />
-		<property name="phoneCountryCode" value="+34" />
-		<property name="periodFinder" value="1" />
-		<property name="maxResultsFinder" value="10" />
-		<property name="spamWords">
+	<!-- Category -->
+	<bean id="category1" class="domain.Category">
+		<property name="titleEnglish" value="CONFERENCE" />
+		<property name="titleSpanish" value="CONFERENCIA" />
+		<property name="childCategories">
 			<list>
-				<value>sex</value>
-				<value>viagra</value>
-				<value>cialis</value>
-				<value>one million</value>
-				<value>you've been selected</value>
-				<value>Nigeria</value>
-				<value>sexo</value>
-				<value>un millón</value>
-				<value>ha sido seleccionado</value>
+				<ref bean="category2" />
 			</list>
 		</property>
-		<property name="fare" value="49.99" />
-		<property name="VATPercentage" value="21.00" />
-		<property name="isNotifiedRebrand" value="false" />
-	</bean>	
+	</bean>
+	<bean id="category2" class="domain.Category">
+		<property name="titleEnglish" value="Computer Science" />
+		<property name="titleSpanish" value="Ciencias de la Computación" />
+		<property name="parentCategory" ref="category1" />
+		<property name="childCategories">
+			<list>
+				<ref bean="category3" />
+				<ref bean="category11" />
+				<ref bean="category16" />
+			</list>
+		</property>
+	</bean>
+	<bean id="category3" class="domain.Category">
+		<property name="titleEnglish" value="Artificial Intelligence" />
+		<property name="titleSpanish" value="Inteligencia Artificial" />
+		<property name="parentCategory" ref="category2" />
+		<property name="childCategories">
+			<list>
+				<ref bean="category4" />
+				<ref bean="category5" />
+				<ref bean="category6" />
+			</list>
+		</property>
+	</bean>
+	<bean id="category4" class="domain.Category">
+		<property name="titleEnglish" value="Deep Learning" />
+		<property name="titleSpanish" value="Aprendizaje profundo" />
+		<property name="parentCategory" ref="category3" />
+	</bean>
+	<bean id="category5" class="domain.Category">
+		<property name="titleEnglish" value="Instance-based learning" />
+		<property name="titleSpanish" value="Aprendizaje basado en la instancia" />
+		<property name="parentCategory" ref="category3" />
+	</bean>
+	<bean id="category6" class="domain.Category">
+		<property name="titleEnglish" value="Regression" />
+		<property name="titleSpanish" value="Regresión" />
+		<property name="parentCategory" ref="category3" />
+	</bean>
+	<bean id="category7" class="domain.Category">
+		<property name="titleEnglish" value="Software Engineering" />
+		<property name="titleSpanish" value="Ingeniería del Software" />
+		<property name="parentCategory" ref="category2" />
+		<property name="childCategories">
+			<list>
+				<ref bean="category8" />
+				<ref bean="category9" />
+				<ref bean="category10" />
+				<ref bean="category11" />
+			</list>
+		</property>
+	</bean>
+	<bean id="category8" class="domain.Category">
+		<property name="titleEnglish" value="Big Data" />
+		<property name="titleSpanish" value="Grandes Datos" />
+		<property name="parentCategory" ref="category7" />
+	</bean>
+	<bean id="category9" class="domain.Category">
+		<property name="titleEnglish" value="Big Processing" />
+		<property name="titleSpanish" value="Grandes Procesos" />
+		<property name="parentCategory" ref="category7" />
+	</bean>
+	<bean id="category10" class="domain.Category">
+		<property name="titleEnglish" value="Methods" />
+		<property name="titleSpanish" value="Métodos" />
+		<property name="parentCategory" ref="category7" />
+	</bean>
+	<bean id="category11" class="domain.Category">
+		<property name="titleEnglish" value="Tools" />
+		<property name="titleSpanish" value="Herramientas" />
+		<property name="parentCategory" ref="category7" />
+	</bean>
+	<bean id="category12" class="domain.Category">
+		<property name="titleEnglish" value="Physics" />
+		<property name="titleSpanish" value="Física" />
+		<property name="parentCategory" ref="category2" />
+		<property name="childCategories">
+			<list>
+				<ref bean="category13" />
+				<ref bean="category14" />
+				<ref bean="category15" />
+			</list>
+		</property>
+	</bean>
+	<bean id="category13" class="domain.Category">
+		<property name="titleEnglish" value="Cinematic" />
+		<property name="titleSpanish" value="Cinemática" />
+		<property name="parentCategory" ref="category12" />
+	</bean>
+	<bean id="category14" class="domain.Category">
+		<property name="titleEnglish" value="Electricity" />
+		<property name="titleSpanish" value="Electricidad" />
+		<property name="parentCategory" ref="category12" />
+	</bean>
+	<bean id="category15" class="domain.Category">
+		<property name="titleEnglish" value="Electronics" />
+		<property name="titleSpanish" value="Electrónica" />
+		<property name="parentCategory" ref="category12" />
+	</bean>
+	<bean id="category16" class="domain.Category">
+		<property name="titleEnglish" value="Biology" />
+		<property name="titleSpanish" value="Biología" />
+		<property name="parentCategory" ref="category2" />
+		<property name="childCategories">
+			<list>
+				<ref bean="category17" />
+				<ref bean="category18" />
+				<ref bean="category19" />
+			</list>
+		</property>
+	</bean>
+	<bean id="category17" class="domain.Category">
+		<property name="titleEnglish" value="Animals" />
+		<property name="titleSpanish" value="Animales" />
+		<property name="parentCategory" ref="category16" />
+	</bean>
+	<bean id="category18" class="domain.Category">
+		<property name="titleEnglish" value="Plants" />
+		<property name="titleSpanish" value="Plantas" />
+		<property name="parentCategory" ref="category16" />
+	</bean>
+	<bean id="category19" class="domain.Category">
+		<property name="titleEnglish" value="Fungi" />
+		<property name="titleSpanish" value="Hongos" />
+		<property name="parentCategory" ref="category16" />
+	</bean>
+	
+	<!-- Topic -->
+	<bean id="topic1" class="domain.Topic">
+		<property name="nameEnglish" value="INQUIRY" />
+		<property name="nameSpanish" value="CONSULTA" />
+	</bean>
+	<bean id="topic2" class="domain.Topic">
+		<property name="nameEnglish" value="REBUTTAL" />
+		<property name="nameSpanish" value="REFUTACIÓN" />
+	</bean>
+	<bean id="topic3" class="domain.Topic">
+		<property name="nameEnglish" value="REGISTRATION" />
+		<property name="nameSpanish" value="REGISTRO" />
+	</bean>
+	<bean id="topic4" class="domain.Topic">
+		<property name="nameEnglish" value="TOPICS" />
+		<property name="nameSpanish" value="TEMAS" />
+	</bean>
+	<bean id="topic5" class="domain.Topic">
+		<property name="nameEnglish" value="OTHER" />
+		<property name="nameSpanish" value="OTRO" />
+	</bean>
+	
+	<!-- SystemConfiguration -->
+	<bean id="systemConfiguration1" class="domain.SystemConfiguration">
+		<property name="nameSystem" value="Acme Conference" />
+		<property name="bannerUrl" value="https://i.ibb.co/GVpZCtM/acme-conference.png" />
+		<property name="welcomeMessageEnglish"
+			value="Welcome to Acme Conference! Your scientific event manager" />
+		<property name="welcomeMessageSpanish"
+			value="¡Bienvenidos a Acme Conference! Su gestor de eventos científicos" />
+		<property name="phoneCountryCode" value="+34" />
+		<property name="creditCardBrands">
+			<list>
+				<value>VISA</value>
+				<value>MASTER</value>
+				<value>DINNERS</value>
+				<value>AMEX</value>
+			</list>
+		</property>
+		<property name="voidWords">
+			<list>
+				<value>a</value>
+				<value>able</value>
+				<value>about</value>
+				<value>across</value>
+				<value>after</value>
+				<value>all</value>
+				<value>almost</value>
+				<value>also</value>
+				<value>am</value>
+				<value>among</value>
+				<value>an</value>
+				<value>and</value>
+				<value>any</value>
+				<value>are</value>
+				<value>as</value>
+				<value>at</value>
+				<value>be</value>
+				<value>because</value>
+				<value>been</value>
+				<value>but</value>
+				<value>by</value>
+				<value>can</value>
+				<value>cannot</value>
+				<value>could</value>
+				<value>dear</value>
+				<value>did</value>
+				<value>do</value>
+				<value>does</value>
+				<value>either</value>
+				<value>else</value>
+				<value>ever</value>
+				<value>every</value>
+				<value>for</value>
+				<value>from</value>
+				<value>get</value>
+				<value>got</value>
+				<value>had</value>
+				<value>has</value>
+				<value>have</value>
+				<value>he</value>
+				<value>her</value>
+				<value>hers</value>
+				<value>him</value>
+				<value>his</value>
+				<value>how</value>
+				<value>however</value>
+				<value>i</value>
+				<value>if</value>
+				<value>in</value>
+				<value>into</value>
+				<value>is</value>
+				<value>it</value>
+				<value>its</value>
+				<value>just</value>
+				<value>least</value>
+				<value>let</value>
+				<value>like</value>
+				<value>likely</value>
+				<value>may</value>
+				<value>me</value>
+				<value>might</value>
+				<value>most</value>
+				<value>must</value>
+				<value>my</value>
+				<value>neither</value>
+				<value>no</value>
+				<value>nor</value>
+				<value>not</value>
+				<value>of</value>
+				<value>off</value>
+				<value>often</value>
+				<value>on</value>
+				<value>only</value>
+				<value>or</value>
+				<value>other</value>
+				<value>our</value>
+				<value>own</value>
+				<value>rather</value>
+				<value>said</value>
+				<value>say</value>
+				<value>says</value>
+				<value>she</value>
+				<value>should</value>
+				<value>since</value>
+				<value>so</value>
+				<value>some</value>
+				<value>than</value>
+				<value>that</value>
+				<value>the</value>
+				<value>their</value>
+				<value>them</value>
+				<value>then</value>
+				<value>there</value>
+				<value>these</value>
+				<value>they</value>
+				<value>this</value>
+				<value>tis</value>
+				<value>to</value>
+				<value>too</value>
+				<value>twas</value>
+				<value>us</value>
+				<value>wants</value>
+				<value>was</value>
+				<value>we</value>
+				<value>were</value>
+				<value>what</value>
+				<value>when</value>
+				<value>where</value>
+				<value>which</value>
+				<value>while</value>
+				<value>who</value>
+				<value>whom</value>
+				<value>why</value>
+				<value>will</value>
+				<value>with</value>
+				<value>would</value>
+				<value>yet</value>
+				<value>you</value>
+				<value>your</value>
+				<value>a</value>
+				<value>acá</value>
+				<value>ahí</value>
+				<value>ajena</value>
+				<value>ajeno</value>
+				<value>ajenas</value>
+				<value>ajenos</value>
+				<value>al</value>
+				<value>algo</value>
+				<value>algún</value>
+				<value>alguna</value>
+				<value>alguno</value>
+				<value>algunas</value>
+				<value>algunos</value>
+				<value>allá</value>
+				<value>allí</value>
+				<value>ambos</value>
+				<value>ante</value>
+				<value>antes</value>
+				<value>aquel</value>
+				<value>aquella</value>
+				<value>aquello</value>
+				<value>aquelas</value>
+				<value>aquellos</value>
+				<value>aquí</value>
+				<value>arriba</value>
+				<value>así</value>
+				<value>atrás</value>
+				<value>aun</value>
+				<value>aunque</value>
+				<value>bajo</value>
+				<value>bastante</value>
+				<value>bien</value>
+				<value>cabe</value>
+				<value>cada</value>
+				<value>casi</value>
+				<value>cierto</value>
+				<value>cierta</value>
+				<value>ciertos</value>
+				<value>ciertas</value>
+				<value>como</value>
+				<value>con</value>
+				<value>conmigo</value>
+				<value>conseguimos</value>
+				<value>conseguir</value>
+				<value>consigo</value>
+				<value>consigue</value>
+				<value>consiguen</value>
+				<value>consigues</value>
+				<value>contigo</value>
+				<value>contra</value>
+				<value>cual</value>
+				<value>cuales</value>
+				<value>cualquier</value>
+				<value>cualquiera</value>
+				<value>cualesquiera</value>
+				<value>cuan</value>
+				<value>cuando</value>
+				<value>cuanto</value>
+				<value>cuanta</value>
+				<value>cuantos</value>
+				<value>cuantas</value>
+				<value>de</value>
+				<value>dejar</value>
+				<value>del</value>
+				<value>demás</value>
+				<value>demasiada</value>
+				<value>demasiado</value>
+				<value>demasiadas</value>
+				<value>demasidos</value>
+				<value>dentro</value>
+				<value>desde</value>
+				<value>donde</value>
+				<value>dos</value>
+				<value>el</value>
+				<value>él</value>
+				<value>ella</value>
+				<value>ello</value>
+				<value>ellos</value>
+				<value>ellas</value>
+				<value>empleáis</value>
+				<value>emplean</value>
+				<value>emplear</value>
+				<value>empleas</value>
+				<value>empleo</value>
+				<value>en</value>
+				<value>encima</value>
+				<value>entonces</value>
+				<value>entre</value>
+				<value>era</value>
+				<value>eras</value>
+				<value>eramos</value>
+				<value>eran</value>
+				<value>eres</value>
+				<value>es</value>
+				<value>esa</value>
+				<value>ese</value>
+				<value>eso</value>
+				<value>esas</value>
+				<value>esos</value>
+				<value>esta</value>
+				<value>estas</value>
+				<value>estaba</value>
+				<value>estado</value>
+				<value>estáis</value>
+				<value>estamos</value>
+				<value>están</value>
+				<value>estar</value>
+				<value>este</value>
+				<value>esto</value>
+				<value>estos</value>
+				<value>estoy</value>
+				<value>etc</value>
+				<value>fin</value>
+				<value>fue</value>
+				<value>fueron</value>
+				<value>fui</value>
+				<value>fuimos</value>
+				<value>gueno</value>
+				<value>ha</value>
+				<value>hace</value>
+				<value>haces</value>
+				<value>hacéis</value>
+				<value>hacemos</value>
+				<value>hacen</value>
+				<value>hacer</value>
+				<value>hacia</value>
+				<value>hago</value>
+				<value>hasta</value>
+				<value>incluso</value>
+				<value>intenta</value>
+				<value>intentas</value>
+				<value>intentáis</value>
+				<value>intentamos</value>
+				<value>intentan</value>
+				<value>intentar</value>
+				<value>intento</value>
+				<value>ir</value>
+				<value>jamás</value>
+				<value>junto</value>
+				<value>juntos</value>
+				<value>la</value>
+				<value>lo</value>
+				<value>las</value>
+				<value>los</value>
+				<value>largo</value>
+				<value>más</value>
+				<value>me</value>
+				<value>menos</value>
+				<value>mi</value>
+				<value>mis</value>
+				<value>mía</value>
+				<value>mías</value>
+				<value>mientras</value>
+				<value>mío</value>
+				<value>míos</value>
+				<value>misma</value>
+				<value>mismo</value>
+				<value>mismas</value>
+				<value>mismos</value>
+				<value>modo</value>
+				<value>mucha</value>
+				<value>muchas</value>
+				<value>muchísima</value>
+				<value>muchísimo</value>
+				<value>muchísimas</value>
+				<value>muchísimos</value>
+				<value>mucho</value>
+				<value>muchos</value>
+				<value>muy</value>
+				<value>nada</value>
+				<value>ni</value>
+				<value>ningún</value>
+				<value>niguna</value>
+				<value>ninguno</value>
+				<value>ningunas</value>
+				<value>ningunos</value>
+				<value>no</value>
+				<value>nos</value>
+				<value>nosotras</value>
+				<value>nosotros</value>
+				<value>nuestra</value>
+				<value>nuestro</value>
+				<value>nuestras</value>
+				<value>nuestros</value>
+				<value>nunca</value>
+				<value>os</value>
+				<value>otra</value>
+				<value>otro</value>
+				<value>otras</value>
+				<value>otros</value>
+				<value>para</value>
+				<value>parecer</value>
+				<value>pero</value>
+				<value>poca</value>
+				<value>poco</value>
+				<value>pocas</value>
+				<value>pocos</value>
+				<value>podéis</value>
+				<value>podemos</value>
+				<value>poder</value>
+				<value>podría</value>
+				<value>podrías</value>
+				<value>podríais</value>
+				<value>podríamos</value>
+				<value>podrían</value>
+				<value>por</value>
+				<value>por qué</value>
+				<value>porque</value>
+				<value>primero</value>
+				<value>puede</value>
+				<value>pueden</value>
+				<value>puedo</value>
+				<value>pues</value>
+				<value>que</value>
+				<value>qué</value>
+				<value>querer</value>
+				<value>quién</value>
+				<value>quienes</value>
+				<value>quienesquiera</value>
+				<value>quienquiera</value>
+				<value>quizá</value>
+				<value>quizás</value>
+				<value>sabe</value>
+				<value>sabes</value>
+				<value>saben</value>
+				<value>sabéis</value>
+				<value>sabemos</value>
+				<value>saber</value>
+				<value>se</value>
+				<value>según</value>
+				<value>ser</value>
+				<value>si</value>
+				<value>sí</value>
+				<value>siempre</value>
+				<value>siendo</value>
+				<value>sin</value>
+				<value>sino</value>
+				<value>so</value>
+				<value>sobre</value>
+				<value>sois</value>
+				<value>solamente</value>
+				<value>solo</value>
+				<value>sólo</value>
+				<value>somos</value>
+				<value>soy</value>
+				<value>sr</value>
+				<value>sra</value>
+				<value>sres</value>
+				<value>sta</value>
+				<value>su</value>
+				<value>sus</value>
+				<value>suya</value>
+				<value>suyo</value>
+				<value>suyas</value>
+				<value>suyos</value>
+				<value>tal</value>
+				<value>tales</value>
+				<value>también</value>
+				<value>tampoco</value>
+				<value>tan</value>
+				<value>tanta</value>
+				<value>tanto</value>
+				<value>tantas</value>
+				<value>tantos</value>
+				<value>te</value>
+				<value>tenéis</value>
+				<value>tenemos</value>
+				<value>tener</value>
+				<value>tengo</value>
+				<value>ti</value>
+				<value>tiempo</value>
+				<value>tiene</value>
+				<value>tienen</value>
+				<value>toda</value>
+				<value>todo</value>
+				<value>todas</value>
+				<value>todos</value>
+				<value>tomar</value>
+				<value>trabaja</value>
+				<value>trabajo</value>
+				<value>trabajáis</value>
+				<value>trabajamos</value>
+				<value>trabajan</value>
+				<value>trabajar</value>
+				<value>trabajas</value>
+				<value>tras</value>
+				<value>tú</value>
+				<value>tu</value>
+				<value>tus</value>
+				<value>tuya</value>
+				<value>tuyo</value>
+				<value>tuyas</value>
+				<value>tuyos</value>
+				<value>último</value>
+				<value>ultimo</value>
+				<value>un</value>
+				<value>una</value>
+				<value>uno</value>
+				<value>unas</value>
+				<value>unos</value>
+				<value>usa</value>
+				<value>usas</value>
+				<value>usáis</value>
+				<value>usamos</value>
+				<value>usan</value>
+				<value>usar</value>
+				<value>uso</value>
+				<value>usted</value>
+				<value>ustedes</value>
+				<value>va</value>
+				<value>van</value>
+				<value>vais</value>
+				<value>valor</value>
+				<value>vamos</value>
+				<value>varias</value>
+				<value>varios</value>
+				<value>vaya</value>
+				<value>verdadera</value>
+				<value>vosotras</value>
+				<value>vosotros</value>
+				<value>voy</value>
+				<value>vuestra</value>
+				<value>vuestro</value>
+				<value>vuestras</value>
+				<value>vuestros</value>
+				<value>y</value>
+				<value>ya</value>
+				<value>yo</value>
+			</list>
+		</property>
+	</bean>
 	
 </beans>

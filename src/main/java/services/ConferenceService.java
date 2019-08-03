@@ -388,4 +388,13 @@ public class ConferenceService {
 		return result;
 	}
 
+	public Collection<Conference> findConferencesLastYearAndFuture() {
+		Collection<Conference> result;
+
+		result = this.conferenceRepository.findConferencesLastYearAndFuture();
+		Assert.notNull(result);
+
+		return result;
+	}
+
 }

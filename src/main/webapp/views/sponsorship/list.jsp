@@ -20,32 +20,26 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <display:table pagesize="5" class="displaytag" name="sponsorships" requestURI="${requestURI}" id="row">
-
-	<spring:message code="sponsorship.creditCard" var="creditCard" />
-	<display:column title="${creditCard}">
-			<spring:message code="creditCard.holder" />: ${row.creditCard.holder}<br />
-			<spring:message code="creditCard.makeCreditCard" />: ${row.creditCard.makeCreditCard}<br />
-			<spring:message code="creditCard.number" />: ${row.creditCard.number}<br />
-			<spring:message code="creditCard.expirationMonth" />: ${row.creditCard.expirationMonth}<br />
-			<spring:message code="creditCard.expirationYear" />: ${row.creditCard.expirationYear}<br />
-			<spring:message code="creditCard.cvv" />: ${row.creditCard.cvv}
-	</display:column>
-	
 	<spring:message code="sponsorship.banner" var="banner" />
 	<display:column title="${banner}" >
 		<img src="<jstl:out value="${row.banner}"/>" width="300px" height="100px" />
 	</display:column>
 	
-	<spring:message code="sponsorship.targetPage" var="targetPage" />
-	<display:column title="${targetPage}" >
-		<a href="<jstl:out value="${row.targetPage}"/>">${row.targetPage}</a>
+	<spring:message code="sponsorship.targetURL" var="targetURL" />
+	<display:column title="${targetURL}" >
+		<a href="<jstl:out value="${row.targetURL}"/>">${row.targetURL}</a>
 	</display:column>
 	
-	<spring:message code="sponsorship.position" var="position" />
-		<display:column title="${position}">
-			<acme:button url="position/sponsor/show.do?positionId=${row.position.id}" code="button.show" />
-		</display:column>
-	
+	<spring:message code="sponsorship.creditCard" var="creditCard" />
+	<display:column title="${creditCard}">
+			<spring:message code="creditCard.holderName" />: ${row.creditCard.holderName}<br />
+			<spring:message code="creditCard.brandName" />: ${row.creditCard.brandName}<br />
+			<spring:message code="creditCard.number" />: ${row.creditCard.number}<br />
+			<spring:message code="creditCard.expirationMonth" />: ${row.creditCard.expirationMonth}<br />
+			<spring:message code="creditCard.expirationYear" />: ${row.creditCard.expirationYear}<br />
+			<spring:message code="creditCard.cvv" />: ${row.creditCard.cvv}
+	</display:column>
+		
 	<spring:message code="sponsorship.edit" var="editH" />
 	<display:column title="${editH}" >
 		<acme:button url="sponsorship/sponsor/edit.do?sponsorshipId=${row.id}" code="button.edit" />

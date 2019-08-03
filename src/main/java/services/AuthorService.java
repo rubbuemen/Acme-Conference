@@ -15,6 +15,7 @@ import security.UserAccount;
 import domain.Author;
 import domain.Finder;
 import domain.Message;
+import domain.Paper;
 import domain.Registration;
 import domain.Submission;
 
@@ -98,6 +99,16 @@ public class AuthorService {
 		return result;
 	}
 
+	public Author saveAuxiliar(final Author author) {
+		Assert.notNull(author);
+
+		Author result;
+
+		result = this.authorRepository.save(author);
+
+		return result;
+	}
+
 	public void delete(final Author author) {
 		Assert.notNull(author);
 		Assert.isTrue(author.getId() != 0);
@@ -135,6 +146,14 @@ public class AuthorService {
 		Author result;
 
 		result = this.authorRepository.findAuthorByRegistrationId(registrationId);
+
+		return result;
+	}
+
+	public Author findAuthorByPaper(final Paper p) {
+		Author result;
+
+		result = this.authorRepository.findAuthorByPaperId(p.getId());
 
 		return result;
 	}

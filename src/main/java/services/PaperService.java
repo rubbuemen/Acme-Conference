@@ -93,4 +93,12 @@ public class PaperService {
 		return result;
 	}
 
+	public Collection<Paper> findPapersCameraReady() {
+		Collection<Paper> result;
+
+		result = this.paperRepository.findPapersCameraReady();
+
+		return result;
+	}
+
 }

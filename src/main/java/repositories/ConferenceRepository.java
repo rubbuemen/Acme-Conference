@@ -76,4 +76,7 @@ public interface ConferenceRepository extends JpaRepository<Conference, Integer>
 	@Query("select distinct c from Conference c where c.category.id = ?1")
 	Collection<Conference> findConferencesByCategoryId(int categoryId);
 
+	@Query("select c from Conference c where c.isFinalMode = 1 and (datediff(c.startDate, CURRENT_DATE) between -365 and -1 or c.startDate > CURRENT_DATE)")
+	Collection<Conference> findConferencesLastYearAndFuture();
+
 }
