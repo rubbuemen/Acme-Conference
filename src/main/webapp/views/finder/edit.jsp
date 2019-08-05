@@ -18,6 +18,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
+<jsp:useBean id="date" class="java.util.Date" />
 
 <form:form action="${actionURL}" modelAttribute="finder">
 	<form:hidden path="id" />
@@ -114,6 +115,18 @@
 			<jstl:set var="banner" value="${randomSponsorship.get(row).banner}"/>
 			<img src="<jstl:out value='${banner}'/>" width="200px" height="100px" />
 		</jstl:if>
+	</display:column>
+	
+	<spring:message code="conference.downloadPDF" var="downloadPDF" />
+	<display:column title="${downloadPDF}">
+		<jstl:choose>
+			<jstl:when test="${row.cameraReadyDeadline < date}">
+				<acme:button url="finder/author/download.do?conferenceId=${row.id}" code="button.download" />
+			</jstl:when>
+			<jstl:otherwise>
+				<spring:message code="conference.downloadPDFNoDeadline"/>
+			</jstl:otherwise>
+		</jstl:choose>
 	</display:column>
 			
 </display:table>

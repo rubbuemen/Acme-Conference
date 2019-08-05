@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.AuthorService;
@@ -28,6 +31,10 @@ import services.CategoryService;
 import services.ConferenceService;
 import services.FinderService;
 import services.SponsorshipService;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
+
 import controllers.AbstractController;
 import domain.Category;
 import domain.Conference;
@@ -123,6 +130,27 @@ public class AuthorFinderController extends AbstractController {
 		result.addObject("finder", finder);
 		result.addObject("actionURL", "finder/author/edit.do");
 		result.addObject("message", message);
+
+		return result;
+	}
+
+	//A+
+	@RequestMapping(value = "/download", method = RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView downloadPDF(final HttpServletResponse response, @RequestParam final int conferenceId) {
+		ModelAndView result;
+		try {
+			final Conference conference = this.conferenceService.findOne(conferenceId);
+			final String title = conference.getTitle().toLowerCase().replace(" ", "_");
+			response.setContentType("text/pdf");
+			response.setHeader("Content-Disposition", "attachment;filename=" + title + ".pdf");
+			final Document document = new Document();
+			PdfWriter.getInstance(document, response.getOutputStream());
+			this.conferenceService.downloadPDF(document, conference);
+			result = new ModelAndView("redirect:/finder/author/edit.do");
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(null, "commit.error");
+		}
 
 		return result;
 	}
