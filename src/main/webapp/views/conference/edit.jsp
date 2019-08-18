@@ -25,6 +25,7 @@
 	<form:hidden path="registrations" />
 	<form:hidden path="comments" />
 	<form:hidden path="isFinalMode" />
+	<form:hidden path="isDecisionProcedureDone" />
 	
 	<acme:textbox code="conference.title" path="title" placeholder="Lorem Ipsum"/>
 	<br />
