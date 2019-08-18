@@ -70,6 +70,7 @@ public class ConferenceService {
 
 		result = new Conference();
 		result.setIsFinalMode(false);
+		result.setIsDecisionProcedureDone(false);
 		result.setActivities(activities);
 		result.setRegistrations(registrations);
 		result.setComments(comments);
@@ -423,7 +424,7 @@ public class ConferenceService {
 		final Paragraph content = new Paragraph();
 		Chunk attribute, contentAttribute;
 
-		//Información de la conferencia
+		//InformaciÃ³n de la conferencia
 		content.add(new Paragraph("Conference Information:", header1Font));
 		content.add(new Paragraph(" "));
 		final SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -473,7 +474,7 @@ public class ConferenceService {
 		content.add(contentAttribute);
 		content.add(new Paragraph(" "));
 
-		//Información de cada camera-ready version de submissions aceptadas
+		//InformaciÃ³n de cada camera-ready version de submissions aceptadas
 		content.add(new Paragraph("Camera-ready version papers:", header2Font));
 		content.add(new Paragraph(" "));
 
