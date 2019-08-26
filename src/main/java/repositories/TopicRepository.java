@@ -21,7 +21,7 @@ import domain.Topic;
 @Repository
 public interface TopicRepository extends JpaRepository<Topic, Integer> {
 
-	@Query("select t from Topic t where t.nameEnglish like 'OTHER'")
+	@Query("select t from Topic t where t.nameEnglish like 'OTHER' or t.nameSpanish like 'OTRO'")
 	Topic findTopicOther();
 
 	@Query("select distinct t from Message m join m.topic t")
