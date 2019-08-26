@@ -134,9 +134,16 @@ public class SystemConfigurationService {
 			final Author author = this.authorService.findAuthorBySubmissionId(s.getId());
 			final Message result = this.messageService.create();
 			final Actor system = this.actorService.getSystemActor();
+			Topic topic = this.topicService.findTopicOther();
+			if (topic == null) {
+				topic = this.topicService.create();
+				topic.setNameEnglish("OTHER");
+				topic.setNameSpanish("OTRO");
+				topic = this.topicService.save(topic);
+			}
 			result.setSubject("Your submission has been reviewed");
 			result.setBody("We inform you that the submission with ticker " + s.getTicker() + " has been reviewed and its status has been '" + s.getStatus() + "'. You can see the reports in the corresponding section.");
-			result.setTopic(this.topicService.findTopicOther());
+			result.setTopic(topic);
 			result.setSender(system);
 			result.getRecipients().add(author);
 			this.messageService.save(result);
@@ -162,7 +169,7 @@ public class SystemConfigurationService {
 		Assert.notNull(actorLogged);
 		this.actorService.checkUserLoginAdministrator(actorLogged);
 
-		//Búsqueda de palabras buzz
+		//BÃºsqueda de palabras buzz
 		final Collection<Conference> conferences = this.conferenceService.findConferencesLastYearAndFuture();
 
 		final Map<String, Integer> wordFrecuency = new HashMap<>();
@@ -175,10 +182,10 @@ public class SystemConfigurationService {
 				s = s.toLowerCase();
 				final String firstCharacter = s.substring(0);
 				final String lastCharacter = s.substring(s.length() - 1);
-				if (firstCharacter.equals(",") || firstCharacter.equals(".") || firstCharacter.equals(":") || firstCharacter.equals(";") || firstCharacter.equals("?") || firstCharacter.equals("!") || firstCharacter.equals("¡")
-					|| firstCharacter.equals("¿") || firstCharacter.equals("'") || firstCharacter.equals("\""))
+				if (firstCharacter.equals(",") || firstCharacter.equals(".") || firstCharacter.equals(":") || firstCharacter.equals(";") || firstCharacter.equals("?") || firstCharacter.equals("!") || firstCharacter.equals("Â¡")
+					|| firstCharacter.equals("Â¿") || firstCharacter.equals("'") || firstCharacter.equals("\""))
 					s = s.substring(1);
-				if (lastCharacter.equals(",") || lastCharacter.equals(".") || lastCharacter.equals(":") || lastCharacter.equals(";") || lastCharacter.equals("?") || lastCharacter.equals("!") || firstCharacter.equals("¡") || firstCharacter.equals("¿")
+				if (lastCharacter.equals(",") || lastCharacter.equals(".") || lastCharacter.equals(":") || lastCharacter.equals(";") || lastCharacter.equals("?") || lastCharacter.equals("!") || firstCharacter.equals("Â¡") || firstCharacter.equals("Â¿")
 					|| firstCharacter.equals("'") || firstCharacter.equals("\""))
 					s = s.substring(0, s.length() - 1);
 				if (!voidWords.contains(s))
