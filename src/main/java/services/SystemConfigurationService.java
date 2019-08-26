@@ -26,6 +26,7 @@ import domain.Message;
 import domain.Paper;
 import domain.Submission;
 import domain.SystemConfiguration;
+import domain.Topic;
 
 @Service
 @Transactional
